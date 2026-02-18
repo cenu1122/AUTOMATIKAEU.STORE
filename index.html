@@ -6,8 +6,8 @@
 <style>
 body { font-family: Arial; background:#f0f2f5; text-align:center; padding:40px; }
 .container { background:white; padding:30px; border-radius:12px; max-width:700px; margin:auto; box-shadow:0 0 20px rgba(0,0,0,0.1); }
-textarea { width:100%; height:150px; margin-top:10px; }
-button { padding:10px 20px; margin:5px; cursor:pointer; }
+textarea { width:100%; height:200px; margin-top:10px; font-size:16px; }
+button { padding:10px 20px; margin:5px; cursor:pointer; font-size:16px; }
 .status { margin-top:10px; font-weight:bold; color:blue; }
 </style>
 </head>
@@ -22,40 +22,44 @@ button { padding:10px 20px; margin:5px; cursor:pointer; }
 <div class="status" id="status">Status: Neaktivno</div>
 
 <h3>Prepoznati tekst:</h3>
-<textarea id="recognizedText"></textarea>
+<textarea id="recognizedText" placeholder="Ovdje će se pojavljivati prepoznati govor..."></textarea>
 </div>
 
 <script>
 let recognition;
 let isListening = false;
+let fullTranscript = ""; // Čuvamo sav prepoznati tekst
 
-async function startListening() {
-    // Chrome automatski traži dozvolu za mikrofon
+function startListening() {
     try {
         recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-        recognition.lang = "bs-BA"; // možeš promijeniti
+        recognition.lang = "bs-BA"; // jezik prepoznavanja
         recognition.continuous = true;
         recognition.interimResults = true;
 
         recognition.onstart = () => {
             isListening = true;
-            document.getElementById("status").innerText = "Status: Slušam audio sa virtualnog kabla...";
+            document.getElementById("status").innerText = "Status: Slušam audio sa Virtual Cable...";
         };
 
         recognition.onresult = (event) => {
-            let transcript = "";
+            let interimTranscript = "";
             for (let i = event.resultIndex; i < event.results.length; i++) {
-                transcript += event.results[i][0].transcript;
+                if (event.results[i].isFinal) {
+                    fullTranscript += event.results[i][0].transcript + " "; // dodaje se u sav tekst
+                } else {
+                    interimTranscript += event.results[i][0].transcript;
+                }
             }
-            document.getElementById("recognizedText").value = transcript;
+            // Prikaz finalnog + trenutno prepoznatog
+            document.getElementById("recognizedText").value = fullTranscript + interimTranscript;
         };
 
         recognition.onend = () => {
             if (isListening) recognition.start(); // automatski restart
         };
 
-        recognition.start();
-
+        recognition.start(); // Chrome će tražiti dozvolu za mikrofon
     } catch (err) {
         console.error(err);
         document.getElementById("status").innerText = "Greška: dozvoli mikrofon u Chrome-u!";
@@ -63,7 +67,10 @@ async function startListening() {
 }
 
 function stopListening() {
-    if (recognition) { isListening = false; recognition.stop(); }
+    if (recognition) { 
+        isListening = false; 
+        recognition.stop(); 
+    }
     document.getElementById("status").innerText = "Status: Zaustavljeno";
 }
 </script>
