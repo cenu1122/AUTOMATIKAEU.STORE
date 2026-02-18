@@ -2,7 +2,7 @@
 <html lang="bs">
 <head>
 <meta charset="UTF-8">
-<title>DE → BS Prevodilac (Test Mikrofon)</title>
+<title>DE → BS Prevodilac (Auto Mikrofon)</title>
 <style>
 body { font-family: Arial; background: #f0f2f5; text-align:center; padding:40px; }
 .container { background:white; padding:30px; border-radius:12px; max-width:700px; margin:auto; box-shadow:0 0 20px rgba(0,0,0,0.1); }
@@ -15,7 +15,7 @@ button { padding:10px 20px; margin:5px; cursor:pointer; }
 <body>
 
 <div class="container">
-<h2>🎤 Njemački → Bosanski (Test Mikrofon)</h2>
+<h2>🎤 Njemački → Bosanski (Test Mikrofon / Prevod)</h2>
 
 <input type="password" id="apiKey" placeholder="API ključ (samo za prevod)">
 
@@ -38,15 +38,6 @@ let recognition;
 let isListening = false;
 let isSpeaking = false;
 
-async function checkMicrophonePermission() {
-    try {
-        const status = await navigator.permissions.query({ name: 'microphone' });
-        return status.state === 'granted';
-    } catch (err) {
-        return false;
-    }
-}
-
 async function startListening(doTranslate) {
     const apiKey = document.getElementById("apiKey").value;
 
@@ -55,36 +46,35 @@ async function startListening(doTranslate) {
         return;
     }
 
-    const micAllowed = await checkMicrophonePermission();
-    if (!micAllowed) {
-        document.getElementById("status").innerText = "Mikrofon nije dozvoljen! Omogući u Chrome-u i osvježi stranicu.";
-        return;
+    try {
+        recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = "de-DE";
+        recognition.continuous = true;
+        recognition.interimResults = false;
+
+        recognition.onstart = () => {
+            isListening = true;
+            document.getElementById("status").innerText = doTranslate ? "Status: Slušam i prevodim..." : "Status: Test mikrofon...";
+        };
+
+        recognition.onresult = async function(event) {
+            const transcript = event.results[event.results.length - 1][0].transcript;
+            document.getElementById("germanText").value = transcript;
+
+            if (doTranslate && !isSpeaking) {
+                await translateText(transcript, apiKey);
+            }
+        };
+
+        recognition.onend = () => {
+            if (isListening) recognition.start(); // automatski restart
+        };
+
+        recognition.start(); // Pokušaj starta → Chrome automatski pita za dozvolu
+    } catch (err) {
+        console.error(err);
+        document.getElementById("status").innerText = "Dozvoli mikrofon u Chrome-u i pokušaj ponovo!";
     }
-
-    recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.lang = "de-DE";
-    recognition.continuous = true;
-    recognition.interimResults = false;
-
-    recognition.onstart = () => {
-        isListening = true;
-        document.getElementById("status").innerText = doTranslate ? "Status: Slušam i prevodim..." : "Status: Test mikrofon...";
-    };
-
-    recognition.onresult = async function(event) {
-        const transcript = event.results[event.results.length - 1][0].transcript;
-        document.getElementById("germanText").value = transcript;
-
-        if (doTranslate && !isSpeaking) {
-            await translateText(transcript, apiKey);
-        }
-    };
-
-    recognition.onend = () => {
-        if (isListening) recognition.start(); // restart
-    };
-
-    recognition.start();
 }
 
 function stopListening() {
@@ -111,7 +101,6 @@ async function translateText(text, apiKey) {
 
         const data = await response.json();
         const translated = data.choices[0].message.content;
-
         document.getElementById("bosnianText").value = translated;
         speak(translated);
 
@@ -125,10 +114,9 @@ function speak(text) {
     isSpeaking = true;
     const utterance = new SpeechSynthesisUtterance(text);
 
-    // fallback na hrvatski ako bosanski nije podržan
     utterance.lang = "bs-BA";
     if (!speechSynthesis.getVoices().some(v => v.lang.startsWith("bs"))) {
-        utterance.lang = "hr-HR";
+        utterance.lang = "hr-HR"; // fallback glas
     }
 
     utterance.onend = () => { isSpeaking = false; };
