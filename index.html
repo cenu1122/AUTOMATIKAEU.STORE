@@ -2,7 +2,7 @@
 <html lang="bs">
 <head>
 <meta charset="UTF-8">
-<title>DE → BS Real-Time Prevodilac</title>
+<title>DE → BS Prevodilac (Test Mikrofon)</title>
 <style>
 body { font-family: Arial; background: #f0f2f5; text-align:center; padding:40px; }
 .container { background:white; padding:30px; border-radius:12px; max-width:700px; margin:auto; box-shadow:0 0 20px rgba(0,0,0,0.1); }
@@ -15,11 +15,12 @@ button { padding:10px 20px; margin:5px; cursor:pointer; }
 <body>
 
 <div class="container">
-<h2>🎤 Njemački → Bosanski (Real-Time)</h2>
+<h2>🎤 Njemački → Bosanski (Test Mikrofon)</h2>
 
-<input type="password" id="apiKey" placeholder="Unesi svoj OpenAI API ključ">
+<input type="password" id="apiKey" placeholder="API ključ (samo za prevod)">
 
-<button onclick="startListening()">▶ START</button>
+<button onclick="startListening(false)">🎙 Test mikrofon</button>
+<button onclick="startListening(true)">▶ START Prevod</button>
 <button onclick="stopListening()">⏹ STOP</button>
 
 <div class="status" id="status">Status: Neaktivno</div>
@@ -37,19 +38,26 @@ let recognition;
 let isListening = false;
 let isSpeaking = false;
 
-function checkMicrophonePermission() {
-    return navigator.permissions.query({name: 'microphone'})
-        .then(permission => permission.state === 'granted')
-        .catch(() => false);
+async function checkMicrophonePermission() {
+    try {
+        const status = await navigator.permissions.query({ name: 'microphone' });
+        return status.state === 'granted';
+    } catch (err) {
+        return false;
+    }
 }
 
-async function startListening() {
+async function startListening(doTranslate) {
     const apiKey = document.getElementById("apiKey").value;
-    if (!apiKey) { alert("Unesi API ključ!"); return; }
+
+    if (doTranslate && !apiKey) {
+        alert("Unesi API ključ da bi koristio prevod!");
+        return;
+    }
 
     const micAllowed = await checkMicrophonePermission();
     if (!micAllowed) {
-        document.getElementById("status").innerText = "Mikrofon nije dozvoljen. Dozvoli u Chrome-u!";
+        document.getElementById("status").innerText = "Mikrofon nije dozvoljen! Omogući u Chrome-u i osvježi stranicu.";
         return;
     }
 
@@ -60,18 +68,20 @@ async function startListening() {
 
     recognition.onstart = () => {
         isListening = true;
-        document.getElementById("status").innerText = "Status: Slušam...";
+        document.getElementById("status").innerText = doTranslate ? "Status: Slušam i prevodim..." : "Status: Test mikrofon...";
     };
 
     recognition.onresult = async function(event) {
-        if (isSpeaking) return;
         const transcript = event.results[event.results.length - 1][0].transcript;
         document.getElementById("germanText").value = transcript;
-        await translateText(transcript, apiKey);
+
+        if (doTranslate && !isSpeaking) {
+            await translateText(transcript, apiKey);
+        }
     };
 
     recognition.onend = () => {
-        if (isListening) recognition.start(); // restart ako je još aktivno
+        if (isListening) recognition.start(); // restart
     };
 
     recognition.start();
@@ -101,8 +111,10 @@ async function translateText(text, apiKey) {
 
         const data = await response.json();
         const translated = data.choices[0].message.content;
+
         document.getElementById("bosnianText").value = translated;
         speak(translated);
+
     } catch (err) {
         console.error(err);
         document.getElementById("status").innerText = "Greška kod API poziva!";
@@ -112,11 +124,13 @@ async function translateText(text, apiKey) {
 function speak(text) {
     isSpeaking = true;
     const utterance = new SpeechSynthesisUtterance(text);
-    // ako bosanski nije podržan, koristi hrvatski
+
+    // fallback na hrvatski ako bosanski nije podržan
     utterance.lang = "bs-BA";
     if (!speechSynthesis.getVoices().some(v => v.lang.startsWith("bs"))) {
         utterance.lang = "hr-HR";
     }
+
     utterance.onend = () => { isSpeaking = false; };
     window.speechSynthesis.speak(utterance);
 }
