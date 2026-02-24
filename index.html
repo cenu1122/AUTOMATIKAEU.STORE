@@ -1,66 +1,163 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="bs">
 <head>
-<title>Arduino Shop i Automatika</title>
-<style>
-body { font-family: sans-serif; margin: 0; background: #f4f4f4; }
-header { background: #008184; color: white; padding: 20px; text-align: center; }
-nav { background: #273b47; padding: 10px; text-align: center; }
-nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
-.container { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; }
-.kartica { background: white; border: 1px solid #ddd; margin: 10px; padding: 20px; width: 250px; text-align: center; border-radius: 8px; }
-.kartica img { width: 100%; height: 150px; object-fit: contain; }
-.cijena { color: #008184; font-size: 22px; font-weight: bold; margin: 10px 0; }
-.dugme { background: #25D366; color: white; padding: 10px; text-decoration: none; display: block; border-radius: 5px; font-weight: bold; }
-.inzenjering { background: #eee; padding: 40px; text-align: center; border-top: 3px solid #008184; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arduino Master Pro - Multilingual</title>
+    <style>
+        :root {
+            --arduino-teal: #008184;
+            --dark: #273b47;
+            --white: #ffffff;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; transition: 0.3s; }
+
+        /* NAVIGACIJA */
+        nav { 
+            background: var(--dark); 
+            padding: 10px 5%; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed; 
+            width: 90%; 
+            top: 0; 
+            z-index: 1000;
+        }
+        .nav-links a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; font-size: 13px; }
+        .lang-switcher button { 
+            background: #444; color: white; border: 1px solid #666; 
+            padding: 5px 10px; cursor: pointer; border-radius: 3px; font-size: 12px;
+        }
+        .lang-switcher button:hover { background: var(--arduino-teal); }
+
+        /* SEKCIJE */
+        header { 
+            background: var(--arduino-teal); 
+            color: white; 
+            padding: 120px 20px 80px; 
+            text-align: center; 
+        }
+
+        section { padding: 80px 10%; min-height: 300px; border-bottom: 1px solid #ddd; text-align: center;}
+
+        /* KARTICE PROIZVODA */
+        .shop-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 30px; }
+        .kartica { 
+            background: white; padding: 20px; width: 250px; 
+            border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+        }
+        .kartica img { width: 100%; height: 120px; object-fit: contain; }
+
+        /* DUGMAD */
+        .btn-buy { 
+            background: #25D366; color: white; padding: 12px; 
+            text-decoration: none; display: block; border-radius: 5px; font-weight: bold; margin-top: 10px;
+        }
+        .btn-back { 
+            display: inline-block; margin-top: 40px; background: #555; 
+            color: white; padding: 8px 15px; text-decoration: none; border-radius: 4px; font-size: 12px;
+        }
+
+        footer { background: #222; color: #777; padding: 20px; text-align: center; }
+    </style>
 </head>
 <body>
 
-<header>
-<h1>ARDUINO MASTER PRO</h1>
-<p>Prodaja dijelova i izrada industrijskih postrojenja</p>
-</header>
-
 <nav>
-<a href="#">TRGOVINA</a>
-<a href="#">IZRADA MAŠINA</a>
-<a href="#">KONTAKT</a>
+    <div class="nav-links">
+        <a href="#pocetna" id="menu-home">POČETNA</a>
+        <a href="#trgovina" id="menu-shop">TRGOVINA</a>
+        <a href="#inzenjering" id="menu-eng">INŽENJERING</a>
+    </div>
+    <div class="lang-switcher">
+        <button onclick="changeLang('bs')">BS</button>
+        <button onclick="changeLang('en')">EN</button>
+        <button onclick="changeLang('de')">DE</button>
+    </div>
 </nav>
 
-<div class="container">
-<div class="kartica">
-<img src="https://via.placeholder.com/150?text=Arduino+Uno" alt="Arduino">
-<h3>Arduino Uno R3</h3>
-<p>Originalni čip, stabilan rad.</p>
-<div class="cijena">15.00 KM</div>
-<a href="https://wa.me/38761111111?text=Narudzba: Arduino Uno" class="dugme">NARUČI (WhatsApp)</a>
-</div>
+<header id="pocetna">
+    <h1 id="hero-title">ARDUINO MASTER PRO</h1>
+    <p id="hero-desc">Vaš partner za elektroniku i izradu industrijskih postrojenja</p>
+</header>
 
-<div class="kartica">
-    <img src="[https://via.placeholder.com/150?text=Senzor+Pokreta](https://via.placeholder.com/150?text=Senzor+Pokreta)" alt="Senzor">
-    <h3>PIR Senzor Pokreta</h3>
-    <p>Idealan za alarmne sisteme.</p>
-    <div class="cijena">5.00 KM</div>
-    <a href="[https://wa.me/38761111111?text=Narudzba](https://wa.me/38761111111?text=Narudzba): PIR Senzor" class="dugme">NARUČI (WhatsApp)</a>
-</div>
-
-<div class="kartica">
-    <img src="[https://via.placeholder.com/150?text=Relej+4K](https://via.placeholder.com/150?text=Relej+4K)" alt="Relej">
-    <h3>Relej Modul 4 Kanala</h3>
-    <p>Za paljenje mašina i svjetala.</p>
-    <div class="cijena">10.00 KM</div>
-    <a href="[https://wa.me/38761111111?text=Narudzba](https://wa.me/38761111111?text=Narudzba): Relej 4K" class="dugme">NARUČI (WhatsApp)</a>
-</div>
-
-</div>
-
-<section class="inzenjering">
-<h2>IZRADA KOMPLETNIH POSTROJENJA</h2>
-<p>Pravimo upravljačke ormare, automatizaciju za apkant prese i CNC mašine bazirane na Arduino i ESP32 kontrolerima.</p>
-<p><strong>Kontaktiraj nas za projekat:</strong> email@tvojsajt.com</p>
+<section id="trgovina">
+    <h2 id="shop-title">KATALOG KOMPONENATA</h2>
+    <div class="shop-grid">
+        <div class="kartica">
+            <img src="https://via.placeholder.com/150?text=Arduino+Uno" alt="Arduino">
+            <h3 id="p1-title">Arduino Uno R3</h3>
+            <p id="p1-desc">Originalni čip za stabilan rad.</p>
+            <a href="https://wa.me/38761111111" class="btn-buy" id="btn-buy-1">KUPI / BUY / KAUFEN</a>
+        </div>
+        <div class="kartica">
+            <img src="https://via.placeholder.com/150?text=ESP32" alt="ESP32">
+            <h3 id="p2-title">ESP32 WiFi Modul</h3>
+            <p id="p2-desc">Brz procesor sa Bluetooth-om.</p>
+            <a href="https://wa.me/38761111111" class="btn-buy" id="btn-buy-2">KUPI / BUY / KAUFEN</a>
+        </div>
+    </div>
+    <a href="#pocetna" class="btn-back" id="back-1">↑ Nazad na vrh / Back to top</a>
 </section>
+
+<section id="inzenjering" style="background: #eef2f3;">
+    <h2 id="eng-title">PROJEKTOVANJE I IZRADA</h2>
+    <p id="eng-desc">Pravimo automatizovane sisteme za vaše mašine. Specijalizovani za apkant prese i CNC kontrolere.</p>
+    <a href="#pocetna" class="btn-back" id="back-2">↑ Nazad na vrh / Back to top</a>
+</section>
+
+<footer>
+    <p>&copy; 2024 Arduino Master Pro</p>
+</footer>
+
+<script>
+    const translations = {
+        bs: {
+            home: "POČETNA", shop: "TRGOVINA", eng: "INŽENJERING",
+            hTitle: "ARDUINO MASTER PRO", hDesc: "Vaš partner za elektroniku i izradu industrijskih postrojenja",
+            sTitle: "KATALOG KOMPONENATA", p1T: "Arduino Uno R3", p1D: "Originalni čip za stabilan rad.",
+            p2T: "ESP32 WiFi Modul", p2D: "Brz procesor sa Bluetooth-om.",
+            eTitle: "PROJEKTOVANJE I IZRADA", eDesc: "Pravimo automatizovane sisteme za vaše mašine. Specijalizovani za apkant prese i CNC kontrolere.",
+            back: "↑ Nazad na vrh"
+        },
+        en: {
+            home: "HOME", shop: "SHOP", eng: "ENGINEERING",
+            hTitle: "ARDUINO MASTER PRO", hDesc: "Your partner for electronics and industrial plant construction",
+            sTitle: "COMPONENTS CATALOG", p1T: "Arduino Uno R3", p1D: "Original chip for stable operation.",
+            p2T: "ESP32 WiFi Module", p2D: "Fast processor with Bluetooth.",
+            eTitle: "DESIGN AND CONSTRUCTION", eDesc: "We build automated systems for your machines. Specialized in press brakes and CNC controllers.",
+            back: "↑ Back to top"
+        },
+        de: {
+            home: "STARTSEITE", shop: "SHOP", eng: "ENGINEERING",
+            hTitle: "ARDUINO MASTER PRO", hDesc: "Ihr Partner für Elektronik und Industrieanlagenbau",
+            sTitle: "KOMPONENTENKATALOG", p1T: "Arduino Uno R3", p1D: "Original-Chip za stabilen rad.",
+            p2T: "ESP32 WiFi Modul", p2D: "Schneller Prozessor mit Bluetooth.",
+            eTitle: "PROJEKTIERUNG UND FERTIGUNG", eDesc: "Wir bauen automatisierte Systeme für Ihre Maschinen. Spezialisiert auf Abkantpressen und CNC-Steuerungen.",
+            back: "↑ Nach oben"
+        }
+    };
+
+    function changeLang(lang) {
+        document.getElementById('menu-home').innerText = translations[lang].home;
+        document.getElementById('menu-shop').innerText = translations[lang].shop;
+        document.getElementById('menu-eng').innerText = translations[lang].eng;
+        document.getElementById('hero-title').innerText = translations[lang].hTitle;
+        document.getElementById('hero-desc').innerText = translations[lang].hDesc;
+        document.getElementById('shop-title').innerText = translations[lang].sTitle;
+        document.getElementById('p1-title').innerText = translations[lang].p1T;
+        document.getElementById('p1-desc').innerText = translations[lang].p1D;
+        document.getElementById('p2-title').innerText = translations[lang].p2T;
+        document.getElementById('p2-desc').innerText = translations[lang].p2D;
+        document.getElementById('eng-title').innerText = translations[lang].eTitle;
+        document.getElementById('eng-desc').innerText = translations[lang].eDesc;
+        document.getElementById('back-1').innerText = translations[lang].back;
+        document.getElementById('back-2').innerText = translations[lang].back;
+    }
+</script>
 
 </body>
 </html>
