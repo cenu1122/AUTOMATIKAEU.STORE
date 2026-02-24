@@ -1,86 +1,66 @@
 <!DOCTYPE html>
-<html lang="hr">
+
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automatika Pro | Prodaja i Izrada Postrojenja</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<title>Arduino Shop i Automatika</title>
+<style>
+body { font-family: sans-serif; margin: 0; background: #f4f4f4; }
+header { background: #008184; color: white; padding: 20px; text-align: center; }
+nav { background: #273b47; padding: 10px; text-align: center; }
+nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+.container { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; }
+.kartica { background: white; border: 1px solid #ddd; margin: 10px; padding: 20px; width: 250px; text-align: center; border-radius: 8px; }
+.kartica img { width: 100%; height: 150px; object-fit: contain; }
+.cijena { color: #008184; font-size: 22px; font-weight: bold; margin: 10px 0; }
+.dugme { background: #25D366; color: white; padding: 10px; text-decoration: none; display: block; border-radius: 5px; font-weight: bold; }
+.inzenjering { background: #eee; padding: 40px; text-align: center; border-top: 3px solid #008184; }
+</style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="logo">AUTOMATIKA<span>PRO</span></div>
-        <ul class="nav-links">
-            <li><a href="#home">Početna</a></li>
-            <li><a href="#shop">Prodaja Dijelova</a></li>
-            <li><a href="#engineering">Izrada Postrojenja</a></li>
-            <li><a href="#contact">Kontakt</a></li>
-        </ul>
-        <div class="cart-icon">
-            <i class="fas fa-shopping-cart"></i> <span>(0)</span>
-        </div>
-    </nav>
+<header>
+<h1>ARDUINO MASTER PRO</h1>
+<p>Prodaja dijelova i izrada industrijskih postrojenja</p>
+</header>
 
-    <header id="home" class="hero">
-        <div class="hero-content">
-            <h1>Inženjering i Komponente za Industriju</h1>
-            <p>Od senzora do kompletnih automatizovanih linija. Vaš partner u industriji 4.0.</p>
-            <div class="buttons">
-                <a href="#shop" class="btn">Kupi Dijelove</a>
-                <a href="#engineering" class="btn-alt">Naši Projekti</a>
-            </div>
-        </div>
-    </header>
+<nav>
+<a href="#">TRGOVINA</a>
+<a href="#">IZRADA MAŠINA</a>
+<a href="#">KONTAKT</a>
+</nav>
 
-    <section id="shop" class="section">
-        <h2 class="section-title">Popularni Dijelovi</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <div class="img-placeholder">PLC Kontroler</div>
-                <h3>PLC Upravljačke Jedinice</h3>
-                <p>Cijena: Na upit</p>
-                <button class="buy-btn">Dodaj u košaricu</button>
-            </div>
-            <div class="product-card">
-                <div class="img-placeholder">Senzor</div>
-                <h3>Induktivni i Optički Senzori</h3>
-                <p>Cijena: 45.00 EUR</p>
-                <button class="buy-btn">Dodaj u košaricu</button>
-            </div>
-            <div class="product-card">
-                <div class="img-placeholder">Pneumatika</div>
-                <h3>Pneumatski Cilindri i Ventili</h3>
-                <p>Cijena: 120.00 EUR</p>
-                <button class="buy-btn">Dodaj u košaricu</button>
-            </div>
-        </div>
-    </section>
+<div class="container">
+<div class="kartica">
+<img src="https://via.placeholder.com/150?text=Arduino+Uno" alt="Arduino">
+<h3>Arduino Uno R3</h3>
+<p>Originalni čip, stabilan rad.</p>
+<div class="cijena">15.00 KM</div>
+<a href="https://wa.me/38761111111?text=Narudzba: Arduino Uno" class="dugme">NARUČI (WhatsApp)</a>
+</div>
 
-    <section id="engineering" class="engineering-section">
-        <div class="container">
-            <h2>Projektovanje i Izrada Postrojenja</h2>
-            <p>Nudimo rješenja ključ u ruke: od elektro-šematske dokumentacije do montaže i programiranja (PLC, SCADA, HMI).</p>
-            <ul class="services-list">
-                <li><i class="fas fa-check"></i> Izrada upravljačkih ormara</li>
-                <li><i class="fas fa-check"></i> Programiranje robotskih ruku</li>
-                <li><i class="fas fa-check"></i> Modernizacija starih mašina (Retrofitting)</li>
-            </ul>
-        </div>
-    </section>
+<div class="kartica">
+    <img src="[https://via.placeholder.com/150?text=Senzor+Pokreta](https://via.placeholder.com/150?text=Senzor+Pokreta)" alt="Senzor">
+    <h3>PIR Senzor Pokreta</h3>
+    <p>Idealan za alarmne sisteme.</p>
+    <div class="cijena">5.00 KM</div>
+    <a href="[https://wa.me/38761111111?text=Narudzba](https://wa.me/38761111111?text=Narudzba): PIR Senzor" class="dugme">NARUČI (WhatsApp)</a>
+</div>
 
-    <footer id="contact">
-        <div class="footer-content">
-            <h3>Kontaktirajte Inženjere</h3>
-            <p>Email: info@automatika-pro.com | Tel: +387 XX XXX XXX</p>
-            <form class="contact-form">
-                <input type="text" placeholder="Vaše Ime">
-                <input type="email" placeholder="Vaš Email">
-                <textarea placeholder="Opis vašeg projekta ili potrebnih dijelova"></textarea>
-                <button type="submit">Pošalji Upit</button>
-            </form>
-        </div>
-    </footer>
+<div class="kartica">
+    <img src="[https://via.placeholder.com/150?text=Relej+4K](https://via.placeholder.com/150?text=Relej+4K)" alt="Relej">
+    <h3>Relej Modul 4 Kanala</h3>
+    <p>Za paljenje mašina i svjetala.</p>
+    <div class="cijena">10.00 KM</div>
+    <a href="[https://wa.me/38761111111?text=Narudzba](https://wa.me/38761111111?text=Narudzba): Relej 4K" class="dugme">NARUČI (WhatsApp)</a>
+</div>
+
+</div>
+
+<section class="inzenjering">
+<h2>IZRADA KOMPLETNIH POSTROJENJA</h2>
+<p>Pravimo upravljačke ormare, automatizaciju za apkant prese i CNC mašine bazirane na Arduino i ESP32 kontrolerima.</p>
+<p><strong>Kontaktiraj nas za projekat:</strong> email@tvojsajt.com</p>
+</section>
 
 </body>
 </html>
