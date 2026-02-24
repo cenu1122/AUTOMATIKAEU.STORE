@@ -3,58 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arduino Master Pro - Industrial Shop</title>
+    <title>Arduino Industrial Shop - 20+ Dijelova sa Slikama</title>
     <style>
         :root { --teal: #008184; --dark: #273b47; --orange: #d35400; --bg: #f4f7f6; }
         html { scroll-behavior: smooth; }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); }
 
-        /* NAVIGACIJA */
         nav { 
             background: var(--dark); padding: 10px 5%; display: flex; justify-content: space-between;
-            align-items: center; position: fixed; width: 90%; top: 0; z-index: 2000; box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            align-items: center; position: fixed; width: 90%; top: 0; z-index: 2000;
         }
-        .nav-links a { color: white; margin: 0 10px; text-decoration: none; font-weight: bold; font-size: 12px; text-transform: uppercase; }
-        .lang-switcher button { background: #444; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 3px; }
+        .nav-links a { color: white; margin: 0 10px; text-decoration: none; font-weight: bold; font-size: 13px; }
+        .lang-switcher button { background: #444; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 3px; font-weight: bold; }
 
-        /* HERO */
         header { 
             background: linear-gradient(rgba(0,129,132,0.8), rgba(39,59,71,0.9)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1350&q=80');
-            background-size: cover; padding: 120px 20px 60px; text-align: center; color: white;
+            background-size: cover; padding: 140px 20px 80px; text-align: center; color: white; 
         }
 
-        /* KATALOG */
         .container { padding: 40px 5%; }
-        .category-title { border-left: 5px solid var(--teal); padding-left: 15px; margin: 40px 0 20px; color: var(--dark); }
+        .category-title { border-left: 5px solid var(--teal); padding-left: 15px; margin: 40px 0 20px; color: var(--dark); text-transform: uppercase; }
         
         .shop-grid { 
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; 
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; 
         }
         .card { 
-            background: white; border-radius: 8px; padding: 15px; text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: 0.3s;
+            background: white; border-radius: 12px; padding: 20px; text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between;
         }
-        .card:hover { transform: translateY(-5px); }
-        .card img { width: 100%; height: 120px; object-fit: contain; margin-bottom: 10px; }
-        .card h4 { font-size: 14px; margin: 10px 0; height: 35px; overflow: hidden; }
-        .price { color: var(--orange); font-weight: bold; font-size: 18px; margin-bottom: 15px; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
+        
+        /* Stil za slike da budu jednake i vidljive */
+        .card img { 
+            width: 100%; 
+            height: 150px; 
+            object-fit: contain; 
+            margin-bottom: 15px; 
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            padding: 5px;
+        }
+
+        .card h4 { font-size: 16px; margin: 10px 0; color: #333; height: 40px; overflow: hidden; }
+        .price { color: var(--orange); font-weight: bold; font-size: 20px; margin-bottom: 15px; }
 
         .btn-buy { 
-            background: #25D366; color: white; padding: 8px; text-decoration: none; 
-            display: block; border-radius: 4px; font-weight: bold; font-size: 12px;
+            background: #25D366; color: white; padding: 12px; text-decoration: none; 
+            display: block; border-radius: 6px; font-weight: bold; font-size: 14px;
         }
-        .btn-back { display: block; width: fit-content; margin: 20px auto; background: #555; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+        .btn-back { display: block; width: fit-content; margin: 40px auto; background: #555; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; }
 
-        footer { background: #111; color: #777; padding: 20px; text-align: center; margin-top: 50px; }
+        footer { background: #111; color: #777; padding: 30px; text-align: center; margin-top: 50px; }
     </style>
 </head>
 <body>
 
 <nav>
     <div class="nav-links">
-        <a href="#pocetna" id="m-home">Početna</a>
-        <a href="#katalog" id="m-shop">Katalog</a>
-        <a href="#kontakt" id="m-con">Kontakt</a>
+        <a href="#pocetna">Početna</a>
+        <a href="#katalog">Katalog</a>
+        <a href="#kontakt">Kontakt</a>
     </div>
     <div class="lang-switcher">
         <button onclick="changeLang('bs')">BS</button>
@@ -64,87 +72,79 @@
 </nav>
 
 <header id="pocetna">
-    <h1 id="h-title">ARDUINO & INDUSTRIAL SHOP</h1>
-    <p id="h-desc">Preko 20 ključnih komponenti za vašu automatizaciju</p>
+    <h1>ARDUINO & INDUSTRIAL SHOP</h1>
+    <p>Kompletna ponuda sa preko 20 artikala</p>
 </header>
 
 <div class="container" id="katalog">
     
-    <h2 class="category-title" id="cat-1">Kontroleri & Ploče</h2>
+    <h2 class="category-title">1. Kontroleri & Ploče</h2>
     <div class="shop-grid" id="grid-1"></div>
 
-    <h2 class="category-title" id="cat-2">Senzori & Moduli</h2>
+    <h2 class="category-title">2. Senzori & Moduli</h2>
     <div class="shop-grid" id="grid-2"></div>
 
-    <h2 class="category-title" id="cat-3">Snaga & Upravljanje</h2>
+    <h2 class="category-title">3. Snaga & Displeji</h2>
     <div class="shop-grid" id="grid-3"></div>
 
-    <a href="#pocetna" class="btn-back" id="b-top">↑ Nazad na vrh</a>
+    <a href="#pocetna" class="btn-back">↑ Nazad na vrh</a>
 </div>
 
 <footer id="kontakt">
-    <p id="f-text">Kontakt: info@arduinomaster.ba | +387 61 000 000</p>
+    <p>Kontakt: info@arduinomaster.ba | WhatsApp: +387 61 000 000</p>
 </footer>
 
 <script>
     const items = [
-        {id: 1, cat: 1, n: "Arduino Uno R3", p: "15 KM", img: "https://via.placeholder.com/150?text=Uno"},
-        {id: 2, cat: 1, n: "Arduino Mega 2560", p: "25 KM", img: "https://via.placeholder.com/150?text=Mega"},
-        {id: 3, cat: 1, n: "Arduino Nano", p: "10 KM", img: "https://via.placeholder.com/150?text=Nano"},
-        {id: 4, cat: 1, n: "ESP32 DevKit", p: "12 KM", img: "https://via.placeholder.com/150?text=ESP32"},
-        {id: 5, cat: 1, n: "ESP8266 NodeMCU", p: "9 KM", img: "https://via.placeholder.com/150?text=ESP8266"},
-        {id: 6, cat: 1, n: "Raspberry Pi Pico", p: "14 KM", img: "https://via.placeholder.com/150?text=RPiPico"},
-        
-        {id: 7, cat: 2, n: "Ultrazvučni HC-SR04", p: "4 KM", img: "https://via.placeholder.com/150?text=Sonic"},
-        {id: 8, cat: 2, n: "PIR Senzor Pokreta", p: "5 KM", img: "https://via.placeholder.com/150?text=PIR"},
-        {id: 9, cat: 2, n: "DHT11 Temp/Vlaga", p: "4 KM", img: "https://via.placeholder.com/150?text=DHT11"},
-        {id: 10, cat: 2, n: "Senzor nivoa vode", p: "3 KM", img: "https://via.placeholder.com/150?text=Water"},
-        {id: 11, cat: 2, n: "MQ-2 Senzor plina", p: "6 KM", img: "https://via.placeholder.com/150?text=Gas"},
-        {id: 12, cat: 2, n: "Infracrveni senzor", p: "3 KM", img: "https://via.placeholder.com/150?text=IR"},
-        {id: 13, cat: 2, n: "RFID Reader RC522", p: "10 KM", img: "https://via.placeholder.com/150?text=RFID"},
-        {id: 14, cat: 2, n: "LDR Fotootpornik", p: "1 KM", img: "https://via.placeholder.com/150?text=LDR"},
+        /* KONTROLERI */
+        {cat: 1, n: "Arduino Uno R3", p: "15 KM", img: "https://www.arduino.cc/en/uploads/Main/A000066_iso_front.jpg"},
+        {cat: 1, n: "Arduino Mega 2560", p: "25 KM", img: "https://www.arduino.cc/en/uploads/Main/A000067_iso_front.jpg"},
+        {cat: 1, n: "Arduino Nano V3", p: "10 KM", img: "https://m.media-amazon.com/images/I/61m1hI4-qjL._SL1000_.jpg"},
+        {cat: 1, n: "ESP32 DevKit V1", p: "12 KM", img: "https://m.media-amazon.com/images/I/61NfI7z3SXL._SL1000_.jpg"},
+        {cat: 1, n: "NodeMCU ESP8266", p: "9 KM", img: "https://m.media-amazon.com/images/I/61I2MlsS89L._SL1000_.jpg"},
+        {cat: 1, n: "Raspberry Pi Pico", p: "14 KM", img: "https://www.raspberrypi.com/app/uploads/2021/01/Pico-Hero.jpg"},
 
-        {id: 15, cat: 3, n: "Relej 1 Kanal 5V", p: "4 KM", img: "https://via.placeholder.com/150?text=Relay1"},
-        {id: 16, cat: 3, n: "Relej 4 Kanala", p: "12 KM", img: "https://via.placeholder.com/150?text=Relay4"},
-        {id: 17, cat: 3, n: "L298N Motor Driver", p: "8 KM", img: "https://via.placeholder.com/150?text=L298N"},
-        {id: 18, cat: 3, n: "Servo Motor SG90", p: "5 KM", img: "https://via.placeholder.com/150?text=SG90"},
-        {id: 19, cat: 3, n: "Step Motor + Driver", p: "15 KM", img: "https://via.placeholder.com/150?text=Step"},
-        {id: 20, cat: 3, n: "LCD 16x2 I2C", p: "9 KM", img: "https://via.placeholder.com/150?text=LCD"},
-        {id: 21, cat: 3, n: "Napajanje 12V 5A", p: "20 KM", img: "https://via.placeholder.com/150?text=Power"}
+        /* SENZORI */
+        {cat: 2, n: "Ultrazvučni HC-SR04", p: "4 KM", img: "https://m.media-amazon.com/images/I/51pI-E9T+iL._SL1000_.jpg"},
+        {cat: 2, n: "PIR Senzor Pokreta", p: "5 KM", img: "https://m.media-amazon.com/images/I/51H0O-0A3iL._SL1000_.jpg"},
+        {cat: 2, n: "DHT11 Temp/Vlaga", p: "4 KM", img: "https://m.media-amazon.com/images/I/41-lU3lXJPL.jpg"},
+        {cat: 2, n: "Senzor Nivoa Vode", p: "3 KM", img: "https://m.media-amazon.com/images/I/51YmE-T+8dL._SL1000_.jpg"},
+        {cat: 2, n: "MQ-2 Senzor Plina", p: "6 KM", img: "https://m.media-amazon.com/images/I/61S-qL0qAEL._SL1000_.jpg"},
+        {cat: 2, n: "RFID Reader RC522", p: "10 KM", img: "https://m.media-amazon.com/images/I/7187qMcl7hL._SL1000_.jpg"},
+        {cat: 2, n: "Senzor Pritiska 20kg", p: "18 KM", img: "https://m.media-amazon.com/images/I/51+u7D1D7YL._SL1000_.jpg"},
+        {cat: 2, n: "Infracrveni Senzor", p: "3 KM", img: "https://m.media-amazon.com/images/I/5176Qf90T6L._SL1000_.jpg"},
+
+        /* SNAGA I DISPLEJI */
+        {cat: 3, n: "Relej 1 Kanal 5V", p: "4 KM", img: "https://m.media-amazon.com/images/I/51+M8v5Vn1L._SL1000_.jpg"},
+        {cat: 3, n: "Relej 4 Kanala 5V", p: "12 KM", img: "https://m.media-amazon.com/images/I/51U6S5m6V1L._SL1000_.jpg"},
+        {cat: 3, n: "LCD Displej 16x2 I2C", p: "9 KM", img: "https://m.media-amazon.com/images/I/61iVpI9F0SL._SL1000_.jpg"},
+        {cat: 3, n: "Servo Motor SG90", p: "5 KM", img: "https://m.media-amazon.com/images/I/51X5f8Yn6oL._SL1000_.jpg"},
+        {cat: 3, n: "Step Motor + Driver", p: "15 KM", img: "https://m.media-amazon.com/images/I/61XW9vO34oL._SL1000_.jpg"},
+        {cat: 3, n: "L298N Motor Driver", p: "8 KM", img: "https://m.media-amazon.com/images/I/71-0Yt1n9rL._SL1000_.jpg"},
+        {cat: 3, n: "Napajanje 12V 5A", p: "20 KM", img: "https://m.media-amazon.com/images/I/615Dq+BvK7L._SL1000_.jpg"},
+        {cat: 3, n: "Tastatura 4x4", p: "4 KM", img: "https://m.media-amazon.com/images/I/61u9n1L6pFL._SL1000_.jpg"}
     ];
-
-    const trans = {
-        bs: { m1: "Početna", m2: "Katalog", m3: "Kontakt", h1: "ARDUINO & INDUSTRIAL SHOP", h2: "Preko 20 komponenti", c1: "Kontroleri", c2: "Senzori", c3: "Snaga", buy: "NARUČI", top: "↑ VRH" },
-        en: { m1: "Home", m2: "Catalog", m3: "Contact", h1: "ARDUINO & INDUSTRIAL SHOP", h2: "Over 20 components", c1: "Controllers", c2: "Sensors", c3: "Power", buy: "ORDER", top: "↑ TOP" },
-        de: { m1: "Start", m2: "Katalog", m3: "Kontakt", h1: "ARDUINO & INDUSTRIAL SHOP", h2: "Über 20 Komponenten", c1: "Controller", c2: "Sensoren", c3: "Energie", buy: "BESTELLEN", top: "↑ OBEN" }
-    };
 
     function loadItems() {
         items.forEach(i => {
-            const card = `<div class="card">
-                <img src="${i.img}">
-                <h4>${i.n}</h4>
-                <div class="price">${i.p}</div>
-                <a href="https://wa.me/38761000000?text=Narucujem:${i.n}" class="btn-buy" id="btext-${i.id}">NARUČI</a>
-            </div>`;
+            const card = `
+                <div class="card">
+                    <img src="${i.img}" alt="${i.n}">
+                    <h4>${i.n}</h4>
+                    <div class="price">${i.p}</div>
+                    <a href="https://wa.me/38761000000?text=Narucujem: ${i.n}" class="btn-buy">NARUČI (WhatsApp)</a>
+                </div>`;
             document.getElementById(`grid-${i.cat}`).innerHTML += card;
         });
     }
 
-    function changeLang(l) {
-        document.getElementById('m-home').innerText = trans[l].m1;
-        document.getElementById('m-shop').innerText = trans[l].m2;
-        document.getElementById('m-con').innerText = trans[l].m3;
-        document.getElementById('h-title').innerText = trans[l].h1;
-        document.getElementById('h-desc').innerText = trans[l].h2;
-        document.getElementById('cat-1').innerText = trans[l].c1;
-        document.getElementById('cat-2').innerText = trans[l].c2;
-        document.getElementById('cat-3').innerText = trans[l].c3;
-        document.getElementById('b-top').innerText = trans[l].top;
-        items.forEach(i => document.getElementById(`btext-${i.id}`).innerText = trans[l].buy);
+    function changeLang(lang) {
+        const btns = document.querySelectorAll('.btn-buy');
+        const labels = { bs: "NARUČI", en: "ORDER", de: "BESTELLEN" };
+        btns.forEach(b => b.innerText = labels[lang] + " (WhatsApp)");
     }
 
-    loadItems();
+    window.onload = loadItems;
 </script>
 </body>
 </html>
