@@ -3,60 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fantastiko Digital</title>
+<title>Fanatastiko Industrial Solutions</title>
 
 <style>
-body{
-margin:0;
-font-family:Arial, sans-serif;
-scroll-behavior:smooth;
-}
+body{margin:0;font-family:Segoe UI;background:#f4f7f6;scroll-behavior:smooth}
 
 nav{
 position:fixed;
 top:0;
 width:100%;
-background:#111;
+background:#0d1b22;
 padding:15px;
-text-align:center;
-z-index:1000;
+display:flex;
+justify-content:center;
+gap:20px;
+z-index:1000
 }
 
-nav a{
-color:white;
-margin:0 15px;
-text-decoration:none;
-font-weight:bold;
+nav a{color:#fff;text-decoration:none;font-weight:bold}
+
+.lang{
+position:fixed;
+top:70px;
+right:20px;
 }
+
+.lang button{
+padding:6px 10px;
+cursor:pointer;
+border:none;
+margin:2px;
+}
+.lang .active{background:#ff7a00;color:#fff}
 
 section{
-padding:100px 20px;
+padding:120px 20px;
 min-height:100vh;
-text-align:center;
+text-align:center
 }
 
-#home{background:#f4f4f4;}
-#services{background:#e3e3e3;}
-#offer{background:#f4f4f4;}
-#payment{background:#e3e3e3;}
-#contact{background:#f4f4f4;}
+.hero{
+background:linear-gradient(#008184,#0d1b22);
+color:#fff
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px
+}
+
+.card{
+background:#fff;
+padding:20px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,.1)
+}
+
+.shop{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px
+}
+
+.product{
+background:#fff;
+padding:15px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,.1)
+}
 
 .btn{
 display:inline-block;
 padding:12px 20px;
 background:#0070ba;
-color:white;
+color:#fff;
+border-radius:6px;
 text-decoration:none;
 margin:10px;
-border-radius:6px;
+cursor:pointer;
+border:none
 }
 
-.back{
-display:block;
-margin-top:40px;
-color:#000;
-font-weight:bold;
+.cart{
+position:fixed;
+right:20px;
+bottom:20px;
+background:#fff;
+padding:20px;
+border-radius:10px;
+box-shadow:0 5px 20px rgba(0,0,0,.2);
+width:250px
 }
+
+.back{display:block;margin-top:30px;font-weight:bold;color:#000}
 </style>
 </head>
 
@@ -64,82 +104,119 @@ font-weight:bold;
 
 <nav>
 <a href="#home">Početna</a>
-<a href="#services">Usluge</a>
-<a href="#offer">Ponuda</a>
+<a href="#about">O nama</a>
+<a href="#why">Zašto mi</a>
+<a href="#shop">Shop</a>
+<a href="#reviews">Recenzije</a>
 <a href="#payment">Plaćanje</a>
-<a href="#contact">Kontakt</a>
 </nav>
 
-<section id="home">
-<h1>Fantastiko Digital</h1>
-<p>Kompletna IT rješenja, programiranje i rješavanje vaših digitalnih problema.</p>
-<a href="#offer" class="btn">Pogledaj ponudu</a>
-<a href="#home" class="back">⬆ Povratak na početnu</a>
+<div class="lang">
+<button id="bs" class="active" onclick="changeLang('bs')">BS</button>
+<button id="en" onclick="changeLang('en')">EN</button>
+<button id="de" onclick="changeLang('de')">DE</button>
+</div>
+
+<section id="home" class="hero">
+<h1 data-key="title">Automatika • Programiranje • Rješavanje problema</h1>
+<p data-key="sub">Kompletna industrijska rješenja i prodaja opreme</p>
+<a href="#shop" class="btn">Shop</a>
 </section>
 
-<section id="services">
-<h2>Naše usluge</h2>
-<p>Izrada web stranica</p>
-<p>Programiranje i automatizacija</p>
-<p>Popravka i optimizacija sistema</p>
-<p>Digitalni marketing</p>
-<p>Online poslovna rješenja</p>
-<a href="#home" class="back">⬆ Povratak na početnu</a>
+<section id="about">
+<h2 data-key="about">O nama</h2>
+<p>Fanatastiko Industrial Solutions pruža profesionalna rješenja automatike, IoT i industrijske elektronike.</p>
+<a href="#home" class="back">⬆ Povratak</a>
 </section>
 
-<section id="offer">
-<h2>Kompletna ponuda</h2>
-<p>Izrada profesionalnih web stranica</p>
-<p>Automatizacija poslovanja</p>
-<p>Rješavanje tehničkih problema</p>
-<p>SEO optimizacija i marketing</p>
-<p>IT podrška i konsultacije</p>
-<a href="#home" class="back">⬆ Povratak na početnu</a>
+<section id="why">
+<h2 data-key="why">Zašto mi</h2>
+<div class="grid">
+<div class="card">Brza realizacija</div>
+<div class="card">Industrijsko iskustvo</div>
+<div class="card">Podrška 24/7</div>
+</div>
+<a href="#home" class="back">⬆ Povratak</a>
+</section>
+
+<section id="shop">
+<h2>Shop</h2>
+<div class="shop" id="shopGrid"></div>
+<a href="#home" class="back">⬆ Povratak</a>
+</section>
+
+<section id="reviews">
+<h2 data-key="reviews">Recenzije</h2>
+<p data-key="r1">⭐⭐⭐⭐⭐ Odlična saradnja</p>
+<p data-key="r2">⭐⭐⭐⭐⭐ Profesionalno rješenje</p>
+<a href="#home" class="back">⬆ Povratak</a>
 </section>
 
 <section id="payment">
-<h2>Načini plaćanja</h2>
-
-<p>PayPal plaćanje:</p>
-<a href="https://paypal.me/fanatastiko" class="btn">Plati PayPal</a>
-
-<p>Plaćanje karticom (Stripe):</p>
-<a href="#" class="btn">Plati karticom</a>
-
-<p>Plaćanje pouzećem dostupno za Bosnu i Hercegovinu.</p>
-
-<a href="#home" class="back">⬆ Povratak na početnu</a>
+<h2 data-key="payment">Plaćanje</h2>
+<a href="https://paypal.me/fanatastiko" target="_blank" class="btn">PayPal</a>
+<button class="btn">Stripe kartica</button>
+<p data-key="cod">Pouzeće dostupno u BiH</p>
+<a href="#home" class="back">⬆ Povratak</a>
 </section>
 
-<section id="contact">
-<h2>Kontakt</h2>
-<p>Email: info@fantastiko.digital</p>
-<p>WhatsApp / Viber: +387</p>
-<a href="#home" class="back">⬆ Povratak na početnu</a>
-</section>
-  <script>
-const langData={
-bs:{
-reviews:"Recenzije",
-download:"Preuzmi instrukcije"
-},
-en:{
-reviews:"Reviews",
-download:"Download instructions"
-},
-de:{
-reviews:"Bewertungen",
-download:"Anleitung herunterladen"
+<div class="cart">
+<b>Korpa</b>
+<div id="cart"></div>
+<b id="total">0 KM</b>
+</div>
+
+<script>
+const products=[
+{name:"Arduino Uno",price:15},
+{name:"ESP32",price:12},
+{name:"Arduino Nano",price:10}
+];
+
+let cart=[];
+
+function loadShop(){
+shopGrid.innerHTML="";
+products.forEach(p=>{
+shopGrid.innerHTML+=`
+<div class="product">
+<h4>${p.name}</h4>
+<p>${p.price} KM</p>
+<button class="btn" onclick="add('${p.name}',${p.price})">Dodaj</button>
+</div>`;
+});
 }
+
+function add(n,p){
+cart.push({n,p});
+render();
+}
+
+function render(){
+cart.innerHTML="";
+let t=0;
+cart.forEach(c=>{
+t+=c.p;
+});
+document.getElementById("total").innerText=t+" KM";
+}
+
+const langData={
+bs:{title:"Automatika • Programiranje • Rješavanje problema",sub:"Kompletna industrijska rješenja i prodaja opreme",about:"O nama",why:"Zašto mi",reviews:"Recenzije",r1:"⭐⭐⭐⭐⭐ Odlična saradnja",r2:"⭐⭐⭐⭐⭐ Profesionalno rješenje",payment:"Plaćanje",cod:"Pouzeće dostupno u BiH"},
+en:{title:"Automation • Programming • Problem solving",sub:"Complete industrial solutions",about:"About us",why:"Why us",reviews:"Reviews",r1:"⭐⭐⭐⭐⭐ Excellent cooperation",r2:"⭐⭐⭐⭐⭐ Professional solution",payment:"Payment",cod:"Cash on delivery in Bosnia"},
+de:{title:"Automatisierung • Programmierung • Problemlösung",sub:"Komplette Industrielösungen",about:"Über uns",why:"Warum wir",reviews:"Bewertungen",r1:"⭐⭐⭐⭐⭐ Ausgezeichnet",r2:"⭐⭐⭐⭐⭐ Professionell",payment:"Zahlung",cod:"Nachnahme in Bosnien"}
 };
 
 function changeLang(l){
+document.querySelectorAll(".lang button").forEach(b=>b.classList.remove("active"));
+document.getElementById(l).classList.add("active");
 document.querySelectorAll("[data-key]").forEach(el=>{
 el.innerText=langData[l][el.dataset.key];
 });
 }
+
+loadShop();
 </script>
 
 </body>
 </html>
-
