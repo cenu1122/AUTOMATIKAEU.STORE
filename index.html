@@ -9,42 +9,37 @@
 body{margin:0;font-family:Segoe UI;background:#f4f7f6;scroll-behavior:smooth}
 
 nav{
-position:fixed;
-top:0;
-width:100%;
-background:#0d1b22;
+background:#1f2d36;
+color:white;
 padding:15px;
 display:flex;
 justify-content:center;
 gap:20px;
+position:fixed;
+top:0;
+width:100%;
 z-index:1000
 }
+nav a{color:white;text-decoration:none;font-weight:bold}
 
-nav a{color:#fff;text-decoration:none;font-weight:bold}
-
-.lang{
+.lang-switcher{
 position:fixed;
 top:70px;
 right:20px;
+z-index:1000
 }
-
-.lang button{
+.lang-switcher button{
 padding:6px 10px;
-cursor:pointer;
 border:none;
-margin:2px;
+cursor:pointer;
+margin:2px
 }
-.lang .active{background:#ff7a00;color:#fff}
+.lang-switcher .active{background:#d35400;color:#fff}
 
 section{
 padding:120px 20px;
 min-height:100vh;
 text-align:center
-}
-
-.hero{
-background:linear-gradient(#008184,#0d1b22);
-color:#fff
 }
 
 .grid{
@@ -54,42 +49,40 @@ gap:20px
 }
 
 .card{
-background:#fff;
+background:white;
 padding:20px;
 border-radius:10px;
 box-shadow:0 5px 15px rgba(0,0,0,.1)
 }
 
-.shop{
+.shop-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 gap:20px
 }
 
 .product{
-background:#fff;
+background:white;
 padding:15px;
 border-radius:10px;
 box-shadow:0 5px 15px rgba(0,0,0,.1)
 }
 
 .btn{
-display:inline-block;
-padding:12px 20px;
+padding:10px 18px;
 background:#0070ba;
-color:#fff;
+color:white;
+border:none;
 border-radius:6px;
-text-decoration:none;
-margin:10px;
 cursor:pointer;
-border:none
+margin-top:10px
 }
 
 .cart{
 position:fixed;
 right:20px;
 bottom:20px;
-background:#fff;
+background:white;
 padding:20px;
 border-radius:10px;
 box-shadow:0 5px 20px rgba(0,0,0,.2);
@@ -111,52 +104,53 @@ width:250px
 <a href="#payment">Plaćanje</a>
 </nav>
 
-<div class="lang">
-<button id="bs" class="active" onclick="changeLang('bs')">BS</button>
-<button id="en" onclick="changeLang('en')">EN</button>
-<button id="de" onclick="changeLang('de')">DE</button>
+<div class="lang-switcher">
+<button onclick="changeLang('bs')" id="lang-bs" class="active">BS</button>
+<button onclick="changeLang('en')" id="lang-en">EN</button>
+<button onclick="changeLang('de')" id="lang-de">DE</button>
 </div>
 
-<section id="home" class="hero">
-<h1 data-key="title">Automatika • Programiranje • Rješavanje problema</h1>
-<p data-key="sub">Kompletna industrijska rješenja i prodaja opreme</p>
-<a href="#shop" class="btn">Shop</a>
+<section id="home">
+<h1 data-key="title">Kompletna Industrijska Rješenja</h1>
+<p data-key="sub">Prodaja Arduino opreme, profesionalno programiranje i rješavanje tehničkih problema.</p>
+<p data-key="home2">Specijalizirani smo za automatiku, IoT projekte, industrijsku elektroniku i razvoj prilagođenih sistema.</p>
+<a href="#home" class="back">⬆ Povratak</a>
 </section>
 
 <section id="about">
 <h2 data-key="about">O nama</h2>
-<p>Fanatastiko Industrial Solutions pruža profesionalna rješenja automatike, IoT i industrijske elektronike.</p>
+<p data-key="about2">Fanatastiko Industrial Solutions pruža profesionalna rješenja automatike, programiranja i industrijskih sistema sa fokusom na kvalitet i pouzdanost.</p>
 <a href="#home" class="back">⬆ Povratak</a>
 </section>
 
 <section id="why">
 <h2 data-key="why">Zašto mi</h2>
 <div class="grid">
-<div class="card">Brza realizacija</div>
+<div class="card">Brza realizacija projekata</div>
 <div class="card">Industrijsko iskustvo</div>
-<div class="card">Podrška 24/7</div>
+<div class="card">Tehnička podrška 24/7</div>
 </div>
 <a href="#home" class="back">⬆ Povratak</a>
 </section>
 
 <section id="shop">
 <h2>Shop</h2>
-<div class="shop" id="shopGrid"></div>
+<div class="shop-grid" id="grid"></div>
 <a href="#home" class="back">⬆ Povratak</a>
 </section>
 
 <section id="reviews">
 <h2 data-key="reviews">Recenzije</h2>
-<p data-key="r1">⭐⭐⭐⭐⭐ Odlična saradnja</p>
-<p data-key="r2">⭐⭐⭐⭐⭐ Profesionalno rješenje</p>
+<p data-key="r1">⭐⭐⭐⭐⭐ Odlična saradnja i profesionalna podrška.</p>
+<p data-key="r2">⭐⭐⭐⭐⭐ Brza isporuka i kvalitetna oprema.</p>
 <a href="#home" class="back">⬆ Povratak</a>
 </section>
 
 <section id="payment">
-<h2 data-key="payment">Plaćanje</h2>
+<h2 data-key="payment">Načini plaćanja</h2>
 <a href="https://paypal.me/fanatastiko" target="_blank" class="btn">PayPal</a>
 <button class="btn">Stripe kartica</button>
-<p data-key="cod">Pouzeće dostupno u BiH</p>
+<p data-key="cod">Plaćanje pouzećem dostupno za Bosnu i Hercegovinu.</p>
 <a href="#home" class="back">⬆ Povratak</a>
 </section>
 
@@ -167,7 +161,7 @@ width:250px
 </div>
 
 <script>
-const products=[
+const items=[
 {name:"Arduino Uno",price:15},
 {name:"ESP32",price:12},
 {name:"Arduino Nano",price:10}
@@ -175,14 +169,14 @@ const products=[
 
 let cart=[];
 
-function loadShop(){
-shopGrid.innerHTML="";
-products.forEach(p=>{
-shopGrid.innerHTML+=`
+function load(){
+grid.innerHTML="";
+items.forEach(i=>{
+grid.innerHTML+=`
 <div class="product">
-<h4>${p.name}</h4>
-<p>${p.price} KM</p>
-<button class="btn" onclick="add('${p.name}',${p.price})">Dodaj</button>
+<h4>${i.name}</h4>
+<p>${i.price} KM</p>
+<button class="btn" onclick="add('${i.name}',${i.price})">Dodaj</button>
 </div>`;
 });
 }
@@ -195,27 +189,61 @@ render();
 function render(){
 cart.innerHTML="";
 let t=0;
-cart.forEach(c=>{
-t+=c.p;
-});
+cart.forEach(c=>t+=c.p);
 document.getElementById("total").innerText=t+" KM";
 }
 
 const langData={
-bs:{title:"Automatika • Programiranje • Rješavanje problema",sub:"Kompletna industrijska rješenja i prodaja opreme",about:"O nama",why:"Zašto mi",reviews:"Recenzije",r1:"⭐⭐⭐⭐⭐ Odlična saradnja",r2:"⭐⭐⭐⭐⭐ Profesionalno rješenje",payment:"Plaćanje",cod:"Pouzeće dostupno u BiH"},
-en:{title:"Automation • Programming • Problem solving",sub:"Complete industrial solutions",about:"About us",why:"Why us",reviews:"Reviews",r1:"⭐⭐⭐⭐⭐ Excellent cooperation",r2:"⭐⭐⭐⭐⭐ Professional solution",payment:"Payment",cod:"Cash on delivery in Bosnia"},
-de:{title:"Automatisierung • Programmierung • Problemlösung",sub:"Komplette Industrielösungen",about:"Über uns",why:"Warum wir",reviews:"Bewertungen",r1:"⭐⭐⭐⭐⭐ Ausgezeichnet",r2:"⭐⭐⭐⭐⭐ Professionell",payment:"Zahlung",cod:"Nachnahme in Bosnien"}
+bs:{
+title:"Kompletna Industrijska Rješenja",
+sub:"Prodaja Arduino opreme, profesionalno programiranje i rješavanje tehničkih problema.",
+home2:"Specijalizirani smo za automatiku, IoT projekte, industrijsku elektroniku i razvoj prilagođenih sistema.",
+about:"O nama",
+about2:"Fanatastiko Industrial Solutions pruža profesionalna rješenja automatike, programiranja i industrijskih sistema.",
+why:"Zašto mi",
+reviews:"Recenzije",
+r1:"⭐⭐⭐⭐⭐ Odlična saradnja i profesionalna podrška.",
+r2:"⭐⭐⭐⭐⭐ Brza isporuka i kvalitetna oprema.",
+payment:"Načini plaćanja",
+cod:"Plaćanje pouzećem dostupno za Bosnu i Hercegovinu."
+},
+en:{
+title:"Complete Industrial Solutions",
+sub:"Arduino equipment sales, programming and problem solving.",
+home2:"Specialized in automation, IoT projects and industrial electronics.",
+about:"About us",
+about2:"Fanatastiko Industrial Solutions provides professional automation and programming services.",
+why:"Why us",
+reviews:"Reviews",
+r1:"⭐⭐⭐⭐⭐ Excellent cooperation and support.",
+r2:"⭐⭐⭐⭐⭐ Fast delivery and quality equipment.",
+payment:"Payment methods",
+cod:"Cash on delivery available in Bosnia."
+},
+de:{
+title:"Komplette Industrielösungen",
+sub:"Arduino Verkauf, Programmierung und Problemlösung.",
+home2:"Spezialisiert auf Automatisierung, IoT und Industrieelektronik.",
+about:"Über uns",
+about2:"Fanatastiko Industrial Solutions bietet professionelle Automatisierungslösungen.",
+why:"Warum wir",
+reviews:"Bewertungen",
+r1:"⭐⭐⭐⭐⭐ Ausgezeichnete Zusammenarbeit.",
+r2:"⭐⭐⭐⭐⭐ Schnelle Lieferung.",
+payment:"Zahlungsmethoden",
+cod:"Nachnahme in Bosnien verfügbar."
+}
 };
 
-function changeLang(l){
-document.querySelectorAll(".lang button").forEach(b=>b.classList.remove("active"));
-document.getElementById(l).classList.add("active");
+function changeLang(lang){
 document.querySelectorAll("[data-key]").forEach(el=>{
-el.innerText=langData[l][el.dataset.key];
+el.innerText=langData[lang][el.dataset.key];
 });
+document.querySelectorAll(".lang-switcher button").forEach(b=>b.classList.remove("active"));
+document.getElementById("lang-"+lang).classList.add("active");
 }
 
-loadShop();
+load();
 </script>
 
 </body>
