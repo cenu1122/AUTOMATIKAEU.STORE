@@ -1,8 +1,4 @@
-<div class="lang-switcher">
-<button onclick="changeLang('bs')" id="lang-bs" class="active">BS</button>
-<button onclick="changeLang('en')" id="lang-en">EN</button>
-<button onclick="changeLang('de')" id="lang-de">DE</button>
-</div><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="bs">
 <head>
 <meta charset="UTF-8">
@@ -10,212 +6,83 @@
 <title>Fanatastiko Industrial Solutions</title>
 
 <style>
-:root{
---primary:#008184;
---dark:#1f2d36;
---accent:#d35400;
---bg:#f4f7f6;
-}
-
-body{
-margin:0;
-font-family:Segoe UI,Arial;
-background:var(--bg);
-}
-
-nav{
-background:var(--dark);
-color:white;
-padding:15px 5%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-position:fixed;
-width:90%;
-z-index:1000;
-}
-
-nav h2{
-margin:0;
-}
-
-header{
-background:linear-gradient(rgba(0,129,132,.85),rgba(31,45,54,.95)),
-url('https://images.unsplash.com/photo-1518770660439-4636190af475');
-background-size:cover;
-color:white;
-text-align:center;
-padding:160px 20px 120px 20px;
-}
-
-header h1{
-font-size:42px;
-margin-bottom:15px;
-}
-
-header p{
-font-size:20px;
-max-width:800px;
-margin:auto;
-}
-
-.btn-main{
-background:var(--accent);
-color:white;
-padding:14px 25px;
-display:inline-block;
-margin-top:25px;
-text-decoration:none;
-border-radius:8px;
-font-weight:bold;
-}
-
-.section{
-background:white;
-margin:60px 5%;
-padding:50px 5%;
-border-radius:12px;
-box-shadow:0 5px 20px rgba(0,0,0,.08);
-}
-
-.section h2{
-text-align:center;
-margin-bottom:30px;
-font-size:32px;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-}
-
-.card{
-background:#fafafa;
-padding:25px;
-border-radius:12px;
-box-shadow:0 4px 12px rgba(0,0,0,.06);
-transition:.3s;
-}
-
-.card:hover{
-transform:translateY(-6px);
-}
-
-.shop-grid{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-gap:25px;
-}
-
-.product{
-background:white;
-padding:20px;
-border-radius:12px;
-box-shadow:0 4px 12px rgba(0,0,0,.08);
-text-align:center;
-}
-
-.product img{
-width:100%;
-height:140px;
-object-fit:contain;
-}
-
-.price{
-color:var(--accent);
-font-weight:bold;
-margin:10px 0;
-}
-
-.btn{
-display:block;
-margin-top:10px;
-padding:10px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-color:white;
-font-weight:bold;
-}
-
+:root{--primary:#008184;--dark:#1f2d36;--accent:#d35400;--bg:#f4f7f6;}
+body{margin:0;font-family:Segoe UI,Arial;background:var(--bg);}
+nav{background:var(--dark);color:white;padding:15px 5%;display:flex;justify-content:space-between;align-items:center;position:fixed;width:90%;z-index:1000;}
+header{background:linear-gradient(rgba(0,129,132,.85),rgba(31,45,54,.95)),url('https://images.unsplash.com/photo-1518770660439-4636190af475');background-size:cover;color:white;text-align:center;padding:160px 20px 120px;}
+.btn-main{background:var(--accent);color:white;padding:14px 25px;display:inline-block;margin-top:25px;text-decoration:none;border-radius:8px;font-weight:bold;}
+.section{background:white;margin:60px 5%;padding:50px 5%;border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,.08);}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
+.card{background:#fafafa;padding:25px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.06);}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:25px;}
+.product{background:white;padding:20px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.08);text-align:center;}
+.product img{width:100%;height:140px;object-fit:contain;}
+.price{color:var(--accent);font-weight:bold;margin:10px 0;}
+.btn{display:block;margin-top:10px;padding:10px;border:none;border-radius:8px;cursor:pointer;color:white;font-weight:bold;}
 .whatsapp{background:#25D366;}
 .cartbtn{background:var(--primary);}
 .paypalbtn{background:#0070ba;}
-
-#cartBox{
-position:fixed;
-right:20px;
-bottom:20px;
-background:white;
-padding:20px;
-border-radius:12px;
-box-shadow:0 5px 20px rgba(0,0,0,.2);
-width:280px;
-max-height:420px;
-overflow:auto;
-}
-
-.cartItem{
-display:flex;
-justify-content:space-between;
-margin:5px 0;
-}
-
-.remove{
-color:red;
-cursor:pointer;
-}
+.cod{background:#444;}
+#cartBox{position:fixed;right:20px;bottom:20px;background:white;padding:20px;border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,.2);width:280px;max-height:420px;overflow:auto;}
+.cartItem{display:flex;justify-content:space-between;margin:5px 0;}
+.remove{color:red;cursor:pointer;}
+.lang-switcher{position:fixed;top:70px;right:20px;}
+.lang-switcher button{padding:6px 10px;margin:2px;border:none;border-radius:6px;cursor:pointer;}
+.active{background:var(--accent);color:white;}
+.back{display:block;text-align:center;margin-top:20px;color:var(--primary);cursor:pointer;}
 </style>
 </head>
 
 <body>
 
-<nav>
-<h2>Fanatastiko</h2>
-</nav>
+<nav><h2>Fanatastiko</h2></nav>
 
-<header>
-<h1>Kompletna Industrijska Rješenja</h1>
-<p>Prodaja Arduino i industrijske opreme, profesionalno programiranje, automatizacija i rješavanje tehničkih problema.</p>
-<a href="#shop" class="btn-main">Pogledaj ponudu</a>
+<div class="lang-switcher">
+<button onclick="changeLang('bs')" id="lang-bs" class="active">BS</button>
+<button onclick="changeLang('en')" id="lang-en">EN</button>
+<button onclick="changeLang('de')" id="lang-de">DE</button>
+</div>
+
+<header id="home">
+<h1 data-bs="Industrijska automatika i programiranje"
+data-en="Industrial automation and programming"
+data-de="Industrieautomatisierung und Programmierung">
+Industrijska automatika i programiranje</h1>
+
+<p data-bs="Prodaja Arduino opreme, programiranje, automatizacija i rješavanje tehničkih problema."
+data-en="Arduino sales, programming, automation and technical problem solving."
+data-de="Arduino Verkauf, Programmierung, Automatisierung und Problemlösung.">
+Prodaja Arduino opreme, programiranje, automatizacija i rješavanje tehničkih problema.
+</p>
+
+<a href="#shop" class="btn-main">Shop</a>
 </header>
 
 <div class="section">
-<h2>Naša Ponuda</h2>
+<h2>O nama</h2>
+<p>Specijalizovani smo za industrijsku automatiku, IoT sisteme i rješavanje tehničkih problema. Nudimo profesionalna rješenja od ideje do realizacije.</p>
+<a class="back" href="#home">⬆ Povratak na početnu</a>
+</div>
+
+<div class="section">
+<h2>Zašto mi</h2>
 <div class="grid">
-
-<div class="card">
-<h3>🛒 Prodaja opreme</h3>
-<p>Arduino ploče, senzori, moduli, IoT uređaji i industrijska elektronika.</p>
+<div class="card">Iskustvo i profesionalnost</div>
+<div class="card">Brza realizacija projekata</div>
+<div class="card">Garancija na rad</div>
+<div class="card">Podrška i održavanje</div>
+</div>
+<a class="back" href="#home">⬆ Povratak na početnu</a>
 </div>
 
-<div class="card">
-<h3>💻 Programiranje</h3>
-<p>Razvoj Arduino projekata, ESP32 sistema, automatizacija i IoT rješenja.</p>
+<div class="section">
+<h2>Recenzije</h2>
+<div class="grid">
+<div class="card">⭐⭐⭐⭐⭐ Odlična saradnja i profesionalan rad</div>
+<div class="card">⭐⭐⭐⭐⭐ Brzo rješavanje problema</div>
+<div class="card">⭐⭐⭐⭐⭐ Preporuka za automatiku</div>
 </div>
-
-<div class="card">
-<h3>🛠 Rješavanje problema</h3>
-<p>Dijagnostika kvarova, optimizacija sistema i tehnička podrška.</p>
-</div>
-
-<div class="card">
-<h3>⚡ Industrijska automatizacija</h3>
-<p>PLC integracija, monitoring sistema i optimizacija proizvodnje.</p>
-</div>
-
-<div class="card">
-<h3>📡 IoT rješenja</h3>
-<p>Pametni sistemi i daljinski nadzor putem interneta.</p>
-</div>
-
-<div class="card">
-<h3>🤝 Konsalting</h3>
-<p>Savjetovanje i planiranje projekata od ideje do realizacije.</p>
-</div>
-
-</div>
+<a class="back" href="#home">⬆ Povratak na početnu</a>
 </div>
 
 <div class="section" id="shop">
@@ -228,8 +95,9 @@ cursor:pointer;
 <div id="cartItems"></div>
 <hr>
 <b id="total">0 KM</b>
-<button class="btn paypalbtn" onclick="paypal()">PayPal Checkout</button>
-<button class="btn whatsapp" onclick="whatsapp()">WhatsApp Narudžba</button>
+<button class="btn paypalbtn" onclick="paypal()">PayPal</button>
+<button class="btn whatsapp" onclick="whatsapp()">WhatsApp</button>
+<button class="btn cod" onclick="cod()">Pouzeće BiH</button>
 </div>
 
 <script>
@@ -238,60 +106,35 @@ const items=[
 {name:"ESP32 Dev Board",price:12,img:"https://m.media-amazon.com/images/I/61NfI7z3SXL._SL1000_.jpg"},
 {name:"Arduino Nano",price:10,img:"https://m.media-amazon.com/images/I/61m1hI4-qjL._SL1000_.jpg"}
 ];
-
 let cart=JSON.parse(localStorage.getItem("cart"))||[];
 
 function load(){
 grid.innerHTML="";
 items.forEach(i=>{
-grid.innerHTML+=`
-<div class="product">
+grid.innerHTML+=`<div class="product">
 <img src="${i.img}">
 <h4>${i.name}</h4>
 <div class="price">${i.price} KM</div>
-<button class="btn cartbtn" onclick="addCart('${i.name}',${i.price})">Dodaj u korpu</button>
+<button class="btn cartbtn" onclick="addCart('${i.name}',${i.price})">Dodaj</button>
 </div>`;
 });
 renderCart();
 }
 
-function addCart(name,price){
-cart.push({name,price});
-localStorage.setItem("cart",JSON.stringify(cart));
-renderCart();
-}
+function addCart(name,price){cart.push({name,price});localStorage.setItem("cart",JSON.stringify(cart));renderCart();}
+function removeItem(i){cart.splice(i,1);localStorage.setItem("cart",JSON.stringify(cart));renderCart();}
+function renderCart(){cartItems.innerHTML="";let t=0;cart.forEach((c,i)=>{t+=c.price;cartItems.innerHTML+=`<div class="cartItem">${c.name}<span class="remove" onclick="removeItem(${i})">❌</span></div>`;});total.innerText=t+" KM";}
+function paypal(){let t=0;cart.forEach(c=>t+=c.price);window.open("https://paypal.me/fanatastiko/"+t);}
+function whatsapp(){let text="Narudzba:%0A";cart.forEach(c=>text+=c.name+"%0A");window.open("https://wa.me/38761000000?text="+text);}
+function cod(){alert("Plaćanje pouzećem dostupno za BiH. Bićete kontaktirani.");}
 
-function removeItem(i){
-cart.splice(i,1);
-localStorage.setItem("cart",JSON.stringify(cart));
-renderCart();
-}
-
-function renderCart(){
-cartItems.innerHTML="";
-let t=0;
-cart.forEach((c,i)=>{
-t+=c.price;
-cartItems.innerHTML+=`<div class="cartItem">${c.name}<span class="remove" onclick="removeItem(${i})">❌</span></div>`;
-});
-document.getElementById("total").innerText=t+" KM";
-}
-
-function paypal(){
-let totalAmount=0;
-cart.forEach(c=>totalAmount+=c.price);
-window.open("https://paypal.me/fanatastiko/"+totalAmount);
-}
-
-function whatsapp(){
-let text="Narudzba:%0A";
-cart.forEach(c=>text+=c.name+"%0A");
-window.open("https://wa.me/38761000000?text="+text);
+function changeLang(lang){
+document.querySelectorAll(".lang-switcher button").forEach(b=>b.classList.remove("active"));
+document.getElementById("lang-"+lang).classList.add("active");
+document.querySelectorAll("[data-"+lang+"]").forEach(el=>el.innerText=el.getAttribute("data-"+lang));
 }
 
 load();
 </script>
-
 </body>
 </html>
-
