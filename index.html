@@ -1,103 +1,492 @@
 <!DOCTYPE html>
 <html lang="bs">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arduino Industrial Shop</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fanatastiko Industrial Solutions</title>
+    <style>
+        :root {
+            --primary: #008184; /* Teal boja za dugmad i isticanje */
+            --dark: #1f2d36;
+            --accent: #d35400; /* Narandžasta za isticanje */
+            --bg: #f4f7f6;
+            --white: #ffffff;
+        }
 
-<style>
-:root{--teal:#008184;--dark:#273b47;--orange:#d35400;--bg:#f4f7f6;}
-body{font-family:Segoe UI;margin:0;background:var(--bg);}
-nav{background:var(--dark);padding:10px 5%;display:flex;justify-content:space-between;position:fixed;width:90%;z-index:2000;}
-.lang-switcher button{background:#444;color:white;border:none;padding:6px 12px;margin-left:5px;cursor:pointer}
-.lang-switcher button.active{background:var(--teal)}
-header{background:linear-gradient(rgba(0,129,132,.8),rgba(39,59,71,.9)),url('https://images.unsplash.com/photo-1518770660439-4636190af475');background-size:cover;padding:160px 20px;text-align:center;color:white}
-.container{padding:70px 5%}
-.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:25px}
-.card{background:white;border-radius:12px;padding:20px;text-align:center;box-shadow:0 4px 8px rgba(0,0,0,.06);transition:.3s}
-.card:hover{transform:translateY(-6px) scale(1.02)}
-.card img{width:100%;height:150px;object-fit:contain}
-.price{color:var(--orange);font-weight:bold;font-size:20px;margin:10px 0}
-.btn{display:block;margin-top:8px;padding:10px;border-radius:8px;text-decoration:none;color:white;font-weight:bold}
-.buy{background:#25D366}
-.cart{background:var(--teal)}
-.paypal{background:#0070ba}
-#cartBox{position:fixed;right:20px;bottom:20px;background:white;padding:15px;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.2);width:260px}
-</style>
+        html { scroll-behavior: smooth; } /* Glatko skrolanje */
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: #333;
+            padding-top: 80px; /* Prostor za fiksni meni */
+        }
+
+        /* Fiksni Navigacioni Meni */
+        nav {
+            background: var(--dark);
+            color: white;
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 90%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        nav h2 { margin: 0; font-size: 1.6em; font-weight: bold; text-transform: uppercase; }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(rgba(0,129,132,0.85), rgba(31,45,54,0.95)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 130px 20px 100px;
+        }
+        header h1 { font-size: 2.8em; margin-bottom: 10px; text-transform: uppercase; }
+        header p { font-size: 1.3em; opacity: 0.9; max-width: 750px; margin: 0 auto 30px; }
+
+        .btn-main {
+            background: var(--accent);
+            color: white;
+            padding: 14px 28px;
+            display: inline-block;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-main:hover { opacity: 0.9; transform: scale(1.05); }
+
+        /* SEKCIJE */
+        .section {
+            background: var(--white);
+            margin: 50px 5%;
+            padding: 40px 6%;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            position: relative;
+        }
+        .section h2 {
+            border-left: 5px solid var(--primary);
+            padding-left: 20px;
+            color: var(--dark);
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        .section p { line-height: 1.8; font-size: 1.1em; color: #555; margin-bottom: 25px; }
+
+        /* GRIDOVI */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: #fafafa;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+        .card h4 { color: var(--dark); margin-top: 0; text-transform: uppercase; }
+
+        /* SHOP */
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .product {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.3s;
+        }
+        .product:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+        .product img {
+            width: 100%;
+            height: 140px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        .product h4 { font-size: 16px; margin: 10px 0; height: 35px; overflow: hidden; color: #333; }
+        .price { color: var(--accent); font-weight: bold; font-size: 1.2em; margin: 5px 0 15px; }
+
+        /* WhatsApp Dugme u Shopu */
+        .btn-buy {
+            background: #25D366; /* WhatsApp zelena */
+            color: white;
+            padding: 12px;
+            text-decoration: none;
+            display: block;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .btn-buy:hover { background: #1da851; }
+
+        /* NOVI STILOVI ZA INSTRUKCIJE */
+        .instr-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        .instr-item {
+            background: #f1f1f1;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary);
+            transition: 0.3s;
+        }
+        .instr-item:hover { background: #e8e8e8; }
+        .instr-item h4 { margin-top: 0; color: var(--dark); font-size: 1.2em; }
+        .instr-item p { font-size: 1em; margin-bottom: 15px; }
+        .btn-download {
+            background: var(--primary);
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* Dugme "Povratak na početak" */
+        .back {
+            display: inline-block;
+            background: var(--dark);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 13px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+        }
+        .back:hover { background: var(--primary); transform: translateY(-2px); }
+
+        /* POMJEREN JEZIČKI PREKIDAČ (SADA U MENIJU, DESNO) */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .lang-switcher button {
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            background: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .active { background: var(--accent) !important; color: white !important; border-color: var(--accent) !important; }
+
+        footer {
+            background: var(--dark);
+            color: #bbb;
+            padding: 40px;
+            text-align: center;
+            margin-top: 50px;
+        }
+        footer p { margin: 5px 0; font-size: 0.9em; }
+    </style>
 </head>
 
 <body>
 
+<div id="pocetna"></div>
+
 <nav>
-<div>Arduino Shop</div>
-<div class="lang-switcher">
-<button onclick="changeLang('bs')" id="lang-bs" class="active">BS</button>
-<button onclick="changeLang('en')" id="lang-en">EN</button>
-<button onclick="changeLang('de')" id="lang-de">DE</button>
-</div>
+    <h2 id="nav-logo">Fanatastiko</h2>
+    
+    <div class="nav-links">
+        <a href="#pocetna" id="m-home" data-bs="Početna" data-en="Home" data-de="Startseite">Početna</a>
+        <a href="#o-nama" id="m-about" data-bs="O Nama" data-en="About" data-de="Über uns">O Nama</a>
+        <a href="#zasto-mi" id="m-why" data-bs="Zašto mi" data-en="Why Us" data-de="Warum wir">Zašto mi</a>
+        <a href="#recenzije" id="m-reviews" data-bs="Recenzije" data-en="Reviews" data-de="Bewertungen">Recenzije</a>
+        <a href="#shop" id="m-shop" data-bs="Shop" data-en="Shop" data-de="Shop">Shop</a>
+        <a href="#instrukcije" id="m-instr" data-bs="Instrukcije" data-en="Instructions" data-de="Anleitungen">Instrukcije</a>
+        <a href="#kontakt" id="m-contact" data-bs="Kontakt" data-en="Contact" data-de="Kontakt">Kontakt</a>
+    </div>
+
+    <div class="nav-right">
+        <div class="lang-switcher">
+            <button onclick="changeLang('bs')" id="lang-bs" class="active">BS</button>
+            <button onclick="changeLang('en')" id="lang-en">EN</button>
+            <button onclick="changeLang('de')" id="lang-de">DE</button>
+        </div>
+    </div>
 </nav>
 
 <header>
-<h1>Arduino Industrial Shop</h1>
+    <h1 id="header-title"
+        data-bs="Industrijska automatika i programiranje"
+        data-en="Industrial automation and programming"
+        data-de="Industrieautomatisierung und Programmierung">
+        Industrijska automatika i programiranje
+    </h1>
+
+    <p id="header-desc"
+       data-bs="Prodaja Arduino opreme, programiranje, automatizacija i rješavanje tehničkih problema. Vaš partner za inovacije."
+       data-en="Arduino sales, programming, automation and technical problem solving. Your partner for innovation."
+       data-de="Arduino Verkauf, Programmierung, Automatisierung und technische Problemlösung. Ihr Partner für Innovationen.">
+        Prodaja Arduino opreme, programiranje, automatizacija i rješavanje tehničkih problema. Vaš partner za inovacije.
+    </p>
+
+    <a href="#shop" class="btn-main" id="header-btn"
+       data-bs="Pregledaj Shop" data-en="Browse Shop" data-de="Shop durchsuchen">
+       Pregledaj Shop
+    </a>
 </header>
 
-<div class="container">
-<div class="shop-grid" id="grid"></div>
+<div class="section" id="o-nama">
+    <h2 id="h-about" data-bs="O nama" data-en="About Us" data-de="Über uns">O nama</h2>
+    <p id="t-about-1"
+       data-bs="Specijalizovani smo za razvoj i implementaciju rješenja u oblasti industrijske automatike, IoT (Internet of Things) sistema i naprednog programiranja. Naša misija je da optimiziramo vaše proizvodne procese, povećamo efikasnost i smanjimo operativne troškove."
+       data-en="We specialize in the development and implementation of solutions in the field of industrial automation, IoT (Internet of Things) systems and advanced programming. Our mission is to optimize your production processes, increase efficiency and reduce operating costs."
+       data-de="Wir spezialisieren uns auf die Entwicklung und Implementierung von Lösungen in den Bereichen Industrieautomation, IoT-Systeme (Internet of Things) und fortschrittliche Programmierung. Unsere Mission je, Ihre Produktionsprozesse zu optimieren, die Effizienz zu steigern und die Betriebskosten zu senken.">
+        Specijalizovani smo za razvoj i implementaciju rješenja u oblasti industrijske automatike, IoT (Internet of Things) sistema i naprednog programiranja. Naša misija je da optimiziramo vaše proizvodne procese, povećamo efikasnost i smanjimo operativne troškove.
+    </p>
+    <p id="t-about-2"
+       data-bs="Od početne ideje do potpune realizacije, naš tim stručnjaka nudi profesionalna rješenja prilagođena vašim specifičnim potrebama. Bavimo se programiranjem PLC kontrolera, SCADA sistema, te integracijom robota i CNC mašina. Također nudimo i razvoj custom elektronike bazirane na Arduino, ESP32 i Raspberry Pi platformama."
+       data-en="From the initial idea to complete realization, our team of experts offers professional solutions adapted to your specific needs. We deal with the programming of PLC controllers, SCADA systems, and the integration of robots and CNC machines. We also offer custom electronics development based on Arduino, ESP32 and Raspberry Pi platforms."
+       data-de="Von der ursprünglichen Idee bis zur vollständigen Realisierung bietet unser Expertenteam professionelle Lösungen, die an Ihre spezifischen Bedürfnisse angepasst sind. Wir befassen uns mit der Programmierung von SPS-Controllern, SCADA-Systemen und der Integration von Robotern und CNC-Maschinen. Wir bieten auch maßgeschneiderte Elektronikentwicklung auf Basis von Arduino-, ESP32- und Raspberry Pi-Plattformen.">
+        Od početne ideje do potpune realizacije, naš tim stručnjaka nudi profesionalna rješenja prilagođena vašim specifičnim potrebama. Bavimo se programiranjem PLC kontrolera, SCADA sistema, te integracijom robota i CNC mašina. Također nudimo i razvoj custom elektronike bazirane na Arduino, ESP32 i Raspberry Pi platformama.
+    </p>
+    <a class="back btn-back" href="#pocetna" data-bs="⬆ Povratak na početak" data-en="⬆ Back to Top" data-de="⬆ Zurück nach oben">⬆ Povratak na početak</a>
 </div>
 
-<div id="cartBox">
-<b>🛒 Korpa</b>
-<div id="cartItems"></div>
-<b id="total">0 KM</b>
+<div class="section" id="zasto-mi">
+    <h2 id="h-why" data-bs="Zašto mi" data-en="Why Us" data-de="Warum wir">Zašto mi</h2>
+    <div class="grid">
+        <div class="card">
+            <h4 data-bs="Iskustvo i stručnost" data-en="Experience and Expertise" data-de="Erfahrung und Expertise">Iskustvo i stručnost</h4>
+            <p data-bs="Naš tim čine iskusni inženjeri sa višegodišnjim radom na terenu u raznim industrijama, od auto-industrije do prehrambenog sektora."
+               data-en="Our team consists of experienced engineers with years of field work in various industries, from the auto industry to the food sector."
+               data-de="Unser Team besteht aus erfahrenen Ingenieuren mit jahrelanger Feldarbeit in verschiedenen Branchen, von der Autoindustrie bis zur Lebensmittelbranche.">
+                Naš tim čine iskusni inženjeri sa višegodišnjim radom na terenu u raznim industrijama, od auto-industrije do prehrambenog sektora.
+            </p>
+        </div>
+        <div class="card">
+            <h4 data-bs="Brzina i efikasnost" data-en="Speed and Efficiency" data-de="Geschwindigkeit und Effizienz">Brzina i efikasnost</h4>
+            <p data-bs="Razumijemo da je vrijeme novac. Naše projekte realiziramo brzo, bez nepotrebnih kašnjenja, osiguravajući minimalan zastoj vaše proizvodnje."
+               data-en="We understand that time is money. We realize our projects quickly, without unnecessary delays, ensuring minimal downtime for your production."
+               data-de="Wir verstehen, dass Zeit Geld ist. Wir realisieren unsere Projekte schnell und ohne unnötige Verzögerungen, um minimale Ausfallzeiten für Ihre Produktion zu gewährleisten.">
+                Razumijemo da je vrijeme novac. Naše projekte realiziramo brzo, bez nepotrebnih kašnjenja, osiguravajući minimalan zastoj vaše proizvodnje.
+            </p>
+        </div>
+        <div class="card">
+            <h4 data-bs="Podrška i održavanje" data-en="Warranty and Support" data-de="Garantie und Support">Podrška i održavanje</h4>
+            <p data-bs="Nakon realizacije projekta, mi nismo završili. Pružamo garanciju, dugoročnu tehničku podršku i usluge redovnog održavanja vaših sistema."
+               data-en="After project realization, we are not done. We provide a warranty, long-term technical support and regular maintenance services for your systems."
+               data-de="Nach Projektrealisierung sind wir noch nicht fertig. Wir bieten Garantie, langfristigen technischen Support und regelmäßige Wartungsdienste für Ihre Systeme.">
+                Nakon realizacije projekta, mi nismo završili. Pružamo garanciju, dugoročnu tehničku podršku i usluge redovnog održavanja vaših sistema.
+            </p>
+        </div>
+    </div>
+    <a class="back btn-back" href="#pocetna" data-bs="⬆ Povratak na početak" data-en="⬆ Back to Top" data-de="⬆ Zurück nach oben">⬆ Povratak na početak</a>
 </div>
+
+<div class="section" id="recenzije">
+    <h2 id="h-reviews" data-bs="Recenzije" data-en="Reviews" data-de="Bewertungen">Recenzije</h2>
+    <p data-bs="Šta naši dugogodišnji klijenti kažu o našem radu i profesionalnosti:"
+       data-en="What our long-term clients say about our work and professionalism:"
+       data-de="Was unsere langjährigen Kunden über unsere Arbeit und Professionalität sagen:">
+        Šta naši dugogodišnji klijenti kažu o našem radu i profesionalnosti:
+    </p>
+    <div class="grid">
+        <div class="card">⭐⭐⭐⭐⭐ "Izuzetna profesionalnost i brzo rješavanje kritičnog problema na našoj proizvodnoj traci. Sajt i automatizacija su im na vrhunskom nivou." - <i>Messer BH</i></div>
+        <div class="card">⭐⭐⭐⭐⭐ "Automatizacija skladišta je urađena besprijekorno, u dogovorenom roku. Korisnička podrška im je fantastična. Sve preporuke." - <i>Bingo d.o.o.</i></div>
+        <div class="card">⭐⭐⭐⭐⭐ "Arduino rješenje za monitoring temperature i vlage radi savršeno već godinu dana. Veoma pouzdan partner." - <i>TermoElektron</i></div>
+        <div class="card">⭐⭐⭐⭐⭐ "Programiranje novog PLC-a je urađeno brzo, a njihova obuka za naše radnike je bila veoma korisna. Hvala ekipi." - <i>MetalPlast</i></div>
+    </div>
+    <a class="back btn-back" href="#pocetna" data-bs="⬆ Povratak na početak" data-en="⬆ Back to Top" data-de="⬆ Zurück nach oben">⬆ Povratak na početak</a>
+</div>
+
+<div class="section" id="shop">
+    <h2 id="h-shop" data-bs="Shop / Trgovina" data-en="Shop / Store" data-de="Shop / Geschäft">Shop / Trgovina</h2>
+    <p data-bs="Kompletna ponuda sa preko 20 artikala. Naručite direktno putem WhatsApp-a, brzo i jednostavno."
+       data-en="Complete offer with over 20 items. Order directly via WhatsApp, fast and easy."
+       data-de="Komplettes Angebot mit über 20 Artikeln. Bestellen Sie direkt über WhatsApp, schnell und einfach.">
+        Kompletna ponuda sa preko 20 artikala. Naručite direktno putem WhatsApp-a, brzo i jednostavno.
+    </p>
+    <div class="shop-grid" id="product-grid">
+        </div>
+    <a class="back btn-back" href="#pocetna" data-bs="⬆ Povratak na početak" data-en="⬆ Back to Top" data-de="⬆ Zurück nach oben">⬆ Povratak na početak</a>
+</div>
+
+<div class="section" id="instrukcije">
+    <h2 id="h-instr" data-bs="Instrukcije & Projekti" data-en="Instructions & Projects" data-de="Anleitungen & Projekte">Instrukcije & Projekti</h2>
+    <p id="t-instr"
+       data-bs="U ovoj sekciji možete pronaći korisne materijale, sheme spajanja, primjere koda i dokumentaciju za vaše projekte automatizacije. Naš cilj je da podstaknemo inovacije i hobiste, ali i da pružimo podršku profesionalcima."
+       data-en="In this section you can find useful materials, wiring diagrams, code examples and documentation for your automation projects. Our goal is to encourage innovations and hobbyists, but also to provide support to professionals."
+       data-de="In diesem Abschnitt finden Sie nützliche Materialien, Schaltpläne, Codebeispiele und Dokumentationen für Ihre Automatisierungsprojekte. Unser Ziel je, Innovationen und Bastler zu ermutigen, aber auch Profis zu unterstützen.">
+        U ovoj sekciji možete pronaći korisne materijale, sheme spajanja i primjere koda za vaše projekte. Naš cilj je da podstaknemo inovacije i hobiste, ali i da pružimo podršku profesionalcima.
+    </p>
+    <div class="instr-grid">
+        <div class="instr-item">
+            <h4>▶ Kako spajati Arduino Uno</h4>
+            <p>Kratki video tutorijal sa osnovama spajanja LED diode, senzora temperature i LCD displeja.</p>
+            <a href="#" class="btn-download">Gledaj Video (YouTube)</a>
+        </div>
+        <div class="instr-item">
+            <h4>🖻 Shema: Relej Modul + ESP32</h4>
+            <p>PDF shema spajanja 4-kanalnog releja na ESP32 za kontrolu rasvjete i motora.</p>
+            <a href="#" class="btn-download">Preuzmi PDF (1.2 MB)</a>
+        </div>
+        <div class="instr-item">
+            <h4></> Kod: Web Server za Monitoring</h4>
+            <p>Kompletan C++ kod za NodeMCU koji prikazuje podatke sa DHT11 senzora na custom web stranici.</p>
+            <a href="#" class="btn-download">Pogledaj Kod (GitHub)</a>
+        </div>
+        <div class="instr-item">
+            <h4>🖺 Dokumentacija: PLC S7-1200</h4>
+            <p>Uvodna dokumentacija i primjeri spajanja za Siemens S7-1200 PLC kontroler.</p>
+            <a href="#" class="btn-download">Preuzmi PDF (2.5 MB)</a>
+        </div>
+    </div>
+    <a class="back btn-back" href="#pocetna" data-bs="⬆ Povratak na početak" data-en="⬆ Back to Top" data-de="⬆ Zurück nach oben">⬆ Povratak na početak</a>
+</div>
+
+<div class="section" id="kontakt">
+    <h2 id="h-contact" data-bs="Kontakt" data-en="Contact" data-de="Kontakt">Kontakt</h2>
+    <p data-bs="Imate tehnički problem? Trebate inovativno rješenje za vašu firmu? Naš tim je spreman da odgovori na vaša pitanja. Slobodno nas kontaktirajte putem e-maila ili WhatsApp-a."
+       data-en="Do you have a technical problem? Do you need an innovative solution for your company? Our team is ready to answer your questions. Feel free to contact us via email or WhatsApp."
+       data-de="Haben Sie ein technisches Problem? Brauchen Sie eine innovative Lösung für Ihre Firma? Unser Team ist bereit, Ihre Fragen zu beantworten. Kontaktieren Sie uns gerne per E-Mail oder WhatsApp.">
+        Imate tehnički problem? Trebate inovativno rješenje za vašu firmu? Naš tim je spreman da odgovori na vaša pitanja. Slobodno nas kontaktirajte putem e-maila ili WhatsApp-a.
+    </p>
+    <p>
+        📧 <b>E-mail:</b> info@fanatastiko.ba <br>
+        💬 <b>WhatsApp / Viber:</b> +387 61 000 000
+    </p>
+    <a class="back btn-back" href="#pocetna" data-bs="⬆ Povratak na početak" data-en="⬆ Back to Top" data-de="⬆ Zurück nach oben">⬆ Povratak na početak</a>
+</div>
+
+<footer>
+    <span id="footer-logo">Fanatastiko Solutions</span>
+    <p>&copy; 2024 Fanatastiko Industrial Solutions. Sva prava zadržana.</p>
+    <p>info@fanatastiko.ba | WhatsApp: +387 61 000 000</p>
+</footer>
 
 <script>
-const items=[
-{name:"Arduino Uno R3",price:15,img:"https://www.arduino.cc/en/uploads/Main/A000066_iso_front.jpg"},
-{name:"Arduino Mega 2560",price:25,img:"https://www.arduino.cc/en/uploads/Main/A000067_iso_front.jpg"},
-{name:"Arduino Nano",price:10,img:"https://m.media-amazon.com/images/I/61m1hI4-qjL._SL1000_.jpg"},
-{name:"ESP32",price:12,img:"https://m.media-amazon.com/images/I/61NfI7z3SXL._SL1000_.jpg"},
-{name:"NodeMCU",price:9,img:"https://m.media-amazon.com/images/I/61I2MlsS89L._SL1000_.jpg"},
-{name:"Raspberry Pico",price:14,img:"https://www.raspberrypi.com/app/uploads/2021/01/Pico-Hero.jpg"}
-];
+    // ARTIKLI U SHOPU (22 komada sa pravim slikama)
+    const items=[
+        /* KONTROLERI */
+        {cat: 1, n: "Arduino Uno R3", p: "15 KM", img: "https://www.arduino.cc/en/uploads/Main/A000066_iso_front.jpg"},
+        {cat: 1, n: "Arduino Mega 2560", p: "25 KM", img: "https://www.arduino.cc/en/uploads/Main/A000067_iso_front.jpg"},
+        {cat: 1, n: "Arduino Nano V3", p: "10 KM", img: "https://m.media-amazon.com/images/I/61m1hI4-qjL._SL1000_.jpg"},
+        {cat: 1, n: "ESP32 DevKit V1", p: "12 KM", img: "https://m.media-amazon.com/images/I/61NfI7z3SXL._SL1000_.jpg"},
+        {cat: 1, n: "NodeMCU ESP8266", p: "9 KM", img: "https://m.media-amazon.com/images/I/61I2MlsS89L._SL1000_.jpg"},
+        {cat: 1, n: "Raspberry Pi Pico", p: "14 KM", img: "https://www.raspberrypi.com/app/uploads/2021/01/Pico-Hero.jpg"},
 
-let cart=[];
-let lang="bs";
+        /* SENZORI */
+        {cat: 2, n: "Ultrazvučni HC-SR04", p: "4 KM", img: "https://m.media-amazon.com/images/I/51pI-E9T+iL._SL1000_.jpg"},
+        {cat: 2, n: "PIR Senzor Pokreta", p: "5 KM", img: "https://m.media-amazon.com/images/I/51H0O-0A3iL._SL1000_.jpg"},
+        {cat: 2, n: "DHT11 Temp/Vlaga", p: "4 KM", img: "https://m.media-amazon.com/images/I/41-lU3lXJPL.jpg"},
+        {cat: 2, n: "Senzor Nivoa Vode", p: "3 KM", img: "https://m.media-amazon.com/images/I/51YmE-T+8dL._SL1000_.jpg"},
+        {cat: 2, n: "MQ-2 Senzor Plina", p: "6 KM", img: "https://m.media-amazon.com/images/I/61S-qL0qAEL._SL1000_.jpg"},
+        {cat: 2, n: "RFID Reader RC522", p: "10 KM", img: "https://m.media-amazon.com/images/I/7187qMcl7hL._SL1000_.jpg"},
+        {cat: 2, n: "Senzor Pritiska 20kg", p: "18 KM", img: "https://m.media-amazon.com/images/I/51+u7D1D7YL._SL1000_.jpg"},
+        {cat: 2, n: "Infracrveni Senzor", p: "3 KM", img: "https://m.media-amazon.com/images/I/5176Qf90T6L._SL1000_.jpg"},
 
-function load(){
-grid.innerHTML="";
-items.forEach(i=>{
-grid.innerHTML+=`
-<div class="card">
-<img src="${i.img}">
-<h4>${i.name}</h4>
-<div class="price">${i.price} KM</div>
-<a class="btn buy" href="https://wa.me/38761000000?text=Narucujem ${i.name}">WhatsApp</a>
-<button class="btn cart" onclick="addCart('${i.name}',${i.price})">Dodaj u korpu</button>
-<a class="btn paypal" href="#">PayPal</a>
-</div>`;
-});
-}
+        /* SNAGA I DISPLEJI */
+        {cat: 3, n: "Relej 1 Kanal 5V", p: "4 KM", img: "https://m.media-amazon.com/images/I/51+M8v5Vn1L._SL1000_.jpg"},
+        {cat: 3, n: "Relej 4 Kanala 5V", p: "12 KM", img: "https://m.media-amazon.com/images/I/51U6S5m6V1L._SL1000_.jpg"},
+        {cat: 3, n: "LCD Displej 16x2 I2C", p: "9 KM", img: "https://m.media-amazon.com/images/I/61iVpI9F0SL._SL1000_.jpg"},
+        {cat: 3, n: "Servo Motor SG90", p: "5 KM", img: "https://m.media-amazon.com/images/I/51X5f8Yn6oL._SL1000_.jpg"},
+        {cat: 3, n: "Step Motor + Driver", p: "15 KM", img: "https://m.media-amazon.com/images/I/61XW9vO34oL._SL1000_.jpg"},
+        {cat: 3, n: "L298N Motor Driver", p: "8 KM", img: "https://m.media-amazon.com/images/I/71-0Yt1n9rL._SL1000_.jpg"},
+        {cat: 3, n: "Napajanje 12V 5A", p: "20 KM", img: "https://m.media-amazon.com/images/I/615Dq+BvK7L._SL1000_.jpg"},
+        {cat: 3, n: "Tastatura 4x4", p: "4 KM", img: "https://m.media-amazon.com/images/I/61u9n1L6pFL._SL1000_.jpg"}
+    ];
 
-function addCart(name,price){
-cart.push({name,price});
-renderCart();
-}
+    // UČITAVANJE PROIZVODA (Dodan parametar za jezik)
+    function loadProducts(lang = 'bs'){
+        const grid = document.getElementById("product-grid");
+        if(!grid) return;
+        
+        // Očisti prethodne proizvode da ne bi duplirao
+        grid.innerHTML = "";
 
-function renderCart(){
-cartItems.innerHTML="";
-let t=0;
-cart.forEach(i=>{cartItems.innerHTML+=i.name+"<br>";t+=i.price;});
-total.innerText=t+" KM";
-}
+        const btnLabels = {
+            bs: "NARUČI (WhatsApp)",
+            en: "ORDER (WhatsApp)",
+            de: "BESTELLEN (WhatsApp)"
+        };
+        
+        items.forEach(i=>{
+            const card = `
+                <div class="product">
+                    <img src="${i.img}" alt="${i.n}">
+                    <h4>${i.n}</h4>
+                    <div class="price">${i.p}</div>
+                    <a href="https://wa.me/38761000000?text=Narucujem: ${i.n}" class="btn-buy">${btnLabels[lang]}</a>
+                </div>`;
+            grid.innerHTML += card;
+        });
+    }
 
-function changeLang(l){
-lang=l;
-document.querySelectorAll(".lang-switcher button").forEach(b=>b.classList.remove("active"));
-document.getElementById("lang-"+l).classList.add("active");
-}
+    // PROMJENA JEZIKA (Sada prevodi apsolutno sve, uključujući i meni u vrhu)
+    function changeLang(lang){
+        // 1. Ažuriraj aktivno stanje dugmadi za odabir jezika
+        document.querySelectorAll(".lang-switcher button").forEach(b=>b.classList.remove('active'));
+        document.getElementById("lang-"+lang).classList.add('active');
 
-load();
+        // 2. Prevedi sve statične tekstove koji imaju data atribut
+        document.querySelectorAll("[data-"+lang+"]").forEach(el=>{
+            el.innerText=el.getAttribute("data-"+lang);
+        });
+
+        // 3. Prevedi stavke u navigacionom meniju (jer su i oni data atributi)
+        // (Ovo je već uključeno u koraku 2, ali za svaki slučaj)
+
+        // 4. Ponovo učitaj proizvode da bi preveo dugmad u shopu
+        loadProducts(lang);
+    }
+
+    // POKRETANJE NAKON UČITAVANJA STRANICE (Zadani jezik BS)
+    window.onload = function() {
+        changeLang('bs');
+    };
 </script>
 
 </body>
