@@ -3,109 +3,220 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arduino Industrial Shop PRO</title>
+<title>Fanatastiko Industrial Solutions</title>
 
 <style>
-:root{--teal:#008184;--dark:#273b47;--orange:#d35400;--bg:#f4f7f6;}
-body{font-family:Segoe UI;margin:0;background:var(--bg)}
-nav{background:var(--dark);padding:10px 5%;display:flex;justify-content:space-between;position:fixed;width:90%;z-index:2000;color:white}
-.lang-switcher button{background:#444;color:white;border:none;padding:6px 12px;margin-left:5px;cursor:pointer}
-.lang-switcher button.active{background:var(--teal)}
-header{background:linear-gradient(rgba(0,129,132,.8),rgba(39,59,71,.9)),url('https://images.unsplash.com/photo-1518770660439-4636190af475');background-size:cover;padding:150px 20px;text-align:center;color:white}
-.container{padding:70px 5%}
-.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:25px}
-.card{background:white;border-radius:12px;padding:20px;text-align:center;box-shadow:0 4px 8px rgba(0,0,0,.06);transition:.3s}
-.card:hover{transform:translateY(-6px) scale(1.03)}
-.card img{width:100%;height:150px;object-fit:contain}
-.price{color:var(--orange);font-weight:bold;font-size:20px;margin:10px 0}
-.btn{display:block;margin-top:8px;padding:10px;border-radius:8px;text-decoration:none;color:white;font-weight:bold;border:none;cursor:pointer}
-.buy{background:#25D366}
-.cart{background:var(--teal)}
-.paypal{background:#0070ba}
-.section{background:white;margin:40px 5%;padding:40px;border-radius:12px;box-shadow:0 4px 8px rgba(0,0,0,.06)}
-.review{background:#f8f8f8;padding:15px;margin:10px 0;border-radius:8px}
-#cartBox{position:fixed;right:20px;bottom:20px;background:white;padding:15px;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,.2);width:270px;max-height:400px;overflow:auto}
-.cartItem{display:flex;justify-content:space-between;margin:5px 0}
-.remove{color:red;cursor:pointer}
+:root{
+--primary:#008184;
+--dark:#1f2d36;
+--accent:#d35400;
+--bg:#f4f7f6;
+}
+
+body{
+margin:0;
+font-family:Segoe UI,Arial;
+background:var(--bg);
+}
+
+nav{
+background:var(--dark);
+color:white;
+padding:15px 5%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:fixed;
+width:90%;
+z-index:1000;
+}
+
+nav h2{
+margin:0;
+}
+
+header{
+background:linear-gradient(rgba(0,129,132,.85),rgba(31,45,54,.95)),
+url('https://images.unsplash.com/photo-1518770660439-4636190af475');
+background-size:cover;
+color:white;
+text-align:center;
+padding:160px 20px 120px 20px;
+}
+
+header h1{
+font-size:42px;
+margin-bottom:15px;
+}
+
+header p{
+font-size:20px;
+max-width:800px;
+margin:auto;
+}
+
+.btn-main{
+background:var(--accent);
+color:white;
+padding:14px 25px;
+display:inline-block;
+margin-top:25px;
+text-decoration:none;
+border-radius:8px;
+font-weight:bold;
+}
+
+.section{
+background:white;
+margin:60px 5%;
+padding:50px 5%;
+border-radius:12px;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.section h2{
+text-align:center;
+margin-bottom:30px;
+font-size:32px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.card{
+background:#fafafa;
+padding:25px;
+border-radius:12px;
+box-shadow:0 4px 12px rgba(0,0,0,.06);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-6px);
+}
+
+.shop-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+gap:25px;
+}
+
+.product{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+text-align:center;
+}
+
+.product img{
+width:100%;
+height:140px;
+object-fit:contain;
+}
+
+.price{
+color:var(--accent);
+font-weight:bold;
+margin:10px 0;
+}
+
+.btn{
+display:block;
+margin-top:10px;
+padding:10px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+color:white;
+font-weight:bold;
+}
+
+.whatsapp{background:#25D366;}
+.cartbtn{background:var(--primary);}
+.paypalbtn{background:#0070ba;}
+
+#cartBox{
+position:fixed;
+right:20px;
+bottom:20px;
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 5px 20px rgba(0,0,0,.2);
+width:280px;
+max-height:420px;
+overflow:auto;
+}
+
+.cartItem{
+display:flex;
+justify-content:space-between;
+margin:5px 0;
+}
+
+.remove{
+color:red;
+cursor:pointer;
+}
 </style>
 </head>
 
 <body>
 
 <nav>
-<div>Arduino Shop</div>
-<div class="lang-switcher">
-<button onclick="changeLang('bs')" id="lang-bs" class="active">BS</button>
-<button onclick="changeLang('en')" id="lang-en">EN</button>
-<button onclick="changeLang('de')" id="lang-de">DE</button>
-</div>
+<h2>Fanatastiko</h2>
 </nav>
 
 <header>
-<h1>Arduino Industrial Shop</h1>
+<h1>Kompletna Industrijska Rješenja</h1>
+<p>Prodaja Arduino i industrijske opreme, profesionalno programiranje, automatizacija i rješavanje tehničkih problema.</p>
+<a href="#shop" class="btn-main">Pogledaj ponudu</a>
 </header>
 
-<div class="container">
-<div class="shop-grid" id="grid"></div>
-</div>
 <div class="section">
-<h2 style="text-align:center;font-size:32px">Kompletna ponuda</h2>
+<h2>Naša Ponuda</h2>
+<div class="grid">
 
-<p style="text-align:center;font-size:18px;max-width:800px;margin:auto">
-Nudimo profesionalna rješenja iz oblasti industrijske elektronike, Arduino sistema i automatizacije.
-Bez obzira da li kupujete opremu ili trebate razvoj projekta — na pravom ste mjestu.
-</p>
-
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:30px">
-
-<div class="review">
+<div class="card">
 <h3>🛒 Prodaja opreme</h3>
-<p>Arduino ploče, senzori, moduli, IoT uređaji i kompletna industrijska elektronika za vaše projekte.</p>
+<p>Arduino ploče, senzori, moduli, IoT uređaji i industrijska elektronika.</p>
 </div>
 
-<div class="review">
+<div class="card">
 <h3>💻 Programiranje</h3>
-<p>Razvoj Arduino projekata, automatizacija, IoT sistemi, ESP32 rješenja i industrijski software.</p>
+<p>Razvoj Arduino projekata, ESP32 sistema, automatizacija i IoT rješenja.</p>
 </div>
 
-<div class="review">
+<div class="card">
 <h3>🛠 Rješavanje problema</h3>
-<p>Dijagnostika, popravke, optimizacija sistema i tehnička podrška za postojeće projekte.</p>
+<p>Dijagnostika kvarova, optimizacija sistema i tehnička podrška.</p>
 </div>
 
-<div class="review">
+<div class="card">
 <h3>⚡ Industrijska automatizacija</h3>
-<p>Pametne fabrike, PLC integracija, monitoring i optimizacija proizvodnih procesa.</p>
+<p>PLC integracija, monitoring sistema i optimizacija proizvodnje.</p>
 </div>
 
-<div class="review">
+<div class="card">
 <h3>📡 IoT rješenja</h3>
-<p>Daljinski nadzor, pametni sistemi, cloud integracija i kontrola uređaja putem interneta.</p>
+<p>Pametni sistemi i daljinski nadzor putem interneta.</p>
 </div>
 
-<div class="review">
-<h3>🤝 Konsalting i podrška</h3>
-<p>Savjetovanje, planiranje projekata i kompletna tehnička podrška od ideje do realizacije.</p>
+<div class="card">
+<h3>🤝 Konsalting</h3>
+<p>Savjetovanje i planiranje projekata od ideje do realizacije.</p>
 </div>
 
 </div>
 </div>
 
-<div class="section">
-<h2>Zašto mi</h2>
-<ul>
-<li>Brza dostava</li>
-<li>Sigurno plaćanje</li>
-<li>Top kvaliteta</li>
-<li>24/7 podrška</li>
-</ul>
-</div>
-
-<div class="section">
-<h2>Recenzije</h2>
-<div class="review">⭐⭐⭐⭐⭐ Odlična usluga i brza dostava</div>
-<div class="review">⭐⭐⭐⭐⭐ Kvalitet proizvoda vrhunski</div>
-<div class="review">⭐⭐⭐⭐⭐ Preporuka svima</div>
+<div class="section" id="shop">
+<h2>Shop</h2>
+<div class="shop-grid" id="grid"></div>
 </div>
 
 <div id="cartBox">
@@ -113,18 +224,15 @@ Bez obzira da li kupujete opremu ili trebate razvoj projekta — na pravom ste m
 <div id="cartItems"></div>
 <hr>
 <b id="total">0 KM</b>
-<button class="btn paypal" onclick="paypal()">PayPal Checkout</button>
-<button class="btn buy" onclick="whatsapp()">WhatsApp Order</button>
+<button class="btn paypalbtn" onclick="paypal()">PayPal Checkout</button>
+<button class="btn whatsapp" onclick="whatsapp()">WhatsApp Narudžba</button>
 </div>
 
 <script>
 const items=[
 {name:"Arduino Uno R3",price:15,img:"https://www.arduino.cc/en/uploads/Main/A000066_iso_front.jpg"},
-{name:"Arduino Mega",price:25,img:"https://www.arduino.cc/en/uploads/Main/A000067_iso_front.jpg"},
-{name:"Arduino Nano",price:10,img:"https://m.media-amazon.com/images/I/61m1hI4-qjL._SL1000_.jpg"},
-{name:"ESP32",price:12,img:"https://m.media-amazon.com/images/I/61NfI7z3SXL._SL1000_.jpg"},
-{name:"NodeMCU",price:9,img:"https://m.media-amazon.com/images/I/61I2MlsS89L._SL1000_.jpg"},
-{name:"Raspberry Pico",price:14,img:"https://www.raspberrypi.com/app/uploads/2021/01/Pico-Hero.jpg"}
+{name:"ESP32 Dev Board",price:12,img:"https://m.media-amazon.com/images/I/61NfI7z3SXL._SL1000_.jpg"},
+{name:"Arduino Nano",price:10,img:"https://m.media-amazon.com/images/I/61m1hI4-qjL._SL1000_.jpg"}
 ];
 
 let cart=JSON.parse(localStorage.getItem("cart"))||[];
@@ -133,12 +241,11 @@ function load(){
 grid.innerHTML="";
 items.forEach(i=>{
 grid.innerHTML+=`
-<div class="card">
+<div class="product">
 <img src="${i.img}">
 <h4>${i.name}</h4>
 <div class="price">${i.price} KM</div>
-<a class="btn buy" href="https://wa.me/38761000000?text=Narucujem ${i.name}">WhatsApp</a>
-<button class="btn cart" onclick="addCart('${i.name}',${i.price})">Dodaj u korpu</button>
+<button class="btn cartbtn" onclick="addCart('${i.name}',${i.price})">Dodaj u korpu</button>
 </div>`;
 });
 renderCart();
@@ -161,15 +268,15 @@ cartItems.innerHTML="";
 let t=0;
 cart.forEach((c,i)=>{
 t+=c.price;
-cartItems.innerHTML+=`<div class="cartItem">${c.name} <span class="remove" onclick="removeItem(${i})">❌</span></div>`;
+cartItems.innerHTML+=`<div class="cartItem">${c.name}<span class="remove" onclick="removeItem(${i})">❌</span></div>`;
 });
 document.getElementById("total").innerText=t+" KM";
 }
 
 function paypal(){
-let totalAmount = 0;
-cart.forEach(c => totalAmount += c.price);
-window.open("https://paypal.me/fanatastiko/" + totalAmount);
+let totalAmount=0;
+cart.forEach(c=>totalAmount+=c.price);
+window.open("https://paypal.me/fanatastiko/"+totalAmount);
 }
 
 function whatsapp(){
@@ -178,14 +285,8 @@ cart.forEach(c=>text+=c.name+"%0A");
 window.open("https://wa.me/38761000000?text="+text);
 }
 
-function changeLang(l){
-document.querySelectorAll(".lang-switcher button").forEach(b=>b.classList.remove("active"));
-document.getElementById("lang-"+l).classList.add("active");
-}
-
 load();
 </script>
 
 </body>
 </html>
-
