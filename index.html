@@ -1,311 +1,153 @@
 <!DOCTYPE html>
 <html lang="bs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arduino Industrial Shop - 20+ Dijelova sa Slikama</title>
-    <style>
-        :root { --teal: #008184; --dark: #273b47; --orange: #d35400; --bg: #f4f7f6; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); color: #333; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arduino Industrial Shop PRO</title>
 
-        nav { 
-            background: var(--dark); padding: 10px 5%; display: flex; justify-content: space-between;
-            align-items: center; position: fixed; width: 90%; top: 0; z-index: 2000;
-        }
-        .nav-links { display: flex; }
-        .nav-links a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; font-size: 14px; text-transform: uppercase; }
-        .nav-links a:hover { color: var(--teal); }
-        .lang-switcher button { background: #444; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 3px; font-weight: bold; margin-left: 5px; }
-        .lang-switcher button:hover, .lang-switcher button.active { background: var(--teal); }
-
-        header { 
-            background: linear-gradient(rgba(0,129,132,0.8), rgba(39,59,71,0.9)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1350&q=80');
-            background-size: cover; background-position: center; padding: 160px 20px 100px; text-align: center; color: white; 
-        }
-        header h1 { font-size: 3em; margin-bottom: 10px; text-transform: uppercase; }
-        header p { font-size: 1.2em; opacity: 0.9; }
-
-        .container { padding: 60px 5%; }
-        
-        /* Novi stilovi za sekcije */
-        .section-title { text-align: center; color: var(--dark); margin-bottom: 40px; text-transform: uppercase; font-size: 2em; position: relative; padding-bottom: 15px;}
-        .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--teal); margin: 10px auto 0; border-radius: 2px; }
-        
-        .about-text, .why-us-text { max-width: 800px; margin: 0 auto 30px; text-align: center; line-height: 1.8; font-size: 1.1em; color: #555; }
-        
-        .why-us-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; }
-        .why-us-item { background: white; padding: 30px; border-radius: 12px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.05); border-top: 4px solid transparent; transition: 0.3s; }
-        .why-us-item:hover { border-top-color: var(--teal); transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
-        .why-us-icon { font-size: 3em; color: var(--teal); margin-bottom: 20px; }
-        .why-us-item h3 { color: var(--dark); margin-bottom: 15px; text-transform: uppercase; font-size: 1.3em; }
-        
-        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-        .review-item { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); position: relative; }
-        .review-text { font-style: italic; line-height: 1.7; color: #666; margin-bottom: 20px; font-size: 1.05em; }
-        .review-author { text-align: right; font-weight: bold; color: var(--dark); border-top: 1px solid #eee; padding-top: 15px; }
-        .review-author::before { content: "- "; }
-
-        /* Postojeći stilovi za katalog */
-        #katalog { background: #fff; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-top: -50px; position: relative; z-index: 10; padding: 50px; }
-        .category-title { border-left: 5px solid var(--teal); padding-left: 15px; margin: 40px 0 25px; color: var(--dark); text-transform: uppercase; font-size: 1.5em; }
-        
-        .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 30px; }
-        .card { 
-            background: white; border-radius: 12px; padding: 25px; text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.06); transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid #eee;
-        }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 12px 24px rgba(0,0,0,0.12); border-color: transparent; }
-        
-        .card img { 
-            width: 100%; height: 160px; object-fit: contain; margin-bottom: 20px; 
-            background: #fff; padding: 10px;
-        }
-
-        .card h4 { font-size: 17px; margin: 10px 0; color: var(--dark); height: 45px; overflow: hidden; line-height: 1.4; }
-        .price { color: var(--orange); font-weight: bold; font-size: 22px; margin-bottom: 20px; background: #fff3e0; display: inline-block; padding: 5px 15px; border-radius: 20px; }
-
-        .btn-buy { 
-            background: #25D366; color: white; padding: 14px; text-decoration: none; 
-            display: block; border-radius: 8px; font-weight: bold; font-size: 15px; transition: 0.2s;
-        }
-        .btn-buy:hover { background: #1da851; transform: scale(1.02); }
-        .btn-back { display: block; width: fit-content; margin: 60px auto 0; background: #555; color: white; padding: 12px 30px; text-decoration: none; border-radius: 30px; font-weight: bold; text-transform: uppercase; font-size: 14px; opacity: 0.8; }
-        .btn-back:hover { opacity: 1; background: #444; }
-
-        footer { background: var(--dark); color: #bbb; padding: 50px 5%; text-align: center; margin-top: 80px; }
-        footer p { margin: 10px 0; }
-        .footer-logo { color: white; font-size: 1.5em; font-weight: bold; text-transform: uppercase; margin-bottom: 20px; display: block; }
-    </style>
+<style>
+:root{--teal:#008184;--dark:#273b47;--orange:#d35400;--bg:#f4f7f6;}
+body{font-family:Segoe UI;margin:0;background:var(--bg)}
+nav{background:var(--dark);padding:10px 5%;display:flex;justify-content:space-between;position:fixed;width:90%;z-index:2000;color:white}
+.lang-switcher button{background:#444;color:white;border:none;padding:6px 12px;margin-left:5px;cursor:pointer}
+.lang-switcher button.active{background:var(--teal)}
+header{background:linear-gradient(rgba(0,129,132,.8),rgba(39,59,71,.9)),url('https://images.unsplash.com/photo-1518770660439-4636190af475');background-size:cover;padding:150px 20px;text-align:center;color:white}
+.container{padding:70px 5%}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:25px}
+.card{background:white;border-radius:12px;padding:20px;text-align:center;box-shadow:0 4px 8px rgba(0,0,0,.06);transition:.3s}
+.card:hover{transform:translateY(-6px) scale(1.03)}
+.card img{width:100%;height:150px;object-fit:contain}
+.price{color:var(--orange);font-weight:bold;font-size:20px;margin:10px 0}
+.btn{display:block;margin-top:8px;padding:10px;border-radius:8px;text-decoration:none;color:white;font-weight:bold;border:none;cursor:pointer}
+.buy{background:#25D366}
+.cart{background:var(--teal)}
+.paypal{background:#0070ba}
+.section{background:white;margin:40px 5%;padding:40px;border-radius:12px;box-shadow:0 4px 8px rgba(0,0,0,.06)}
+.review{background:#f8f8f8;padding:15px;margin:10px 0;border-radius:8px}
+#cartBox{position:fixed;right:20px;bottom:20px;background:white;padding:15px;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,.2);width:270px;max-height:400px;overflow:auto}
+.cartItem{display:flex;justify-content:space-between;margin:5px 0}
+.remove{color:red;cursor:pointer}
+</style>
 </head>
+
 <body>
 
 <nav>
-    <div class="nav-links">
-        <a href="#pocetna" id="nav-home">Početna</a>
-        <a href="#o-nama" id="nav-about">O Nama</a>
-        <a href="#katalog" id="nav-catalog">Katalog</a>
-        <a href="#recenzije" id="nav-reviews">Recenzije</a>
-        <a href="#kontakt" id="nav-contact">Kontakt</a>
-    </div>
-    <div class="lang-switcher">
-        <button onclick="changeLang('bs')" id="lang-bs" class="active">BS</button>
-        <button onclick="changeLang('en')" id="lang-en">EN</button>
-        <button onclick="changeLang('de')" id="lang-de">DE</button>
-    </div>
+<div>Arduino Shop</div>
+<div class="lang-switcher">
+<button onclick="changeLang('bs')" id="lang-bs" class="active">BS</button>
+<button onclick="changeLang('en')" id="lang-en">EN</button>
+<button onclick="changeLang('de')" id="lang-de">DE</button>
+</div>
 </nav>
 
-<header id="pocetna">
-    <h1 id="header-title">ARDUINO & INDUSTRIAL SHOP</h1>
-    <p id="header-desc">Kompletna ponuda sa preko 20 artikala</p>
+<header>
+<h1>Arduino Industrial Shop</h1>
 </header>
 
 <div class="container">
-    <section id="o-nama">
-        <h2 class="section-title" id="about-title">O Nama</h2>
-        <div class="about-text" id="about-text-content">
-            Mi smo vaš pouzdan partner za visoko-kvalitetne Arduino komponente i industrijsku elektroniku. Naša misija je da pružimo inovativna rješenja, pouzdanu opremu i stručnu podršku kako hobistima, tako i profesionalcima u industriji automatizacije. Sa sjedištem u Bosni i Hercegovini, nastojimo da budemo most između vaših ideja i njihove realizacije.
-        </div>
-    </section>
-
-    <section id="zasto-mi">
-        <h2 class="section-title" id="why-title">Zašto Mi?</h2>
-        <div class="why-us-grid">
-            <div class="why-us-item">
-                <div class="why-us-icon">✓</div>
-                <h3 id="why-qual-title">Kvalitet</h3>
-                <p id="why-qual-desc">Svi naši dijelovi prolaze strogu kontrolu kvaliteta kako bi osigurali pouzdanost u vašim projektima.</p>
-            </div>
-            <div class="why-us-item">
-                <div class="why-us-icon">🚀</div>
-                <h3 id="why-speed-title">Brzina</h3>
-                <p id="why-speed-desc">Brza obrada narudžbi i efikasna dostava direktno do vaših vrata.</p>
-            </div>
-            <div class="why-us-item">
-                <div class="why-us-icon">🛠</div>
-                <h3 id="why-support-title">Podrška</h3>
-                <p id="why-support-desc">Naš tim stručnjaka je tu da odgovori na vaša pitanja i pruži tehničku podršku.</p>
-            </div>
-        </div>
-    </section>
+<div class="shop-grid" id="grid"></div>
 </div>
 
-<div class="container" id="katalog">
-    <h2 class="section-title" id="catalog-main-title">Katalog Proizvoda</h2>
-    <h3 class="category-title" id="cat-1-title">1. Kontroleri & Ploče</h3>
-    <div class="shop-grid" id="grid-1"></div>
-
-    <h3 class="category-title" id="cat-2-title">2. Senzori & Moduli</h3>
-    <div class="shop-grid" id="grid-2"></div>
-
-    <h3 class="category-title" id="cat-3-title">3. Snaga & Displeji</h3>
-    <div class="shop-grid" id="grid-3"></div>
-
-    <a href="#pocetna" class="btn-back" id="btn-back-to-top">↑ Nazad na vrh</a>
+<div class="section">
+<h2>O nama</h2>
+<p>Mi smo online trgovina Arduino industrijskih komponenti sa brzom dostavom i vrhunskom podrškom.</p>
 </div>
 
-<div class="container">
-    <section id="recenzije">
-        <h2 class="section-title" id="reviews-title">Recenzije Kupaca</h2>
-        <div class="reviews-grid">
-            <div class="review-item">
-                <p class="review-text" id="review-1-text">"Odličan izbor Arduino kontrolera! Isporuka je bila brža nego što sam očekivao, a komponente su stigle sigurno upakovane. Sve preporuke!"</p>
-                <div class="review-author" id="review-1-author">Mirza B.</div>
-            </div>
-            <div class="review-item">
-                <p class="review-text" id="review-2-text">"Kupio sam senzore za automatizaciju male mašine. Kvalitet je na nivou, a korisnička podrška mi je pomogla oko tehničkih pitanja. Veoma zadovoljan!"</p>
-                <div class="review-author" id="review-2-author">ElektroInženjering d.o.o.</div>
-            </div>
-            <div class="review-item">
-                <p class="review-text" id="review-3-text">"Za moj hobistički projekat, ovaj šop je savršen. Cijene su pristupačne, a izbor displeja i releja je fantastičan. Sigurno ću ponovo naručiti."</p>
-                <div class="review-author" id="review-3-author">Amina S.</div>
-            </div>
-        </div>
-    </section>
+<div class="section">
+<h2>Zašto mi</h2>
+<ul>
+<li>Brza dostava</li>
+<li>Sigurno plaćanje</li>
+<li>Top kvaliteta</li>
+<li>24/7 podrška</li>
+</ul>
 </div>
 
-<footer id="kontakt">
-    <span class="footer-logo">Arduino Industrial Shop</span>
-    <p id="footer-contact-info">Kontakt: info@arduinomaster.ba | WhatsApp: +387 61 000 000</p>
-    <p id="footer-rights">&copy; 2024 Arduino Industrial Shop. Sva prava zadržana.</p>
-</footer>
+<div class="section">
+<h2>Recenzije</h2>
+<div class="review">⭐⭐⭐⭐⭐ Odlična usluga i brza dostava</div>
+<div class="review">⭐⭐⭐⭐⭐ Kvalitet proizvoda vrhunski</div>
+<div class="review">⭐⭐⭐⭐⭐ Preporuka svima</div>
+</div>
+
+<div id="cartBox">
+<b>🛒 Korpa</b>
+<div id="cartItems"></div>
+<hr>
+<b id="total">0 KM</b>
+<button class="btn paypal" onclick="paypal()">PayPal Checkout</button>
+<button class="btn buy" onclick="whatsapp()">WhatsApp Order</button>
+</div>
 
 <script>
-    const items = [
-        /* KONTROLERI */
-        {id: 'item-1', cat: 1, n_bs: "Arduino Uno R3", n_en: "Arduino Uno R3", n_de: "Arduino Uno R3", p: "15 KM", img: "https://www.arduino.cc/en/uploads/Main/A000066_iso_front.jpg"},
-        {id: 'item-2', cat: 1, n_bs: "Arduino Mega 2560", n_en: "Arduino Mega 2560", n_de: "Arduino Mega 2560", p: "25 KM", img: "https://www.arduino.cc/en/uploads/Main/A000067_iso_front.jpg"},
-        {id: 'item-3', cat: 1, n_bs: "Arduino Nano V3", n_en: "Arduino Nano V3", n_de: "Arduino Nano V3", p: "10 KM", img: "https://m.media-amazon.com/images/I/61m1hI4-qjL._SL1000_.jpg"},
-        {id: 'item-4', cat: 1, n_bs: "ESP32 DevKit V1", n_en: "ESP32 DevKit V1", n_de: "ESP32 DevKit V1", p: "12 KM", img: "https://m.media-amazon.com/images/I/61NfI7z3SXL._SL1000_.jpg"},
-        {id: 'item-5', cat: 1, n_bs: "NodeMCU ESP8266", n_en: "NodeMCU ESP8266", n_de: "NodeMCU ESP8266", p: "9 KM", img: "https://m.media-amazon.com/images/I/61I2MlsS89L._SL1000_.jpg"},
-        {id: 'item-6', cat: 1, n_bs: "Raspberry Pi Pico", n_en: "Raspberry Pi Pico", n_de: "Raspberry Pi Pico", p: "14 KM", img: "https://www.raspberrypi.com/app/uploads/2021/01/Pico-Hero.jpg"},
+const items=[
+{name:"Arduino Uno R3",price:15,img:"https://www.arduino.cc/en/uploads/Main/A000066_iso_front.jpg"},
+{name:"Arduino Mega",price:25,img:"https://www.arduino.cc/en/uploads/Main/A000067_iso_front.jpg"},
+{name:"Arduino Nano",price:10,img:"https://m.media-amazon.com/images/I/61m1hI4-qjL._SL1000_.jpg"},
+{name:"ESP32",price:12,img:"https://m.media-amazon.com/images/I/61NfI7z3SXL._SL1000_.jpg"},
+{name:"NodeMCU",price:9,img:"https://m.media-amazon.com/images/I/61I2MlsS89L._SL1000_.jpg"},
+{name:"Raspberry Pico",price:14,img:"https://www.raspberrypi.com/app/uploads/2021/01/Pico-Hero.jpg"}
+];
 
-        /* SENZORI */
-        {id: 'item-7', cat: 2, n_bs: "Ultrazvučni HC-SR04", n_en: "Ultrasonic HC-SR04", n_de: "Ultraschall HC-SR04", p: "4 KM", img: "https://m.media-amazon.com/images/I/51pI-E9T+iL._SL1000_.jpg"},
-        {id: 'item-8', cat: 2, n_bs: "PIR Senzor Pokreta", n_en: "PIR Motion Sensor", n_de: "PIR Bewegungssensor", p: "5 KM", img: "https://m.media-amazon.com/images/I/51H0O-0A3iL._SL1000_.jpg"},
-        {id: 'item-9', cat: 2, n_bs: "DHT11 Temp/Vlaga", n_en: "DHT11 Temp/Humidity", n_de: "DHT11 Temp/Feuchtigkeit", p: "4 KM", img: "https://m.media-amazon.com/images/I/41-lU3lXJPL.jpg"},
-        {id: 'item-10', cat: 2, n_bs: "Senzor Nivoa Vode", n_en: "Water Level Sensor", n_de: "Wasserstandssensor", p: "3 KM", img: "https://m.media-amazon.com/images/I/51YmE-T+8dL._SL1000_.jpg"},
-        {id: 'item-11', cat: 2, n_bs: "MQ-2 Senzor Plina", n_en: "MQ-2 Gas Sensor", n_de: "MQ-2 Gassensor", p: "6 KM", img: "https://m.media-amazon.com/images/I/61S-qL0qAEL._SL1000_.jpg"},
-        {id: 'item-12', cat: 2, n_bs: "RFID Reader RC522", n_en: "RFID Reader RC522", n_de: "RFID Reader RC522", p: "10 KM", img: "https://m.media-amazon.com/images/I/7187qMcl7hL._SL1000_.jpg"},
-        {id: 'item-13', cat: 2, n_bs: "Senzor Pritiska 20kg", n_en: "Pressure Sensor 20kg", n_de: "Drucksensor 20kg", p: "18 KM", img: "https://m.media-amazon.com/images/I/51+u7D1D7YL._SL1000_.jpg"},
-        {id: 'item-14', cat: 2, n_bs: "Infracrveni Senzor", n_en: "Infrared Sensor", n_de: "Infrarotsensor", p: "3 KM", img: "https://m.media-amazon.com/images/I/5176Qf90T6L._SL1000_.jpg"},
+let cart=JSON.parse(localStorage.getItem("cart"))||[];
 
-        /* SNAGA I DISPLEJI */
-        {id: 'item-15', cat: 3, n_bs: "Relej 1 Kanal 5V", n_en: "Relay 1 Channel 5V", n_de: "Relais 1 Kanal 5V", p: "4 KM", img: "https://m.media-amazon.com/images/I/51+M8v5Vn1L._SL1000_.jpg"},
-        {id: 'item-16', cat: 3, n_bs: "Relej 4 Kanala 5V", n_en: "Relay 4 Channels 5V", n_de: "Relais 4 Kanäle 5V", p: "12 KM", img: "https://m.media-amazon.com/images/I/51U6S5m6V1L._SL1000_.jpg"},
-        {id: 'item-17', cat: 3, n_bs: "LCD Displej 16x2 I2C", n_en: "LCD Display 16x2 I2C", n_de: "LCD Display 16x2 I2C", p: "9 KM", img: "https://m.media-amazon.com/images/I/61iVpI9F0SL._SL1000_.jpg"},
-        {id: 'item-18', cat: 3, n_bs: "Servo Motor SG90", n_en: "Servo Motor SG90", n_de: "Servo Motor SG90", p: "5 KM", img: "https://m.media-amazon.com/images/I/51X5f8Yn6oL._SL1000_.jpg"},
-        {id: 'item-19', cat: 3, n_bs: "Step Motor + Driver", n_en: "Stepper Motor + Driver", n_de: "Schrittmotor + Treiber", p: "15 KM", img: "https://m.media-amazon.com/images/I/61XW9vO34oL._SL1000_.jpg"},
-        {id: 'item-20', cat: 3, n_bs: "L298N Motor Driver", n_en: "L298N Motor Driver", n_de: "L298N Motortreiber", p: "8 KM", img: "https://m.media-amazon.com/images/I/71-0Yt1n9rL._SL1000_.jpg"},
-        {id: 'item-21', cat: 3, n_bs: "Napajanje 12V 5A", n_en: "Power Supply 12V 5A", n_de: "Netzteil 12V 5A", p: "20 KM", img: "https://m.media-amazon.com/images/I/615Dq+BvK7L._SL1000_.jpg"},
-        {id: 'item-22', cat: 3, n_bs: "Tastatura 4x4", n_en: "Keypad 4x4", n_de: "Tastatur 4x4", p: "4 KM", img: "https://m.media-amazon.com/images/I/61u9n1L6pFL._SL1000_.jpg"}
-    ];
+function load(){
+grid.innerHTML="";
+items.forEach(i=>{
+grid.innerHTML+=`
+<div class="card">
+<img src="${i.img}">
+<h4>${i.name}</h4>
+<div class="price">${i.price} KM</div>
+<a class="btn buy" href="https://wa.me/38761000000?text=Narucujem ${i.name}">WhatsApp</a>
+<button class="btn cart" onclick="addCart('${i.name}',${i.price})">Dodaj u korpu</button>
+</div>`;
+});
+renderCart();
+}
 
-    const translations = {
-        bs: {
-            // Navigacija
-            'nav-home': 'Početna', 'nav-about': 'O Nama', 'nav-catalog': 'Katalog', 'nav-reviews': 'Recenzije', 'nav-contact': 'Kontakt',
-            // Header
-            'header-title': 'ARDUINO & INDUSTRIAL SHOP', 'header-desc': 'Kompletna ponuda sa preko 20 artikala',
-            // O Nama
-            'about-title': 'O Nama', 'about-text-content': 'Mi smo vaš pouzdan partner za visoko-kvalitetne Arduino komponente i industrijsku elektroniku. Naša misija je da pružimo inovativna rješenja, pouzdanu opremu i stručnu podršku kako hobistima, tako i profesionalcima u industriji automatizacije. Sa sjedištem u Bosni i Hercegovini, nastojimo da budemo most između vaših ideja i njihove realizacije.',
-            // Zašto Mi
-            'why-title': 'Zašto Mi?', 'why-qual-title': 'Kvalitet', 'why-qual-desc': 'Svi naši dijelovi prolaze strogu kontrolu kvaliteta kako bi osigurali pouzdanost u vašim projektima.', 'why-speed-title': 'Brzina', 'why-speed-desc': 'Brza obrada narudžbi i efikasna dostava direktno do vaših vrata.', 'why-support-title': 'Podrška', 'why-support-desc': 'Naš tim stručnjaka je tu da odgovori na vaša pitanja i pruži tehničku podršku.',
-            // Katalog
-            'catalog-main-title': 'Katalog Proizvoda', 'cat-1-title': '1. Kontroleri & Ploče', 'cat-2-title': '2. Senzori & Moduli', 'cat-3-title': '3. Snaga & Displeji', 'btn-back-to-top': '↑ Nazad na vrh',
-            // Dugme za kupovinu
-            'btn-buy-label': 'NARUČI (WhatsApp)',
-            // Recenzije
-            'reviews-title': 'Recenzije Kupaca', 'review-1-text': '"Odličan izbor Arduino kontrolera! Isporuka je bila brža nego što sam očekivao, a komponente su stigle sigurno upakovane. Sve preporuke!"', 'review-1-author': 'Mirza B.', 'review-2-text': '"Kupio sam senzore za automatizaciju male mašine. Kvalitet je na nivou, a korisnička podrška mi je pomogla oko tehničkih pitanja. Veoma zadovoljan!"', 'review-2-author': 'ElektroInženjering d.o.o.', 'review-3-text': '"Za moj hobistički projekat, ovaj šop je savršen. Cijene su pristupačne, a izbor displeja i releja je fantastičan. Sigurno ću ponovo naručiti."', 'review-3-author': 'Amina S.',
-            // Footer
-            'footer-contact-info': 'Kontakt: info@arduinomaster.ba | WhatsApp: +387 61 000 000', 'footer-rights': '&copy; 2024 Arduino Industrial Shop. Sva prava zadržana.'
-        },
-        en: {
-            // Navigation
-            'nav-home': 'Home', 'nav-about': 'About Us', 'nav-catalog': 'Catalog', 'nav-reviews': 'Reviews', 'nav-contact': 'Contact',
-            // Header
-            'header-title': 'ARDUINO & INDUSTRIAL SHOP', 'header-desc': 'Complete offer with over 20 items',
-            // About Us
-            'about-title': 'About Us', 'about-text-content': 'We are your reliable partner for high-quality Arduino components and industrial electronics. Our mission is to provide innovative solutions, dependable equipment, and professional support to both hobbyists and professionals in the automation industry. Based in Bosnia and Herzegovina, we strive to be the bridge between your ideas and their realization.',
-            // Why Us
-            'why-title': 'Why Us?', 'why-qual-title': 'Quality', 'why-qual-desc': 'All our parts undergo strict quality control to ensure reliability in your projects.', 'why-speed-title': 'Speed', 'why-speed-desc': 'Fast order processing and efficient delivery directly to your doorstep.', 'why-support-title': 'Support', 'why-support-desc': 'Our team of experts is here to answer your questions and provide technical support.',
-            // Catalog
-            'catalog-main-title': 'Product Catalog', 'cat-1-title': '1. Controllers & Boards', 'cat-2-title': '2. Sensors & Modules', 'cat-3-title': '3. Power & Displays', 'btn-back-to-top': '↑ Back to Top',
-            // Buy Button
-            'btn-buy-label': 'ORDER (WhatsApp)',
-            // Reviews
-            'reviews-title': 'Customer Reviews', 'review-1-text': '"Excellent selection of Arduino controllers! Delivery was faster than I expected, and components arrived safely packed. Highly recommended!"', 'review-1-author': 'Mirza B.', 'review-2-text': '"I bought sensors for automating a small machine. The quality is top-notch, and customer support helped me with technical questions. Very satisfied!"', 'review-2-author': 'ElektroInženjering d.o.o.', 'review-3-text': '"For my hobbyist project, this shop is perfect. The prices are affordable, and the selection of displays and relays is fantastic. I will definitely order again."', 'review-3-author': 'Amina S.',
-            // Footer
-            'footer-contact-info': 'Contact: info@arduinomaster.ba | WhatsApp: +387 61 000 000', 'footer-rights': '&copy; 2024 Arduino Industrial Shop. All rights reserved.'
-        },
-        de: {
-            // Navigation
-            'nav-home': 'Startseite', 'nav-about': 'Über Uns', 'nav-catalog': 'Katalog', 'nav-reviews': 'Bewertungen', 'nav-contact': 'Kontakt',
-            // Header
-            'header-title': 'ARDUINO & INDUSTRIAL SHOP', 'header-desc': 'Komplettes Angebot mit über 20 Artikeln',
-            // Über Uns
-            'about-title': 'Über Uns', 'about-text-content': 'Wir sind Ihr zuverlässiger Partner für hochwertige Arduino-Komponenten und Industrieelektronik. Unsere Mission ist es, innovative Lösungen, zuverlässige Ausrüstung und professionelle Unterstützung sowohl für Bastler als auch für Fachleute in der Automatisierungsindustrie bereitzustellen. Mit Sitz in Bosnien und Herzegowina bestreben wir uns, die Brücke zwischen Ihren Ideen und deren Realisierung zu sein.',
-            // Warum Wir
-            'why-title': 'Warum Wir?', 'why-qual-title': 'Qualität', 'why-qual-desc': 'Alle unsere Teile unterliegen einer strengen Qualitätskontrolle, um Zuverlässigkeit in Ihren Projekten zu gewährleisten.', 'why-speed-title': 'Geschwindigkeit', 'why-speed-desc': 'Schnelle Auftragsbearbeitung und effiziente Lieferung direkt an Ihre Haustür.', 'why-support-title': 'Unterstützung', 'why-support-desc': 'Unser Expertenteam steht Ihnen zur Beantwortung Ihrer Fragen und zur technischen Unterstützung zur Verfügung.',
-            // Katalog
-            'catalog-main-title': 'Produktkatalog', 'cat-1-title': '1. Controller & Boards', 'cat-2-title': '2. Sensoren & Module', 'cat-3-title': '3. Leistung & Displays', 'btn-back-to-top': '↑ Zurück nach oben',
-            // Kauf-Button
-            'btn-buy-label': 'BESTELLEN (WhatsApp)',
-            // Bewertungen
-            'reviews-title': 'Kundenbewertungen', 'review-1-text': '"Hervorragende Auswahl an Arduino-Controllern! Lieferung war schneller als erwartet, und die Komponenten kamen sicher verpackt an. Sehr empfehlenswert!"', 'review-1-author': 'Mirza B.', 'review-2-text': '"Ich habe Sensoren für die Automatisierung einer kleinen Maschine gekauft. Die Qualität ist erstklassig, und der Kundensupport hat mir bei technischen Fragen geholfen. Sehr zufrieden!"', 'review-2-author': 'ElektroInženjering d.o.o.', 'review-3-text': '"Für mein Hobyyprojekt ist dieser Shop perfekt. Die Preise sind erschwinglich und die Auswahl an Displays und Relais ist fantastisch. Ich werde definitiv wieder bestellen."', 'review-3-author': 'Amina S.',
-            // Footer
-            'footer-contact-info': 'Kontakt: info@arduinomaster.ba | WhatsApp: +387 61 000 000', 'footer-rights': '&copy; 2024 Arduino Industrial Shop. Alle Rechte vorbehalten.'
-        }
-    };
+function addCart(name,price){
+cart.push({name,price});
+localStorage.setItem("cart",JSON.stringify(cart));
+renderCart();
+}
 
-    function loadItems(lang = 'bs') {
-        // Očisti prethodni sadržaj prije ponovnog učitavanja za novi jezik
-        document.getElementById(`grid-1`).innerHTML = '';
-        document.getElementById(`grid-2`).innerHTML = '';
-        document.getElementById(`grid-3`).innerHTML = '';
+function removeItem(i){
+cart.splice(i,1);
+localStorage.setItem("cart",JSON.stringify(cart));
+renderCart();
+}
 
-        items.forEach(i => {
-            const card = `
-                <div class="card" id="${i.id}">
-                    <img src="${i.img}" alt="${i['n_'+lang]}">
-                    <h4 class="item-name">${i['n_'+lang]}</h4>
-                    <div class="price">${i.p}</div>
-                    <a href="https://wa.me/38761000000?text=Narucujem: ${i['n_'+lang]}" class="btn-buy">${translations[lang]['btn-buy-label']}</a>
-                </div>`;
-            document.getElementById(`grid-${i.cat}`).innerHTML += card;
-        });
-    }
+function renderCart(){
+cartItems.innerHTML="";
+let t=0;
+cart.forEach((c,i)=>{
+t+=c.price;
+cartItems.innerHTML+=`<div class="cartItem">${c.name} <span class="remove" onclick="removeItem(${i})">❌</span></div>`;
+});
+document.getElementById("total").innerText=t+" KM";
+}
 
-    function changeLang(lang) {
-        // 1. Ažuriraj statični tekst
-        const langData = translations[lang];
-        for (const id in langData) {
-            const element = document.getElementById(id);
-            if (element) {
-                // Provjeri da li je autor recenzije, dodaj prefiks crticu
-                if (id.startsWith('review-') && id.endsWith('-author')) {
-                     element.innerText = langData[id]; 
-                } else if (id === 'btn-back-to-top') {
-                     element.innerText = langData[id];
-                } else {
-                     element.innerText = langData[id];
-                }
-            }
-        }
+function paypal(){
+let totalAmount = 0;
+cart.forEach(c => totalAmount += c.price);
+window.open("https://paypal.me/fanatastiko/" + totalAmount);
+}
 
-        // 2. Ponovo učitaj stavke kataloga sa prevedenim imenima i dugmetom
-        loadItems(lang);
+function whatsapp(){
+let text="Narudzba:%0A";
+cart.forEach(c=>text+=c.name+"%0A");
+window.open("https://wa.me/38761000000?text="+text);
+}
 
-        // 3. Ažuriraj aktivno stanje dugmadi za odabir jezika
-        const langButtons = document.querySelectorAll('.lang-switcher button');
-        langButtons.forEach(btn => btn.classList.remove('active'));
-        document.getElementById('lang-' + lang).classList.add('active');
-    }
+function changeLang(l){
+document.querySelectorAll(".lang-switcher button").forEach(b=>b.classList.remove("active"));
+document.getElementById("lang-"+l).classList.add("active");
+}
 
-    // Učitaj početno stanje (BS jezik)
-    window.onload = function() {
-        changeLang('bs'); // Ovo će popuniti katalog i statični tekst
-    };
+load();
 </script>
+
 </body>
 </html>
