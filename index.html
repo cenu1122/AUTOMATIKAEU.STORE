@@ -1,250 +1,39 @@
-<!DOCTYPE html>
-<html lang="bs">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fanatastiko Industrial Solutions</title>
-
-<style>
-body{margin:0;font-family:Segoe UI;background:#f4f7f6;scroll-behavior:smooth}
-
-nav{
-background:#1f2d36;
-color:white;
-padding:15px;
-display:flex;
-justify-content:center;
-gap:20px;
-position:fixed;
-top:0;
-width:100%;
-z-index:1000
-}
-nav a{color:white;text-decoration:none;font-weight:bold}
-
-.lang-switcher{
-position:fixed;
-top:70px;
-right:20px;
-z-index:1000
-}
-.lang-switcher button{
-padding:6px 10px;
-border:none;
-cursor:pointer;
-margin:2px
-}
-.lang-switcher .active{background:#d35400;color:#fff}
-
-section{
-padding:120px 20px;
-min-height:100vh;
-text-align:center
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px
-}
-
-.card{
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 5px 15px rgba(0,0,0,.1)
-}
-
-.shop-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px
-}
-
-.product{
-background:white;
-padding:15px;
-border-radius:10px;
-box-shadow:0 5px 15px rgba(0,0,0,.1)
-}
-
-.btn{
-padding:10px 18px;
-background:#0070ba;
-color:white;
-border:none;
-border-radius:6px;
-cursor:pointer;
-margin-top:10px
-}
-
-.cart{
-position:fixed;
-right:20px;
-bottom:20px;
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 5px 20px rgba(0,0,0,.2);
-width:250px
-}
-
-.back{display:block;margin-top:30px;font-weight:bold;color:#000}
-</style>
-</head>
-
-<body>
-
-<nav>
-<a href="#home">Početna</a>
-<a href="#about">O nama</a>
-<a href="#why">Zašto mi</a>
-<a href="#shop">Shop</a>
-<a href="#reviews">Recenzije</a>
-<a href="#payment">Plaćanje</a>
-</nav>
-
-<div class="lang-switcher">
-<button onclick="changeLang('bs')" id="lang-bs" class="active">BS</button>
-<button onclick="changeLang('en')" id="lang-en">EN</button>
-<button onclick="changeLang('de')" id="lang-de">DE</button>
-</div>
-
-<section id="home">
-<h1 data-key="title">Kompletna Industrijska Rješenja</h1>
-<p data-key="sub">Prodaja Arduino opreme, profesionalno programiranje i rješavanje tehničkih problema.</p>
-<p data-key="home2">Specijalizirani smo za automatiku, IoT projekte, industrijsku elektroniku i razvoj prilagođenih sistema.</p>
-<a href="#home" class="back">⬆ Povratak</a>
-</section>
-
-<section id="about">
-<h2 data-key="about">O nama</h2>
-<p data-key="about2">Fanatastiko Industrial Solutions pruža profesionalna rješenja automatike, programiranja i industrijskih sistema sa fokusom na kvalitet i pouzdanost.</p>
-<a href="#home" class="back">⬆ Povratak</a>
-</section>
-
 <section id="why">
 <h2 data-key="why">Zašto mi</h2>
+
 <div class="grid">
-<div class="card">Brza realizacija projekata</div>
-<div class="card">Industrijsko iskustvo</div>
-<div class="card">Tehnička podrška 24/7</div>
-</div>
-<a href="#home" class="back">⬆ Povratak</a>
-</section>
 
-<section id="shop">
-<h2>Shop</h2>
-<div class="shop-grid" id="grid"></div>
-<a href="#home" class="back">⬆ Povratak</a>
-</section>
-
-<section id="reviews">
-<h2 data-key="reviews">Recenzije</h2>
-<p data-key="r1">⭐⭐⭐⭐⭐ Odlična saradnja i profesionalna podrška.</p>
-<p data-key="r2">⭐⭐⭐⭐⭐ Brza isporuka i kvalitetna oprema.</p>
-<a href="#home" class="back">⬆ Povratak</a>
-</section>
-
-<section id="payment">
-<h2 data-key="payment">Načini plaćanja</h2>
-<a href="https://paypal.me/fanatastiko" target="_blank" class="btn">PayPal</a>
-<button class="btn">Stripe kartica</button>
-<p data-key="cod">Plaćanje pouzećem dostupno za Bosnu i Hercegovinu.</p>
-<a href="#home" class="back">⬆ Povratak</a>
-</section>
-
-<div class="cart">
-<b>Korpa</b>
-<div id="cart"></div>
-<b id="total">0 KM</b>
+<div class="card">
+<h3 data-key="w1t">⚡ Brza realizacija</h3>
+<p data-key="w1">Projekte realizujemo brzo i efikasno uz profesionalan pristup.</p>
 </div>
 
-<script>
-const items=[
-{name:"Arduino Uno",price:15},
-{name:"ESP32",price:12},
-{name:"Arduino Nano",price:10}
-];
+<div class="card">
+<h3 data-key="w2t">🏭 Industrijsko iskustvo</h3>
+<p data-key="w2">Višegodišnje iskustvo u industrijskoj automatizaciji i IoT sistemima.</p>
+</div>
 
-let cart=[];
+<div class="card">
+<h3 data-key="w3t">🛠 Tehnička podrška</h3>
+<p data-key="w3">Stalna podrška i rješavanje tehničkih problema.</p>
+</div>
 
-function load(){
-grid.innerHTML="";
-items.forEach(i=>{
-grid.innerHTML+=`
-<div class="product">
-<h4>${i.name}</h4>
-<p>${i.price} KM</p>
-<button class="btn" onclick="add('${i.name}',${i.price})">Dodaj</button>
-</div>`;
-});
-}
+<div class="card">
+<h3 data-key="w4t">💡 Prilagođena rješenja</h3>
+<p data-key="w4">Razvijamo rješenja prilagođena potrebama klijenta.</p>
+</div>
 
-function add(n,p){
-cart.push({n,p});
-render();
-}
+<div class="card">
+<h3 data-key="w5t">📡 IoT i automatika</h3>
+<p data-key="w5">Napredni sistemi nadzora i automatizacije.</p>
+</div>
 
-function render(){
-cart.innerHTML="";
-let t=0;
-cart.forEach(c=>t+=c.p);
-document.getElementById("total").innerText=t+" KM";
-}
+<div class="card">
+<h3 data-key="w6t">🤝 Konsalting</h3>
+<p data-key="w6">Savjetovanje i planiranje projekata od ideje do realizacije.</p>
+</div>
 
-const langData={
-bs:{
-title:"Kompletna Industrijska Rješenja",
-sub:"Prodaja Arduino opreme, profesionalno programiranje i rješavanje tehničkih problema.",
-home2:"Specijalizirani smo za automatiku, IoT projekte, industrijsku elektroniku i razvoj prilagođenih sistema.",
-about:"O nama",
-about2:"Fanatastiko Industrial Solutions pruža profesionalna rješenja automatike, programiranja i industrijskih sistema.",
-why:"Zašto mi",
-reviews:"Recenzije",
-r1:"⭐⭐⭐⭐⭐ Odlična saradnja i profesionalna podrška.",
-r2:"⭐⭐⭐⭐⭐ Brza isporuka i kvalitetna oprema.",
-payment:"Načini plaćanja",
-cod:"Plaćanje pouzećem dostupno za Bosnu i Hercegovinu."
-},
-en:{
-title:"Complete Industrial Solutions",
-sub:"Arduino equipment sales, programming and problem solving.",
-home2:"Specialized in automation, IoT projects and industrial electronics.",
-about:"About us",
-about2:"Fanatastiko Industrial Solutions provides professional automation and programming services.",
-why:"Why us",
-reviews:"Reviews",
-r1:"⭐⭐⭐⭐⭐ Excellent cooperation and support.",
-r2:"⭐⭐⭐⭐⭐ Fast delivery and quality equipment.",
-payment:"Payment methods",
-cod:"Cash on delivery available in Bosnia."
-},
-de:{
-title:"Komplette Industrielösungen",
-sub:"Arduino Verkauf, Programmierung und Problemlösung.",
-home2:"Spezialisiert auf Automatisierung, IoT und Industrieelektronik.",
-about:"Über uns",
-about2:"Fanatastiko Industrial Solutions bietet professionelle Automatisierungslösungen.",
-why:"Warum wir",
-reviews:"Bewertungen",
-r1:"⭐⭐⭐⭐⭐ Ausgezeichnete Zusammenarbeit.",
-r2:"⭐⭐⭐⭐⭐ Schnelle Lieferung.",
-payment:"Zahlungsmethoden",
-cod:"Nachnahme in Bosnien verfügbar."
-}
-};
+</div>
 
-function changeLang(lang){
-document.querySelectorAll("[data-key]").forEach(el=>{
-el.innerText=langData[lang][el.dataset.key];
-});
-document.querySelectorAll(".lang-switcher button").forEach(b=>b.classList.remove("active"));
-document.getElementById("lang-"+lang).classList.add("active");
-}
-
-load();
-</script>
-
-</body>
-</html>
+<a href="#home" class="back">⬆ Povratak</a>
+</section>
