@@ -117,6 +117,29 @@ font-weight:bold;
 <p>WhatsApp / Viber: +387</p>
 <a href="#home" class="back">⬆ Povratak na početnu</a>
 </section>
+  <script>
+const langData={
+bs:{
+reviews:"Recenzije",
+download:"Preuzmi instrukcije"
+},
+en:{
+reviews:"Reviews",
+download:"Download instructions"
+},
+de:{
+reviews:"Bewertungen",
+download:"Anleitung herunterladen"
+}
+};
+
+function changeLang(l){
+document.querySelectorAll("[data-key]").forEach(el=>{
+el.innerText=langData[l][el.dataset.key];
+});
+}
+</script>
 
 </body>
 </html>
+
