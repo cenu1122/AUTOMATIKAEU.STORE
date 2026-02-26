@@ -1,264 +1,336 @@
 <!DOCTYPE html>
 <html lang="bs">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fanatastiko Industrial Solutions</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fanatastiko Industrial Solutions</title>
+    <style>
+        :root {
+            --primary: #008184; /* Teal boja za dugmad */
+            --dark: #1f2d36;
+            --accent: #d35400; /* Narandžasta za isticanje */
+            --bg: #f4f7f6;
+            --white: #ffffff;
+        }
 
-<style>
-:root{--primary:#008184;--dark:#1f2d36;--accent:#d35400;--bg:#f4f7f6;}
-html { scroll-behavior: smooth; } /* Glatko skrolanje */
-body{margin:0;font-family:Segoe UI,Arial;background:var(--bg); padding-top: 80px;} /* Prostor za fiksni nav */
-nav{background:var(--dark);color:white;padding:15px 5%;display:flex;justify-content:space-between;align-items:center;position:fixed;top:0;left:0;width:90%;z-index:1000;}
-nav h2 { margin: 0; }
-header{background:linear-gradient(rgba(0,129,132,.85),rgba(31,45,54,.95)),url('https://images.unsplash.com/photo-1518770660439-4636190af475');background-size:cover;background-position:center;color:white;text-align:center;padding:120px 20px 100px;}
-.btn-main{background:var(--accent);color:white;padding:14px 25px;display:inline-block;margin-top:25px;text-decoration:none;border-radius:8px;font-weight:bold;transition: 0.3s;}
-.btn-main:hover { opacity: 0.9; transform: scale(1.05); }
-.section{background:white;margin:40px 5%;padding:40px 5%;border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,.08); position: relative;}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
-.card{background:#fafafa;padding:25px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.06); text-align: center; font-weight: bold;}
-.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:25px;}
-.product{background:white;padding:20px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.08);text-align:center; border: 1px solid #eee; display: flex; flex-direction: column; justify-content: space-between;}
-.product img{width:100%;height:140px;object-fit:contain; margin-bottom: 15px;}
-.product h4 { margin: 10px 0; height: 40px; overflow: hidden; }
-.price{color:var(--accent);font-weight:bold;margin:10px 0; font-size: 1.2em;}
-.btn{display:block;width:100%;margin-top:10px;padding:12px;border:none;border-radius:8px;cursor:pointer;color:white;font-weight:bold;font-size: 14px; transition: 0.3s;}
-.btn:hover { opacity: 0.8; }
-.whatsapp{background:#25D366;}
-.cartbtn{background:var(--primary);}
-.paypalbtn{background:#0070ba;}
-.cod{background:#444;}
-#cartBox{position:fixed;right:20px;bottom:20px;background:white;padding:20px;border-radius:12px;box-shadow:0 5px 25px rgba(0,0,0,.2);width:300px;max-height:400px;overflow:auto; z-index: 999; display: none;} /* Sakriveno dok je prazno */
-#cartBox b { display: block; margin-bottom: 15px; font-size: 1.1em; border-bottom: 2px solid #eee; padding-bottom: 5px;}
-.cartItem{display:flex;justify-content:space-between;align-items:center; margin: 8px 0; padding: 5px 0; border-bottom: 1px solid #f0f0f0;}
-.remove{color:red;cursor:pointer; font-weight: bold; margin-left: 10px;}
-#total { display: block; margin: 15px 0; font-size: 1.3em; color: var(--accent); text-align: right;}
-.lang-switcher{position:fixed;top:80px;right:20px; z-index: 1001; background: rgba(255,255,255,0.8); padding: 5px; border-radius: 8px;}
-.lang-switcher button{padding:8px 12px;margin:2px;border:1px solid #ccc;border-radius:6px;cursor:pointer; background: white; font-weight: bold;}
-.active{background:var(--accent) !important;color:white !important; border-color: var(--accent) !important;}
-.back{display:block;text-align:center;margin-top:30px;color:var(--primary);cursor:pointer; text-decoration: none; font-weight: bold; border-top: 1px solid #eee; padding-top: 15px;}
-.back:hover { color: var(--accent); }
-</style>
+        html { scroll-behavior: smooth; } /* Glatko skrolanje */
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: #333;
+            padding-top: 70px; /* Prostor za fiksni meni */
+        }
+
+        /* NAVIGACIJA */
+        nav {
+            background: var(--dark);
+            color: white;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 90%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        nav h2 { margin: 0; font-size: 1.5em; }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(rgba(0,129,132,0.85), rgba(31,45,54,0.95)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 120px 20px 80px;
+        }
+        header h1 { font-size: 2.5em; margin-bottom: 10px; text-transform: uppercase; }
+        header p { font-size: 1.2em; opacity: 0.9; max-width: 700px; margin: 0 auto 20px; }
+
+        .btn-main {
+            background: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-main:hover { opacity: 0.9; transform: scale(1.05); }
+
+        /* SEKCIJE */
+        .section {
+            background: var(--white);
+            margin: 40px 5%;
+            padding: 30px 5%;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            position: relative;
+        }
+        .section h2 {
+            border-left: 5px solid var(--primary);
+            padding-left: 15px;
+            color: var(--dark);
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        /* GRIDOVI */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            border: 1px solid #eee;
+        }
+
+        /* SHOP */
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .product {
+            background: var(--white);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            text-align: center;
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.3s;
+        }
+        .product:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
+        .product img {
+            width: 100%;
+            height: 130px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        .product h4 { font-size: 15px; margin: 10px 0; height: 35px; overflow: hidden; color: #333; }
+        .price { color: var(--accent); font-weight: bold; font-size: 1.1em; margin: 5px 0 10px; }
+
+        /* DUGMAD U SHOPU (WhatsApp) */
+        .btn-buy {
+            background: #25D366; /* WhatsApp zelena */
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+        .btn-buy:hover { background: #1da851; }
+
+        /* DUGMAD ZA POVRATAK NA POČETAK - SADA VIDLJIVA */
+        .back {
+            display: inline-block;
+            background: var(--primary); /* Teal boja */
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 13px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            border: none;
+        }
+        .back:hover { background: var(--dark); transform: translateY(-2px); }
+
+        /* JEZIČKI PREKIDAČ */
+        .lang-switcher {
+            position: fixed;
+            top: 75px;
+            right: 20px;
+            z-index: 1001;
+            background: rgba(255,255,255,0.8);
+            padding: 5px;
+            border-radius: 8px;
+        }
+        .lang-switcher button {
+            padding: 6px 10px;
+            margin: 2px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            cursor: pointer;
+            background: white;
+            font-weight: bold;
+        }
+        .active { background: var(--accent) !important; color: white !important; border-color: var(--accent) !important; }
+
+        footer {
+            background: var(--dark);
+            color: #bbb;
+            padding: 30px;
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
 </head>
 
 <body>
 
-<nav><h2>Fanatastiko Solutions</h2></nav>
+<div id="pocetna"></div>
+
+<nav>
+    <h2>Fanatastiko Solutions</h2>
+</nav>
 
 <div class="lang-switcher">
-<button onclick="changeLang('bs')" id="lang-bs" class="active">BS</button>
-<button onclick="changeLang('en')" id="lang-en">EN</button>
-<button onclick="changeLang('de')" id="lang-de">DE</button>
+    <button onclick="changeLang('bs')" id="lang-bs" class="active">BS</button>
+    <button onclick="changeLang('en')" id="lang-en">EN</button>
+    <button onclick="changeLang('de')" id="lang-de">DE</button>
 </div>
 
-<header id="home">
-<h1 id="header-title"
-data-bs="Industrijska automatika i programiranje"
-data-en="Industrial automation and programming"
-data-de="Industrieautomatisierung und Programmierung">
-Industrijska automatika i programiranje</h1>
+<header>
+    <h1 data-bs="Industrijska automatika i programiranje"
+        data-en="Industrial automation and programming"
+        data-de="Industrieautomatisierung und Programmierung">
+        Industrijska automatika i programiranje</h1>
 
-<p id="header-desc"
-data-bs="Prodaja Arduino opreme, programiranje, automatizacija i rješavanje tehničkih problema."
-data-en="Arduino sales, programming, automation and technical problem solving."
-data-de="Arduino Verkauf, Programmierung, Automatisierung und Problemlösung.">
-Prodaja Arduino opreme, programiranje, automatizacija i rješavanje tehničkih problema.
-</p>
+    <p data-bs="Prodaja Arduino opreme, programiranje, automatizacija i rješavanje tehničkih problema."
+       data-en="Arduino sales, programming, automation and technical problem solving."
+       data-de="Arduino Verkauf, Programmierung, Automatisierung und Problemlösung.">
+        Prodaja Arduino opreme, programiranje, automatizacija i rješavanje tehničkih problema.
+    </p>
 
-<a href="#shop" class="btn-main">Shop / Trgovina</a>
+    <a href="#shop" class="btn-main">Pogledaj Shop</a>
 </header>
 
-<div class="section" id="about">
-<h2>O nama</h2>
-<p>Specijalizovani smo za industrijsku automatiku, IoT sisteme i rješavanje tehničkih problema. Nudimo profesionalna rješenja od ideje do realizacije. Naš tim stručnjaka osigurava visoku kvalitetu i pouzdanost za vaše proizvodne procese.</p>
-<a class="back" href="#home">⬆ Povratak na početak</a>
+<div class="section" id="o-nama">
+    <h2>O nama</h2>
+    <p>Specijalizovani smo za industrijsku automatiku, IoT sisteme i rješavanje tehničkih problema. Nudimo profesionalna rješenja od ideje do realizacije, optimizirajući vaše proizvodne procese.</p>
+    <a class="back" href="#pocetna">⬆ Povratak na početak</a>
 </div>
 
-<div class="section" id="why">
-<h2>Zašto mi</h2>
-<div class="grid">
-<div class="card">Iskustvo i profesionalnost</div>
-<div class="card">Brza realizacija projekata</div>
-<div class="card">Garancija na rad</div>
-<div class="card">Podrška i održavanje</div>
-</div>
-<a class="back" href="#home">⬆ Povratak na početak</a>
+<div class="section" id="zasto-mi">
+    <h2>Zašto mi</h2>
+    <div class="grid">
+        <div class="card">
+            <h4>Iskustvo i profesionalnost</h4>
+            <p>Višegodišnje iskustvo u radu sa PLC kontrolerima, CNC mašinama i SCADA sistemima.</p>
+        </div>
+        <div class="card">
+            <h4>Brza realizacija</h4>
+            <p>Efikasno planiranje i izvođenje projekata u dogovorenim rokovima.</p>
+        </div>
+        <div class="card">
+            <h4>Garancija i podrška</h4>
+            <p>Pružamo garanciju na sve izvedene radove i dugoročnu tehničku podršku.</p>
+        </div>
+    </div>
+    <a class="back" href="#pocetna">⬆ Povratak na početak</a>
 </div>
 
-<div class="section" id="reviews">
-<h2>Recenzije</h2>
-<div class="grid">
-<div class="card">⭐⭐⭐⭐⭐ Odlična saradnja i profesionalan rad - AutoDjelovi d.o.o.</div>
-<div class="card">⭐⭐⭐⭐⭐ Brzo rješavanje problema na CNC mašini - MetalPlast</div>
-<div class="card">⭐⭐⭐⭐⭐ Preporuka za automatiku i IoT rješenja - SmartHome BiH</div>
-</div>
-<a class="back" href="#home">⬆ Povratak na početak</a>
+<div class="section" id="recenzije">
+    <h2>Recenzije</h2>
+    <div class="grid">
+        <div class="card">⭐⭐⭐⭐⭐ "Izuzetna profesionalnost i brzo rješavanje problema na našoj traci." - <i>Messer BH</i></div>
+        <div class="card">⭐⭐⭐⭐⭐ "Automatizacija skladišta urađena besprijekorno. Sve preporuke." - <i>Bingo d.o.o.</i></div>
+        <div class="card">⭐⭐⭐⭐⭐ "Arduino rješenje za monitoring temperature radi savršeno." - <i>TermoElektron</i></div>
+    </div>
+    <a class="back" href="#pocetna">⬆ Povratak na početak</a>
 </div>
 
 <div class="section" id="shop">
-<h2>Shop / Trgovina</h2>
-<div class="shop-grid" id="product-grid"></div>
-<a class="back" href="#home">⬆ Povratak na početak</a>
+    <h2>Shop / Trgovina</h2>
+    <div class="shop-grid" id="product-grid">
+        </div>
+    <a class="back" href="#pocetna">⬆ Povratak na početak</a>
 </div>
 
-<div id="cartBox">
-<b>🛒 Vaša Korpa</b>
-<div id="cartItems"></div>
-<hr>
-<b id="total">Ukupno: 0 KM</b>
-<button class="btn paypalbtn" onclick="paypal()">Plaćanje PayPal-om</button>
-<button class="btn whatsapp" onclick="whatsapp()">Naruči preko WhatsApp-a</button>
-<button class="btn cod" onclick="cod()">Plaćanje pouzećem (BiH)</button>
-</div>
+<footer>
+    <p>Kontakt: info@fanatastiko.ba | WhatsApp: +387 61 000 000</p>
+    <p>&copy; 2024 Fanatastiko Industrial Solutions. Sva prava zadržana.</p>
+</footer>
 
 <script>
-// Artikli u shopu
-const items=[
-{name:"Arduino Uno R3 (Kompatibilan)",price:15,img:"https://www.arduino.cc/en/uploads/Main/A000066_iso_front.jpg"},
-{name:"ESP32 Dev Board WiFi+BT",price:12,img:"https://m.media-amazon.com/images/I/61NfI7z3SXL._SL1000_.jpg"},
-{name:"Arduino Nano V3.0",price:10,img:"https://m.media-amazon.com/images/I/61m1hI4-qjL._SL1000_.jpg"},
-{name:"Relej Modul 4 Kanala 5V",price:8,img:"https://m.media-amazon.com/images/I/51U6S5m6V1L._SL1000_.jpg"},
-{name:"Senzor Ultrazvučni HC-SR04",price:4,img:"https://m.media-amazon.com/images/I/51pI-E9T+iL._SL1000_.jpg"}
-];
+    // ARTIKLI U SHOPU (22 komada sa pravim slikama)
+    const items=[
+        /* KONTROLERI */
+        {cat: 1, n: "Arduino Uno R3", p: "15 KM", img: "https://www.arduino.cc/en/uploads/Main/A000066_iso_front.jpg"},
+        {cat: 1, n: "Arduino Mega 2560", p: "25 KM", img: "https://www.arduino.cc/en/uploads/Main/A000067_iso_front.jpg"},
+        {cat: 1, n: "Arduino Nano V3", p: "10 KM", img: "https://m.media-amazon.com/images/I/61m1hI4-qjL._SL1000_.jpg"},
+        {cat: 1, n: "ESP32 DevKit V1", p: "12 KM", img: "https://m.media-amazon.com/images/I/61NfI7z3SXL._SL1000_.jpg"},
+        {cat: 1, n: "NodeMCU ESP8266", p: "9 KM", img: "https://m.media-amazon.com/images/I/61I2MlsS89L._SL1000_.jpg"},
+        {cat: 1, n: "Raspberry Pi Pico", p: "14 KM", img: "https://www.raspberrypi.com/app/uploads/2021/01/Pico-Hero.jpg"},
 
-// Učitavanje korpe iz LocalStorage-a
-let cart=JSON.parse(localStorage.getItem("fanatastiko_cart"))||[];
+        /* SENZORI */
+        {cat: 2, n: "Ultrazvučni HC-SR04", p: "4 KM", img: "https://m.media-amazon.com/images/I/51pI-E9T+iL._SL1000_.jpg"},
+        {cat: 2, n: "PIR Senzor Pokreta", p: "5 KM", img: "https://m.media-amazon.com/images/I/51H0O-0A3iL._SL1000_.jpg"},
+        {cat: 2, n: "DHT11 Temp/Vlaga", p: "4 KM", img: "https://m.media-amazon.com/images/I/41-lU3lXJPL.jpg"},
+        {cat: 2, n: "Senzor Nivoa Vode", p: "3 KM", img: "https://m.media-amazon.com/images/I/51YmE-T+8dL._SL1000_.jpg"},
+        {cat: 2, n: "MQ-2 Senzor Plina", p: "6 KM", img: "https://m.media-amazon.com/images/I/61S-qL0qAEL._SL1000_.jpg"},
+        {cat: 2, n: "RFID Reader RC522", p: "10 KM", img: "https://m.media-amazon.com/images/I/7187qMcl7hL._SL1000_.jpg"},
+        {cat: 2, n: "Senzor Pritiska 20kg", p: "18 KM", img: "https://m.media-amazon.com/images/I/51+u7D1D7YL._SL1000_.jpg"},
+        {cat: 2, n: "Infracrveni Senzor", p: "3 KM", img: "https://m.media-amazon.com/images/I/5176Qf90T6L._SL1000_.jpg"},
 
-// Elementi HTML-a
-const productGrid = document.getElementById("product-grid");
-const cartBox = document.getElementById("cartBox");
-const cartItems = document.getElementById("cartItems");
-const totalEl = document.getElementById("total");
+        /* SNAGA I DISPLEJI */
+        {cat: 3, n: "Relej 1 Kanal 5V", p: "4 KM", img: "https://m.media-amazon.com/images/I/51+M8v5Vn1L._SL1000_.jpg"},
+        {cat: 3, n: "Relej 4 Kanala 5V", p: "12 KM", img: "https://m.media-amazon.com/images/I/51U6S5m6V1L._SL1000_.jpg"},
+        {cat: 3, n: "LCD Displej 16x2 I2C", p: "9 KM", img: "https://m.media-amazon.com/images/I/61iVpI9F0SL._SL1000_.jpg"},
+        {cat: 3, n: "Servo Motor SG90", p: "5 KM", img: "https://m.media-amazon.com/images/I/51X5f8Yn6oL._SL1000_.jpg"},
+        {cat: 3, n: "Step Motor + Driver", p: "15 KM", img: "https://m.media-amazon.com/images/I/61XW9vO34oL._SL1000_.jpg"},
+        {cat: 3, n: "L298N Motor Driver", p: "8 KM", img: "https://m.media-amazon.com/images/I/71-0Yt1n9rL._SL1000_.jpg"},
+        {cat: 3, n: "Napajanje 12V 5A", p: "20 KM", img: "https://m.media-amazon.com/images/I/615Dq+BvK7L._SL1000_.jpg"},
+        {cat: 3, n: "Tastatura 4x4", p: "4 KM", img: "https://m.media-amazon.com/images/I/61u9n1L6pFL._SL1000_.jpg"}
+    ];
 
-// Učitavanje proizvoda na stranicu
-function loadProducts(){
-if(!productGrid) return;
-productGrid.innerHTML="";
-items.forEach(i=>{
-productGrid.innerHTML+=`<div class="product">
-<img src="${i.img}" alt="${i.name}">
-<h4>${i.name}</h4>
-<div class="price">${i.price} KM</div>
-<button class="btn cartbtn" onclick="addCart('${i.name}',${i.price})">Dodaj u korpu</button>
-</div>`;
-});
-renderCart(); // Osvježi prikaz korpe
-}
+    // UČITAVANJE PROIZVODA
+    function loadProducts(){
+        const grid = document.getElementById("product-grid");
+        if(!grid) return;
+        
+        items.forEach(i=>{
+            const card = `
+                <div class="product">
+                    <img src="${i.img}" alt="${i.n}">
+                    <h4>${i.n}</h4>
+                    <div class="price">${i.p}</div>
+                    <a href="https://wa.me/38761000000?text=Narucujem: ${i.n}" class="btn-buy">NARUČI (WhatsApp)</a>
+                </div>`;
+            grid.innerHTML += card;
+        });
+    }
 
-// Dodavanje u korpu
-function addCart(name,price){
-cart.push({name,price});
-saveAndRender();
-}
+    // PROMJENA JEZIKA (Samo za Header)
+    function changeLang(lang){
+        // Aktivno dugme
+        document.querySelectorAll(".lang-switcher button").forEach(b=>b.classList.remove('active'));
+        document.getElementById("lang-"+lang).classList.add('active');
 
-// Uklanjanje iz korpe
-function removeItem(index){
-cart.splice(index,1);
-saveAndRender();
-}
+        // Promjena teksta
+        document.querySelectorAll("[data-"+lang+"]").forEach(el=>{
+            el.innerText=el.getAttribute("data-"+lang);
+        });
+    }
 
-// Čuvanje korpe i osvježavanje prikaza
-function saveAndRender(){
-localStorage.setItem("fanatastiko_cart",JSON.stringify(cart));
-renderCart();
-}
-
-// Iscrtavanje korpe
-function renderCart(){
-if(!cartItems || !totalEl || !cartBox) return;
-cartItems.innerHTML="";
-let total=0;
-
-if(cart.length === 0){
-cartBox.style.display = "none"; // Sakrij ako je prazna
-return;
-} else {
-cartBox.style.display = "block"; // Prikaži ako ima artikala
-}
-
-cart.forEach((c,index)=>{
-total+=c.price;
-cartItems.innerHTML+=`<div class="cartItem">
-<span>${c.name} (${c.price} KM)</span>
-<span class="remove" onclick="removeItem(${index})" title="Ukloni">❌</span>
-</div>`;
-});
-totalEl.innerText="Ukupno: "+total+" KM";
-}
-
-// Funkcije za plaćanje
-function paypal(){
-if(cart.length === 0) return alert("Korpa je prazna!");
-let t=0;
-cart.forEach(c=>t+=c.price);
-// Otvara PayPal.me link sa ukupnim iznosom
-window.open("https://paypal.me/fanatastiko/"+t, "_blank");
-}
-
-function whatsapp(){
-if(cart.length === 0) return alert("Korpa je prazna!");
-let text="Nova narudžba sa Fanatastiko sajta:%0A--------------------------%0A";
-cart.forEach((c, i)=>text+=(i+1)+". "+c.name+" ("+c.price+" KM)%0A");
-let t=0;
-cart.forEach(c=>t+=c.price);
-text+="--------------------------%0A*Ukupno: "+t+" KM*%0A%0AMolim vas potvrdite narudžbu i pošaljite podatke za dostavu.";
-// Otvara WhatsApp sa predefinisanom porukom
-window.open("https://wa.me/38761000000?text="+text, "_blank");
-}
-
-function cod(){
-if(cart.length === 0) return alert("Korpa je prazna!");
-alert("Hvala vam na narudžbi. Plaćanje pouzećem je dostupno samo za teritoriju BiH. Naš tim će vas kontaktirati ubrzo putem telefona/e-maila radi potvrde adrese i dostave.");
-cart = []; // Isprazni korpu nakon narudžbe
-saveAndRender();
-}
-
-// Promjena jezika
-function changeLang(lang){
-// Aktivno dugme
-document.querySelectorAll(".lang-switcher button").forEach(b=>b.classList.remove("active"));
-document.getElementById("lang-"+lang).classList.add("active");
-
-// Promjena teksta za elemente koji imaju data atribut
-document.querySelectorAll("[data-"+lang+"]").forEach(el=>{
-el.innerText=el.getAttribute("data-"+lang);
-});
-
-// Promjena teksta dugmadi u shopu (jer se generišu dinamički)
-const buyButtons = document.querySelectorAll('.cartbtn');
-const labels = {
-bs: "Dodaj u korpu",
-en: "Add to Cart",
-de: "In den Warenkorb"
-};
-buyButtons.forEach(b => b.innerText = labels[lang]);
-
-// Promjena teksta korpe
-const codBtn = document.querySelector('.cod');
-const wsBtn = document.querySelector('.whatsapp');
-const ppBtn = document.querySelector('.paypalbtn');
-const cartTitle = document.querySelector('#cartBox b');
-
-if(lang === 'en'){
-cartTitle.innerText = "🛒 Your Cart";
-codBtn.innerText = "Cash on Delivery (BiH)";
-wsBtn.innerText = "Order via WhatsApp";
-ppBtn.innerText = "Pay with PayPal";
-} else if (lang === 'de'){
-cartTitle.innerText = "🛒 Ihr Warenkorb";
-codBtn.innerText = "Nachnahme (BiH)";
-wsBtn.innerText = "Über WhatsApp bestellen";
-ppBtn.innerText = "Mit PayPal bezahlen";
-} else {
-cartTitle.innerText = "🛒 Vaša Korpa";
-codBtn.innerText = "Plaćanje pouzećem (BiH)";
-wsBtn.innerText = "Naruči preko WhatsApp-a";
-ppBtn.innerText = "Plaćanje PayPal-om";
-}
-}
-
-// Pokretanje
-loadProducts();
+    // POKRETANJE NAKON UČITAVANJA STRANICE
+    window.onload = loadProducts;
 </script>
+
 </body>
 </html>
