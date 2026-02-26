@@ -7,35 +7,43 @@
 
 <style>
 :root{--primary:#008184;--dark:#1f2d36;--accent:#d35400;--bg:#f4f7f6;}
-body{margin:0;font-family:Segoe UI,Arial;background:var(--bg);}
-nav{background:var(--dark);color:white;padding:15px 5%;display:flex;justify-content:space-between;align-items:center;position:fixed;width:90%;z-index:1000;}
-header{background:linear-gradient(rgba(0,129,132,.85),rgba(31,45,54,.95)),url('https://images.unsplash.com/photo-1518770660439-4636190af475');background-size:cover;color:white;text-align:center;padding:160px 20px 120px;}
-.btn-main{background:var(--accent);color:white;padding:14px 25px;display:inline-block;margin-top:25px;text-decoration:none;border-radius:8px;font-weight:bold;}
-.section{background:white;margin:60px 5%;padding:50px 5%;border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,.08);}
+html { scroll-behavior: smooth; } /* Glatko skrolanje */
+body{margin:0;font-family:Segoe UI,Arial;background:var(--bg); padding-top: 80px;} /* Prostor za fiksni nav */
+nav{background:var(--dark);color:white;padding:15px 5%;display:flex;justify-content:space-between;align-items:center;position:fixed;top:0;left:0;width:90%;z-index:1000;}
+nav h2 { margin: 0; }
+header{background:linear-gradient(rgba(0,129,132,.85),rgba(31,45,54,.95)),url('https://images.unsplash.com/photo-1518770660439-4636190af475');background-size:cover;background-position:center;color:white;text-align:center;padding:120px 20px 100px;}
+.btn-main{background:var(--accent);color:white;padding:14px 25px;display:inline-block;margin-top:25px;text-decoration:none;border-radius:8px;font-weight:bold;transition: 0.3s;}
+.btn-main:hover { opacity: 0.9; transform: scale(1.05); }
+.section{background:white;margin:40px 5%;padding:40px 5%;border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,.08); position: relative;}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
-.card{background:#fafafa;padding:25px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.06);}
+.card{background:#fafafa;padding:25px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.06); text-align: center; font-weight: bold;}
 .shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:25px;}
-.product{background:white;padding:20px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.08);text-align:center;}
-.product img{width:100%;height:140px;object-fit:contain;}
-.price{color:var(--accent);font-weight:bold;margin:10px 0;}
-.btn{display:block;margin-top:10px;padding:10px;border:none;border-radius:8px;cursor:pointer;color:white;font-weight:bold;}
+.product{background:white;padding:20px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.08);text-align:center; border: 1px solid #eee; display: flex; flex-direction: column; justify-content: space-between;}
+.product img{width:100%;height:140px;object-fit:contain; margin-bottom: 15px;}
+.product h4 { margin: 10px 0; height: 40px; overflow: hidden; }
+.price{color:var(--accent);font-weight:bold;margin:10px 0; font-size: 1.2em;}
+.btn{display:block;width:100%;margin-top:10px;padding:12px;border:none;border-radius:8px;cursor:pointer;color:white;font-weight:bold;font-size: 14px; transition: 0.3s;}
+.btn:hover { opacity: 0.8; }
 .whatsapp{background:#25D366;}
 .cartbtn{background:var(--primary);}
 .paypalbtn{background:#0070ba;}
 .cod{background:#444;}
-#cartBox{position:fixed;right:20px;bottom:20px;background:white;padding:20px;border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,.2);width:280px;max-height:420px;overflow:auto;}
-.cartItem{display:flex;justify-content:space-between;margin:5px 0;}
-.remove{color:red;cursor:pointer;}
-.lang-switcher{position:fixed;top:70px;right:20px;}
-.lang-switcher button{padding:6px 10px;margin:2px;border:none;border-radius:6px;cursor:pointer;}
-.active{background:var(--accent);color:white;}
-.back{display:block;text-align:center;margin-top:20px;color:var(--primary);cursor:pointer;}
+#cartBox{position:fixed;right:20px;bottom:20px;background:white;padding:20px;border-radius:12px;box-shadow:0 5px 25px rgba(0,0,0,.2);width:300px;max-height:400px;overflow:auto; z-index: 999; display: none;} /* Sakriveno dok je prazno */
+#cartBox b { display: block; margin-bottom: 15px; font-size: 1.1em; border-bottom: 2px solid #eee; padding-bottom: 5px;}
+.cartItem{display:flex;justify-content:space-between;align-items:center; margin: 8px 0; padding: 5px 0; border-bottom: 1px solid #f0f0f0;}
+.remove{color:red;cursor:pointer; font-weight: bold; margin-left: 10px;}
+#total { display: block; margin: 15px 0; font-size: 1.3em; color: var(--accent); text-align: right;}
+.lang-switcher{position:fixed;top:80px;right:20px; z-index: 1001; background: rgba(255,255,255,0.8); padding: 5px; border-radius: 8px;}
+.lang-switcher button{padding:8px 12px;margin:2px;border:1px solid #ccc;border-radius:6px;cursor:pointer; background: white; font-weight: bold;}
+.active{background:var(--accent) !important;color:white !important; border-color: var(--accent) !important;}
+.back{display:block;text-align:center;margin-top:30px;color:var(--primary);cursor:pointer; text-decoration: none; font-weight: bold; border-top: 1px solid #eee; padding-top: 15px;}
+.back:hover { color: var(--accent); }
 </style>
 </head>
 
 <body>
 
-<nav><h2>Fanatastiko</h2></nav>
+<nav><h2>Fanatastiko Solutions</h2></nav>
 
 <div class="lang-switcher">
 <button onclick="changeLang('bs')" id="lang-bs" class="active">BS</button>
@@ -44,27 +52,29 @@ header{background:linear-gradient(rgba(0,129,132,.85),rgba(31,45,54,.95)),url('h
 </div>
 
 <header id="home">
-<h1 data-bs="Industrijska automatika i programiranje"
+<h1 id="header-title"
+data-bs="Industrijska automatika i programiranje"
 data-en="Industrial automation and programming"
 data-de="Industrieautomatisierung und Programmierung">
 Industrijska automatika i programiranje</h1>
 
-<p data-bs="Prodaja Arduino opreme, programiranje, automatizacija i rješavanje tehničkih problema."
+<p id="header-desc"
+data-bs="Prodaja Arduino opreme, programiranje, automatizacija i rješavanje tehničkih problema."
 data-en="Arduino sales, programming, automation and technical problem solving."
 data-de="Arduino Verkauf, Programmierung, Automatisierung und Problemlösung.">
 Prodaja Arduino opreme, programiranje, automatizacija i rješavanje tehničkih problema.
 </p>
 
-<a href="#shop" class="btn-main">Shop</a>
+<a href="#shop" class="btn-main">Shop / Trgovina</a>
 </header>
 
-<div class="section">
+<div class="section" id="about">
 <h2>O nama</h2>
-<p>Specijalizovani smo za industrijsku automatiku, IoT sisteme i rješavanje tehničkih problema. Nudimo profesionalna rješenja od ideje do realizacije.</p>
-<a class="back" href="#home">⬆ Povratak na početnu</a>
+<p>Specijalizovani smo za industrijsku automatiku, IoT sisteme i rješavanje tehničkih problema. Nudimo profesionalna rješenja od ideje do realizacije. Naš tim stručnjaka osigurava visoku kvalitetu i pouzdanost za vaše proizvodne procese.</p>
+<a class="back" href="#home">⬆ Povratak na početak</a>
 </div>
 
-<div class="section">
+<div class="section" id="why">
 <h2>Zašto mi</h2>
 <div class="grid">
 <div class="card">Iskustvo i profesionalnost</div>
@@ -72,69 +82,183 @@ Prodaja Arduino opreme, programiranje, automatizacija i rješavanje tehničkih p
 <div class="card">Garancija na rad</div>
 <div class="card">Podrška i održavanje</div>
 </div>
-<a class="back" href="#home">⬆ Povratak na početnu</a>
+<a class="back" href="#home">⬆ Povratak na početak</a>
 </div>
 
-<div class="section">
+<div class="section" id="reviews">
 <h2>Recenzije</h2>
 <div class="grid">
-<div class="card">⭐⭐⭐⭐⭐ Odlična saradnja i profesionalan rad</div>
-<div class="card">⭐⭐⭐⭐⭐ Brzo rješavanje problema</div>
-<div class="card">⭐⭐⭐⭐⭐ Preporuka za automatiku</div>
+<div class="card">⭐⭐⭐⭐⭐ Odlična saradnja i profesionalan rad - AutoDjelovi d.o.o.</div>
+<div class="card">⭐⭐⭐⭐⭐ Brzo rješavanje problema na CNC mašini - MetalPlast</div>
+<div class="card">⭐⭐⭐⭐⭐ Preporuka za automatiku i IoT rješenja - SmartHome BiH</div>
 </div>
-<a class="back" href="#home">⬆ Povratak na početnu</a>
+<a class="back" href="#home">⬆ Povratak na početak</a>
 </div>
 
 <div class="section" id="shop">
-<h2>Shop</h2>
-<div class="shop-grid" id="grid"></div>
+<h2>Shop / Trgovina</h2>
+<div class="shop-grid" id="product-grid"></div>
+<a class="back" href="#home">⬆ Povratak na početak</a>
 </div>
 
 <div id="cartBox">
-<b>🛒 Korpa</b>
+<b>🛒 Vaša Korpa</b>
 <div id="cartItems"></div>
 <hr>
-<b id="total">0 KM</b>
-<button class="btn paypalbtn" onclick="paypal()">PayPal</button>
-<button class="btn whatsapp" onclick="whatsapp()">WhatsApp</button>
-<button class="btn cod" onclick="cod()">Pouzeće BiH</button>
+<b id="total">Ukupno: 0 KM</b>
+<button class="btn paypalbtn" onclick="paypal()">Plaćanje PayPal-om</button>
+<button class="btn whatsapp" onclick="whatsapp()">Naruči preko WhatsApp-a</button>
+<button class="btn cod" onclick="cod()">Plaćanje pouzećem (BiH)</button>
 </div>
 
 <script>
+// Artikli u shopu
 const items=[
-{name:"Arduino Uno R3",price:15,img:"https://www.arduino.cc/en/uploads/Main/A000066_iso_front.jpg"},
-{name:"ESP32 Dev Board",price:12,img:"https://m.media-amazon.com/images/I/61NfI7z3SXL._SL1000_.jpg"},
-{name:"Arduino Nano",price:10,img:"https://m.media-amazon.com/images/I/61m1hI4-qjL._SL1000_.jpg"}
+{name:"Arduino Uno R3 (Kompatibilan)",price:15,img:"https://www.arduino.cc/en/uploads/Main/A000066_iso_front.jpg"},
+{name:"ESP32 Dev Board WiFi+BT",price:12,img:"https://m.media-amazon.com/images/I/61NfI7z3SXL._SL1000_.jpg"},
+{name:"Arduino Nano V3.0",price:10,img:"https://m.media-amazon.com/images/I/61m1hI4-qjL._SL1000_.jpg"},
+{name:"Relej Modul 4 Kanala 5V",price:8,img:"https://m.media-amazon.com/images/I/51U6S5m6V1L._SL1000_.jpg"},
+{name:"Senzor Ultrazvučni HC-SR04",price:4,img:"https://m.media-amazon.com/images/I/51pI-E9T+iL._SL1000_.jpg"}
 ];
-let cart=JSON.parse(localStorage.getItem("cart"))||[];
 
-function load(){
-grid.innerHTML="";
+// Učitavanje korpe iz LocalStorage-a
+let cart=JSON.parse(localStorage.getItem("fanatastiko_cart"))||[];
+
+// Elementi HTML-a
+const productGrid = document.getElementById("product-grid");
+const cartBox = document.getElementById("cartBox");
+const cartItems = document.getElementById("cartItems");
+const totalEl = document.getElementById("total");
+
+// Učitavanje proizvoda na stranicu
+function loadProducts(){
+if(!productGrid) return;
+productGrid.innerHTML="";
 items.forEach(i=>{
-grid.innerHTML+=`<div class="product">
-<img src="${i.img}">
+productGrid.innerHTML+=`<div class="product">
+<img src="${i.img}" alt="${i.name}">
 <h4>${i.name}</h4>
 <div class="price">${i.price} KM</div>
-<button class="btn cartbtn" onclick="addCart('${i.name}',${i.price})">Dodaj</button>
+<button class="btn cartbtn" onclick="addCart('${i.name}',${i.price})">Dodaj u korpu</button>
 </div>`;
 });
+renderCart(); // Osvježi prikaz korpe
+}
+
+// Dodavanje u korpu
+function addCart(name,price){
+cart.push({name,price});
+saveAndRender();
+}
+
+// Uklanjanje iz korpe
+function removeItem(index){
+cart.splice(index,1);
+saveAndRender();
+}
+
+// Čuvanje korpe i osvježavanje prikaza
+function saveAndRender(){
+localStorage.setItem("fanatastiko_cart",JSON.stringify(cart));
 renderCart();
 }
 
-function addCart(name,price){cart.push({name,price});localStorage.setItem("cart",JSON.stringify(cart));renderCart();}
-function removeItem(i){cart.splice(i,1);localStorage.setItem("cart",JSON.stringify(cart));renderCart();}
-function renderCart(){cartItems.innerHTML="";let t=0;cart.forEach((c,i)=>{t+=c.price;cartItems.innerHTML+=`<div class="cartItem">${c.name}<span class="remove" onclick="removeItem(${i})">❌</span></div>`;});total.innerText=t+" KM";}
-function paypal(){let t=0;cart.forEach(c=>t+=c.price);window.open("https://paypal.me/fanatastiko/"+t);}
-function whatsapp(){let text="Narudzba:%0A";cart.forEach(c=>text+=c.name+"%0A");window.open("https://wa.me/38761000000?text="+text);}
-function cod(){alert("Plaćanje pouzećem dostupno za BiH. Bićete kontaktirani.");}
+// Iscrtavanje korpe
+function renderCart(){
+if(!cartItems || !totalEl || !cartBox) return;
+cartItems.innerHTML="";
+let total=0;
 
-function changeLang(lang){
-document.querySelectorAll(".lang-switcher button").forEach(b=>b.classList.remove("active"));
-document.getElementById("lang-"+lang).classList.add("active");
-document.querySelectorAll("[data-"+lang+"]").forEach(el=>el.innerText=el.getAttribute("data-"+lang));
+if(cart.length === 0){
+cartBox.style.display = "none"; // Sakrij ako je prazna
+return;
+} else {
+cartBox.style.display = "block"; // Prikaži ako ima artikala
 }
 
-load();
+cart.forEach((c,index)=>{
+total+=c.price;
+cartItems.innerHTML+=`<div class="cartItem">
+<span>${c.name} (${c.price} KM)</span>
+<span class="remove" onclick="removeItem(${index})" title="Ukloni">❌</span>
+</div>`;
+});
+totalEl.innerText="Ukupno: "+total+" KM";
+}
+
+// Funkcije za plaćanje
+function paypal(){
+if(cart.length === 0) return alert("Korpa je prazna!");
+let t=0;
+cart.forEach(c=>t+=c.price);
+// Otvara PayPal.me link sa ukupnim iznosom
+window.open("https://paypal.me/fanatastiko/"+t, "_blank");
+}
+
+function whatsapp(){
+if(cart.length === 0) return alert("Korpa je prazna!");
+let text="Nova narudžba sa Fanatastiko sajta:%0A--------------------------%0A";
+cart.forEach((c, i)=>text+=(i+1)+". "+c.name+" ("+c.price+" KM)%0A");
+let t=0;
+cart.forEach(c=>t+=c.price);
+text+="--------------------------%0A*Ukupno: "+t+" KM*%0A%0AMolim vas potvrdite narudžbu i pošaljite podatke za dostavu.";
+// Otvara WhatsApp sa predefinisanom porukom
+window.open("https://wa.me/38761000000?text="+text, "_blank");
+}
+
+function cod(){
+if(cart.length === 0) return alert("Korpa je prazna!");
+alert("Hvala vam na narudžbi. Plaćanje pouzećem je dostupno samo za teritoriju BiH. Naš tim će vas kontaktirati ubrzo putem telefona/e-maila radi potvrde adrese i dostave.");
+cart = []; // Isprazni korpu nakon narudžbe
+saveAndRender();
+}
+
+// Promjena jezika
+function changeLang(lang){
+// Aktivno dugme
+document.querySelectorAll(".lang-switcher button").forEach(b=>b.classList.remove("active"));
+document.getElementById("lang-"+lang).classList.add("active");
+
+// Promjena teksta za elemente koji imaju data atribut
+document.querySelectorAll("[data-"+lang+"]").forEach(el=>{
+el.innerText=el.getAttribute("data-"+lang);
+});
+
+// Promjena teksta dugmadi u shopu (jer se generišu dinamički)
+const buyButtons = document.querySelectorAll('.cartbtn');
+const labels = {
+bs: "Dodaj u korpu",
+en: "Add to Cart",
+de: "In den Warenkorb"
+};
+buyButtons.forEach(b => b.innerText = labels[lang]);
+
+// Promjena teksta korpe
+const codBtn = document.querySelector('.cod');
+const wsBtn = document.querySelector('.whatsapp');
+const ppBtn = document.querySelector('.paypalbtn');
+const cartTitle = document.querySelector('#cartBox b');
+
+if(lang === 'en'){
+cartTitle.innerText = "🛒 Your Cart";
+codBtn.innerText = "Cash on Delivery (BiH)";
+wsBtn.innerText = "Order via WhatsApp";
+ppBtn.innerText = "Pay with PayPal";
+} else if (lang === 'de'){
+cartTitle.innerText = "🛒 Ihr Warenkorb";
+codBtn.innerText = "Nachnahme (BiH)";
+wsBtn.innerText = "Über WhatsApp bestellen";
+ppBtn.innerText = "Mit PayPal bezahlen";
+} else {
+cartTitle.innerText = "🛒 Vaša Korpa";
+codBtn.innerText = "Plaćanje pouzećem (BiH)";
+wsBtn.innerText = "Naruči preko WhatsApp-a";
+ppBtn.innerText = "Plaćanje PayPal-om";
+}
+}
+
+// Pokretanje
+loadProducts();
 </script>
 </body>
 </html>
