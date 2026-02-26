@@ -9,7 +9,153 @@
 </div>
 
 <div class="card">
-<h3 data-key="w2t">🏭 Industrijsko iskustvo</h3>
+<h3 data-key="<!DOCTYPE html>
+<html lang="bs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arduino Industrial Shop</title>
+
+<style>
+:root { --teal:#008184; --dark:#273b47; --orange:#d35400; --bg:#f4f7f6;}
+html{scroll-behavior:smooth;}
+body{font-family:'Segoe UI',sans-serif;margin:0;background:var(--bg);color:#333;}
+
+nav{background:var(--dark);padding:10px 5%;display:flex;justify-content:space-between;align-items:center;position:fixed;width:90%;top:0;z-index:2000;}
+.nav-links a{color:white;margin:0 15px;text-decoration:none;font-weight:bold;font-size:14px;text-transform:uppercase;}
+.nav-links a:hover{color:var(--teal);}
+.lang-switcher button{background:#444;color:white;border:none;padding:6px 12px;cursor:pointer;border-radius:4px;font-weight:bold;margin-left:5px;}
+.lang-switcher button.active{background:var(--teal);}
+
+header{background:linear-gradient(rgba(0,129,132,0.8),rgba(39,59,71,0.9)),url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1350&q=80');
+background-size:cover;background-position:center;padding:160px 20px 100px;text-align:center;color:white;}
+header h1{font-size:3em;margin-bottom:10px;}
+header p{font-size:1.2em;}
+
+.container{padding:60px 5%;}
+.section-title{text-align:center;color:var(--dark);margin-bottom:40px;text-transform:uppercase;font-size:2em;}
+.about-text{max-width:900px;margin:auto;text-align:center;line-height:1.8;font-size:1.1em;}
+
+.why-us-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;margin-top:40px;}
+.why-us-item{background:white;padding:30px;border-radius:12px;text-align:center;box-shadow:0 4px 8px rgba(0,0,0,0.05);transition:0.3s;}
+.why-us-item:hover{transform:translateY(-5px);}
+.why-us-icon{font-size:2.5em;color:var(--teal);margin-bottom:15px;}
+
+#katalog{background:white;border-radius:16px;margin-top:-50px;padding:50px;}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:25px;}
+.card{background:white;border-radius:12px;padding:20px;text-align:center;box-shadow:0 4px 8px rgba(0,0,0,0.06);}
+.card img{width:100%;height:160px;object-fit:contain;margin-bottom:15px;}
+.price{color:var(--orange);font-weight:bold;font-size:20px;margin:10px 0;}
+.btn-buy{background:#25D366;color:white;padding:12px;text-decoration:none;border-radius:8px;font-weight:bold;display:block;}
+.btn-buy:hover{background:#1da851;}
+
+footer{background:var(--dark);color:#bbb;padding:40px 5%;text-align:center;margin-top:60px;}
+.footer-logo{color:white;font-size:1.3em;font-weight:bold;margin-bottom:15px;display:block;}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="nav-links">
+<a href="#pocetna" id="nav-home">Početna</a>
+<a href="#o-nama" id="nav-about">O Nama</a>
+<a href="#katalog" id="nav-catalog">Katalog</a>
+<a href="#recenzije" id="nav-reviews">Recenzije</a>
+<a href="#kontakt" id="nav-contact">Kontakt</a>
+</div>
+<div class="lang-switcher">
+<button onclick="changeLang('bs')" id="lang-bs" class="active">BS</button>
+<button onclick="changeLang('en')" id="lang-en">EN</button>
+<button onclick="changeLang('de')" id="lang-de">DE</button>
+</div>
+</nav>
+
+<header id="pocetna">
+<h1 id="header-title">ARDUINO & INDUSTRIAL SHOP</h1>
+<p id="header-desc">Kompletna ponuda sa preko 20 artikala</p>
+</header>
+
+<div class="container">
+<section id="o-nama">
+<h2 class="section-title" id="about-title">O Nama</h2>
+<div class="about-text" id="about-text-content">
+Specijalizovana online prodavnica za Arduino i industrijske komponente.
+Nudimo kvalitet, tehničku podršku i brzu isporuku širom BiH i EU.
+</div>
+</section>
+
+<section id="zasto-mi">
+<h2 class="section-title" id="why-title">Zašto Mi?</h2>
+<div class="why-us-grid">
+
+<div class="why-us-item"><div class="why-us-icon">✓</div><h3>Kvalitet</h3><p>Testirane i pouzdane komponente.</p></div>
+<div class="why-us-item"><div class="why-us-icon">🚀</div><h3>Brzina</h3><p>Brza obrada narudžbi.</p></div>
+<div class="why-us-item"><div class="why-us-icon">🛠</div><h3>Podrška</h3><p>Stručna tehnička pomoć.</p></div>
+<div class="why-us-item"><div class="why-us-icon">💰</div><h3>Najbolje cijene</h3><p>Povoljna i konkurentna ponuda.</p></div>
+<div class="why-us-item"><div class="why-us-icon">📦</div><h3>Sigurna isporuka</h3><p>Sigurno pakovanje i praćenje.</p></div>
+<div class="why-us-item"><div class="why-us-icon">⭐</div><h3>Provjeren kvalitet</h3><p>Saradnja sa provjerenim dobavljačima.</p></div>
+
+</div>
+</section>
+</div>
+
+<div class="container" id="katalog">
+<h2 class="section-title">Katalog</h2>
+<div class="shop-grid" id="grid"></div>
+</div>
+
+<div class="container">
+<section id="recenzije">
+<h2 class="section-title">Recenzije</h2>
+<p style="text-align:center;">★★★★★ "Odlična usluga i brza dostava!"</p>
+<p style="text-align:center;">★★★★★ "Sve komponente rade savršeno."</p>
+<p style="text-align:center;">★★★★★ "Sigurno ću ponovo naručiti."</p>
+</section>
+</div>
+
+<footer id="kontakt">
+<span class="footer-logo">Arduino Industrial Shop</span>
+<p>Kontakt: info@arduinomaster.ba | WhatsApp: +38761000000</p>
+<p>© 2024 Arduino Industrial Shop</p>
+</footer>
+
+<script>
+const items=[
+{name:"Arduino Uno R3",price:"15 KM",img:"https://www.arduino.cc/en/uploads/Main/A000066_iso_front.jpg"},
+{name:"Arduino Mega 2560",price:"25 KM",img:"https://www.arduino.cc/en/uploads/Main/A000067_iso_front.jpg"},
+{name:"ESP32 DevKit",price:"12 KM",img:"https://m.media-amazon.com/images/I/61NfI7z3SXL._SL1000_.jpg"}
+];
+
+function loadItems(lang="bs"){
+document.getElementById("grid").innerHTML="";
+let waText={bs:"Narucujem",en:"I want to order",de:"Ich möchte bestellen"};
+
+items.forEach(i=>{
+document.getElementById("grid").innerHTML+=`
+<div class="card">
+<img src="${i.img}">
+<h4>${i.name}</h4>
+<div class="price">${i.price}</div>
+<a href="https://wa.me/38761000000?text=${waText[lang]}: ${i.name}" class="btn-buy">
+${lang==="bs"?"NARUČI":"ORDER"}
+</a>
+</div>`;
+});
+}
+
+function changeLang(lang){
+document.documentElement.lang=lang;
+document.querySelectorAll(".lang-switcher button").forEach(b=>b.classList.remove("active"));
+document.getElementById("lang-"+lang).classList.add("active");
+loadItems(lang);
+}
+
+window.onload=function(){changeLang("bs");}
+</script>
+
+</body>
+</html>w2t">🏭 Industrijsko iskustvo</h3>
 <p data-key="w2">Višegodišnje iskustvo u industrijskoj automatizaciji i IoT sistemima.</p>
 </div>
 
@@ -37,3 +183,4 @@
 
 <a href="#home" class="back">⬆ Povratak</a>
 </section>
+
