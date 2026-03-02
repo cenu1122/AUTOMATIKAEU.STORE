@@ -260,6 +260,59 @@
             margin-top: 50px;
         }
         footer p { margin: 5px 0; font-size: 0.9em; }
+        .product-gallery {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.product-gallery img {
+    width: 48%;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.product-gallery img:hover {
+    transform: scale(1.05);
+}
+
+.main-product-img {
+    cursor: pointer;
+}
+
+/* LIGHTBOX */
+#lightbox {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+}
+
+#lightbox span {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+}
     </style>
     <!-- NJEMAČKI SEO SCHEMA -->
 <script type="application/ld+json">
@@ -509,35 +562,23 @@
 
 <script>
     // ARTIKLI U SHOPU (22 komada sa pravim slikama)
-    const items=[
-        /* KONTROLERI */
-        {cat: 1, n: "Arduino Uno R3", p: "15 KM", img: "https://www.arduino.cc/en/uploads/Main/A000066_iso_front.jpg"},
-        {cat: 1, n: "Arduino Mega 2560", p: "25 KM", img: "https://www.arduino.cc/en/uploads/Main/A000067_iso_front.jpg"},
-        {cat: 1, n: "Arduino Nano V3", p: "10 KM", img: "https://m.media-amazon.com/images/I/61m1hI4-qjL._SL1000_.jpg"},
-        {cat: 1, n: "ESP32 DevKit V1", p: "12 KM", img: "https://m.media-amazon.com/images/I/61NfI7z3SXL._SL1000_.jpg"},
-        {cat: 1, n: "NodeMCU ESP8266", p: "9 KM", img: "https://m.media-amazon.com/images/I/61I2MlsS89L._SL1000_.jpg"},
-        {cat: 1, n: "Raspberry Pi Pico", p: "14 KM", img: "https://www.raspberrypi.com/app/uploads/2021/01/Pico-Hero.jpg"},
-
-        /* SENZORI */
-        {cat: 2, n: "Ultrazvučni HC-SR04", p: "4 KM", img: "https://m.media-amazon.com/images/I/51pI-E9T+iL._SL1000_.jpg"},
-        {cat: 2, n: "PIR Senzor Pokreta", p: "5 KM", img: "https://m.media-amazon.com/images/I/51H0O-0A3iL._SL1000_.jpg"},
-        {cat: 2, n: "DHT11 Temp/Vlaga", p: "4 KM", img: "https://m.media-amazon.com/images/I/41-lU3lXJPL.jpg"},
-        {cat: 2, n: "Senzor Nivoa Vode", p: "3 KM", img: "https://m.media-amazon.com/images/I/51YmE-T+8dL._SL1000_.jpg"},
-        {cat: 2, n: "MQ-2 Senzor Plina", p: "6 KM", img: "https://m.media-amazon.com/images/I/61S-qL0qAEL._SL1000_.jpg"},
-        {cat: 2, n: "RFID Reader RC522", p: "10 KM", img: "https://m.media-amazon.com/images/I/7187qMcl7hL._SL1000_.jpg"},
-        {cat: 2, n: "Senzor Pritiska 20kg", p: "18 KM", img: "https://m.media-amazon.com/images/I/51+u7D1D7YL._SL1000_.jpg"},
-        {cat: 2, n: "Infracrveni Senzor", p: "3 KM", img: "https://m.media-amazon.com/images/I/5176Qf90T6L._SL1000_.jpg"},
-
-        /* SNAGA I DISPLEJI */
-        {cat: 3, n: "Relej 1 Kanal 5V", p: "4 KM", img: "https://m.media-amazon.com/images/I/51+M8v5Vn1L._SL1000_.jpg"},
-        {cat: 3, n: "Relej 4 Kanala 5V", p: "12 KM", img: "https://m.media-amazon.com/images/I/51U6S5m6V1L._SL1000_.jpg"},
-        {cat: 3, n: "LCD Displej 16x2 I2C", p: "9 KM", img: "https://m.media-amazon.com/images/I/61iVpI9F0SL._SL1000_.jpg"},
-        {cat: 3, n: "Servo Motor SG90", p: "5 KM", img: "https://m.media-amazon.com/images/I/51X5f8Yn6oL._SL1000_.jpg"},
-        {cat: 3, n: "Step Motor + Driver", p: "15 KM", img: "https://m.media-amazon.com/images/I/61XW9vO34oL._SL1000_.jpg"},
-        {cat: 3, n: "L298N Motor Driver", p: "8 KM", img: "https://m.media-amazon.com/images/I/71-0Yt1n9rL._SL1000_.jpg"},
-        {cat: 3, n: "Napajanje 12V 5A", p: "20 KM", img: "https://m.media-amazon.com/images/I/615Dq+BvK7L._SL1000_.jpg"},
-        {cat: 3, n: "Tastatura 4x4", p: "4 KM", img: "https://m.media-amazon.com/images/I/61u9n1L6pFL._SL1000_.jpg"}
-    ];
+   const items=[
+{n:"Arduino Uno R3",p:"15 KM",imgs:[
+"https://www.arduino.cc/en/uploads/Main/A000066_iso_front.jpg",
+"https://store.arduino.cc/cdn/shop/products/A000066_01.iso_643x483.jpg",
+"https://m.media-amazon.com/images/I/61jH-lZVfFL._SL1000_.jpg"
+]},
+{n:"Arduino Mega 2560",p:"25 KM",imgs:[
+"https://www.arduino.cc/en/uploads/Main/A000067_iso_front.jpg",
+"https://store.arduino.cc/cdn/shop/products/A000067_01.iso_643x483.jpg",
+"https://m.media-amazon.com/images/I/61S-PJp6D1L._SL1000_.jpg"
+]},
+{n:"ESP32 DevKit V1",p:"12 KM",imgs:[
+"https://m.media-amazon.com/images/I/61NfI7z3SXL._SL1000_.jpg",
+"https://m.media-amazon.com/images/I/71v3cA5b4+L._SL1000_.jpg",
+"https://m.media-amazon.com/images/I/61o5n9vYgDL._SL1000_.jpg"
+]}
+];
 
     // UČITAVANJE PROIZVODA (Dodan parametar za jezik)
    function loadProducts(lang='bs'){
@@ -601,9 +642,13 @@
         changeLang('bs');
     };
 </script>
-
+<div id="lightbox">
+    <span onclick="closeLightbox()">×</span>
+    <img id="lightbox-img">
+</div>
 </body>
 </html>
+
 
 
 
