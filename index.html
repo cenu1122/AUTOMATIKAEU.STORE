@@ -251,24 +251,24 @@
             align-items: center;
             gap: 10px;
         }
-        .lang-switcher button {
-            padding: 5px 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            cursor: pointer;
-            background: white;
-            font-weight: bold;
-            font-size: 12px;
-        }
-        .active { background: var(--accent) !important; color: white !important; border-color: var(--accent) !important; }
+       .lang-switcher button,
+.lang-switcher a {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    background: white;
+    font-weight: bold;
+    font-size: 12px;
+    text-decoration: none;
+    color: black;
+}
 
-        footer {
-            background: var(--dark);
-            color: #bbb;
-            padding: 40px;
-            text-align: center;
-            margin-top: 50px;
-        }
+.lang-switcher .active {
+    background: var(--accent) !important;
+    color: white !important;
+    border-color: var(--accent) !important;
+}
         footer p { margin: 5px 0; font-size: 0.9em; }
         .product-gallery {
     display: flex;
@@ -324,45 +324,13 @@
     cursor: pointer;
 }
     </style>
-    <!-- NJEMAČKI SEO SCHEMA -->
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "name": "Automatika EU",
- "url": "https://automatikaeu.store",
- "areaServed": {
-   "@type": "Country",
-   "name": "Germany"
- },
- "availableLanguage": ["de","en","bs"]
-}
-</script>
+  
 
 <!-- HREFLANG BOOST -->
-<link rel="alternate" hreflang="de" href="https://automatikaeu.store/">
-<link rel="alternate" hreflang="en" href="https://automatikaeu.store/">
-<link rel="alternate" hreflang="bs" href="https://automatikaeu.store/">
-<link rel="alternate" hreflang="x-default" href="https://automatikaeu.store/">
-
-<!-- NJEMAČKI META SEO -->
-<meta name="description" lang="de" content="Arduino Shop, PLC Programmierung, Industrieautomation und IoT Lösungen in Europa. Automatika EU.">
-<meta name="keywords" lang="de" content="Arduino kaufen, PLC Programmierung, Industrieautomation, IoT Lösungen, Arduino Shop Europa">
-
-<!-- EU PRODUCT SCHEMA -->
-<script type="application/ld+json">
-{
- "@context": "https://schema.org/",
- "@type": "Product",
- "name": "Arduino Uno",
- "offers": {
-   "@type": "Offer",
-   "priceCurrency": "EUR",
-   "price": "13",
-   "availability": "https://schema.org/InStock",
-   "areaServed": "EU"
- }
-}
-</script>
+<link rel="alternate" hreflang="bs" href="https://www.automatikaeu.store/">
+<link rel="alternate" hreflang="en" href="https://www.automatikaeu.store/en/">
+<link rel="alternate" hreflang="de" href="https://www.automatikaeu.store/de/">
+<link rel="alternate" hreflang="x-default" href="https://www.automatikaeu.store/">
 
 <!-- INDUSTRIAL AUTOMATION EU SCHEMA -->
 <script type="application/ld+json">
@@ -377,20 +345,6 @@
 }
 </script>
 
-<!-- GERMAN KEYWORD SCHEMA -->
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "DefinedTermSet",
- "name": "German SEO Keywords",
- "hasDefinedTerm": [
-   {"@type":"DefinedTerm","name":"Arduino kaufen"},
-   {"@type":"DefinedTerm","name":"PLC Programmierung"},
-   {"@type":"DefinedTerm","name":"Industrieautomation"},
-   {"@type":"DefinedTerm","name":"IoT Lösungen"}
- ]
-}
-</script>
 </head>
 
 <body>
@@ -400,14 +354,7 @@
 <nav>
     <h2 id="nav-logo">Automatika EU</h2>
     
-    <div class="nav-links">
-            <a href="#home">Početna</a>
-            <a href="#shop">Shop</a>
-            <a href="#services">Usluge</a>
-            <a href="#contact">Kontakt</a>
-        </div>
-
-        <!-- OVDJE IDE nav-right -->
+           <!-- OVDJE IDE nav-right -->
         <div class="nav-links">
         <a href="#home">Početna</a>
         <a href="#shop">Shop</a>
@@ -419,10 +366,10 @@
         <div class="lang-switcher">
             <button onclick="changeLang('bs')" id="lang-bs" class="active">BS</button>
             <button onclick="changeLang('en')" id="lang-en">EN</button>
-            <button onclick="changeLang('de')" id="lang-de">DE</button>
+            <a href="/de/" id="lang-de">DE</a>
         </div>
     </div>
-</nav>
+    </nav>
 
 <header>
     <h1 id="header-title"
@@ -584,6 +531,10 @@
     <p>info@automatikaeu.store | WhatsApp: +387 64 4179 441</p>
 </footer>
 
+<div id="lightbox">
+    <span onclick="closeLightbox()">×</span>
+    <img id="lightbox-img">
+</div>
 <script>
     // ARTIKLI U SHOPU (22 komada sa pravim slikama)
    const items=[
@@ -643,34 +594,33 @@
 }
 
     // PROMJENA JEZIKA (Sada prevodi apsolutno sve, uključujući i meni u vrhu)
-    function changeLang(lang){
-        // 1. Ažuriraj aktivno stanje dugmadi za odabir jezika
-        document.querySelectorAll(".lang-switcher button").forEach(b=>b.classList.remove('active'));
-        document.getElementById("lang-"+lang).classList.add('active');
+  function changeLang(lang){
 
-        // 2. Prevedi sve statične tekstove koji imaju data atribut
-        document.querySelectorAll("[data-"+lang+"]").forEach(el=>{
-            el.innerText=el.getAttribute("data-"+lang);
-        });
+    // ukloni active sa svih
+    document.querySelectorAll(".lang-switcher button, .lang-switcher a")
+        .forEach(el => el.classList.remove("active"));
 
-        // 3. Prevedi stavke u navigacionom meniju (jer su i oni data atributi)
-        // (Ovo je već uključeno u koraku 2, ali za svaki slučaj)
+    // dodaj active na kliknuti
+    const activeBtn = document.getElementById("lang-"+lang);
+    if(activeBtn) activeBtn.classList.add("active");
 
-        // 4. Ponovo učitaj proizvode da bi preveo dugmad u shopu
-        loadProducts(lang);
-    }
+    // prevedi sve elemente sa data atributima
+    document.querySelectorAll("[data-"+lang+"]").forEach(el=>{
+        el.innerText = el.getAttribute("data-"+lang);
+    });
 
-    // POKRETANJE NAKON UČITAVANJA STRANICE (Zadani jezik BS)
-    window.onload = function() {
-        changeLang('bs');
-    };
+    // ponovo učitaj proizvode
+    loadProducts(lang);
+}
+
+// pokreni BS kad se stranica učita
+window.onload = function(){
+    changeLang('bs');
+};
 </script>
-<div id="lightbox">
-    <span onclick="closeLightbox()">×</span>
-    <img id="lightbox-img">
-</div>
 </body>
 </html>
+
 
 
 
