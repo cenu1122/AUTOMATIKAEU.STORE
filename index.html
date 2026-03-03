@@ -541,7 +541,7 @@
 </div>
 <script>
     // ARTIKLI U SHOPU (22 komada sa pravim slikama)
-  // ARTIKLI U SHOPU
+ // ARTIKLI U SHOPU
 const items = [
     {
         n: "Arduino Uno R3",
@@ -617,71 +617,66 @@ const items = [
         ]
     }
 ];
-    // UČITAVANJE PROIZVODA (Dodan parametar za jezik)
-   function loadProducts(lang='bs'){
-    const grid=document.getElementById("product-grid");
-    grid.innerHTML="";
 
-    const btnLabels={
-        bs:"NARUČI (WhatsApp)",
-        en:"ORDER (WhatsApp)",
-        de:"BESTELLEN (WhatsApp)"
+function loadProducts(lang='bs'){
+    const grid = document.getElementById("product-grid");
+    if(!grid) return;
+    grid.innerHTML = "";
+
+    const btnLabels = {
+        bs: "NARUČI (WhatsApp)",
+        en: "ORDER (WhatsApp)",
+        de: "BESTELLEN (WhatsApp)"
     };
 
-    items.forEach((i,index)=>{
-
-        let galleryImages=i.imgs.map(img=>`
-            <img src="${img}" onclick="changeMainImage(${index},'${img}')">
+    items.forEach((i, index) => {
+        let galleryImages = i.imgs.map(img => `
+            <img src="${img}" onclick="changeMainImage(${index},'${img}')" onerror="this.style.display='none'">
         `).join("");
 
-        const card=`
+        const card = `
         <div class="product">
-            <img src="${i.imgs[0]}" 
-                 id="main-img-${index}"
-                 class="main-product-img"
-                 onclick="openLightbox('${i.imgs[0]}')">
-
-            <div class="product-gallery">
-                ${galleryImages}
-            </div>
-
+            <img src="${i.imgs[0]}" id="main-img-${index}" class="main-product-img" onclick="openLightbox('${i.imgs[0]}')">
+            <div class="product-gallery">${galleryImages}</div>
             <h4>${i.n}</h4>
             <div class="price">${i.p}</div>
-            <a href="https://wa.me/387644179441?text=Narucujem: ${i.n}" 
-               class="btn-buy">${btnLabels[lang]}</a>
+            <a href="https://wa.me/387644179441?text=Narucujem: ${i.n}" class="btn-buy">${btnLabels[lang]}</a>
         </div>`;
-
-        grid.innerHTML+=card;
+        grid.innerHTML += card;
     });
 }
 
-    // PROMJENA JEZIKA (Sada prevodi apsolutno sve, uključujući i meni u vrhu)
-  function changeLang(lang){
+function changeMainImage(index, src) {
+    document.getElementById(`main-img-${index}`).src = src;
+}
 
-    // ukloni active sa svih
-    document.querySelectorAll(".lang-switcher button, .lang-switcher a")
-        .forEach(el => el.classList.remove("active"));
+function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+}
 
-    // dodaj active na kliknuti
+function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+}
+
+function changeLang(lang){
+    document.querySelectorAll(".lang-switcher button, .lang-switcher a").forEach(el => el.classList.remove("active"));
     const activeBtn = document.getElementById("lang-"+lang);
     if(activeBtn) activeBtn.classList.add("active");
 
-    // prevedi sve elemente sa data atributima
     document.querySelectorAll("[data-"+lang+"]").forEach(el=>{
         el.innerText = el.getAttribute("data-"+lang);
     });
-
-    // ponovo učitaj proizvode
     loadProducts(lang);
 }
 
-// pokreni BS kad se stranica učita
 window.onload = function(){
     changeLang('bs');
 };
 </script>
 </body>
 </html>
+
 
 
 
