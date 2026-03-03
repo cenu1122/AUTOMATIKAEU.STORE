@@ -28,7 +28,7 @@
  "url": "https://www.automatikaeu.store",
  "logo": "https://www.automatikaeu.store/logo.png",
  "email": "info@automatikaeu.store",
- "telephone": "+38761000000"
+ "telephone": "+387644179441"
 }
 </script>
 
@@ -83,10 +83,11 @@
 }
         nav h2 { margin: 0; font-size: 1.6em; font-weight: bold; text-transform: uppercase; }
         
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
+       .nav-links {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
         .nav-links a {
             color: white;
             text-decoration: none;
@@ -508,7 +509,7 @@
         <div class="instr-item">
             <h4>🖺 Dokumentacija: PLC S7-1200</h4>
             <p>Uvodna dokumentacija i primjeri spajanja za Siemens S7-1200 PLC kontroler.</p>
-            <a href="#" class="btn-download">Preuzmi PDF (2.5 MB)</a>
+           <a href="#" class="btn-download">Preuzmi PDF (2.5 MB)</a>
         </div>
     </div>
     <a class="back btn-back" href="#pocetna" data-bs="⬆ Povratak na početak" data-en="⬆ Back to Top" data-de="⬆ Zurück nach oben">⬆ Povratak na početak</a>
@@ -540,24 +541,82 @@
 </div>
 <script>
     // ARTIKLI U SHOPU (22 komada sa pravim slikama)
-   const items=[
-{n:"Arduino Uno R3",p:"15 KM",imgs:[
-"https://www.arduino.cc/en/uploads/Main/A000066_iso_front.jpg",
-"https://store.arduino.cc/cdn/shop/products/A000066_01.iso_643x483.jpg",
-"https://m.media-amazon.com/images/I/61jH-lZVfFL._SL1000_.jpg"
-]},
-{n:"Arduino Mega 2560",p:"25 KM",imgs:[
-"https://www.arduino.cc/en/uploads/Main/A000067_iso_front.jpg",
-"https://store.arduino.cc/cdn/shop/products/A000067_01.iso_643x483.jpg",
-"https://m.media-amazon.com/images/I/61S-PJp6D1L._SL1000_.jpg"
-]},
-{n:"ESP32 DevKit V1",p:"12 KM",imgs:[
-"https://m.media-amazon.com/images/I/61NfI7z3SXL._SL1000_.jpg",
-"https://m.media-amazon.com/images/I/71v3cA5b4+L._SL1000_.jpg",
-"https://m.media-amazon.com/images/I/61o5n9vYgDL._SL1000_.jpg"
-]}
+  // ARTIKLI U SHOPU
+const items = [
+    {
+        n: "Arduino Uno R3",
+        p: "15 KM",
+        imgs: [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Arduino_Uno_-_R3.jpg/1200px-Arduino_Uno_-_R3.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/7/71/Arduino-uno-perspective-view.jpg"
+        ]
+    },
+    {
+        n: "Arduino Mega 2560",
+        p: "25 KM",
+        imgs: [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Arduino_Mega_2560_Rev3_Front.jpg/1200px-Arduino_Mega_2560_Rev3_Front.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/2/25/Arduino_Mega_2560_Rev3_Back.jpg"
+        ]
+    },
+    {
+        n: "ESP32 DevKit V1",
+        p: "12 KM",
+        imgs: [
+            "https://upload.wikimedia.org/wikipedia/commons/2/20/ESP32_DevKit_V1.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Espressif_ESP32_WROOM-32_Module_Top_View.jpg/1200px-Espressif_ESP32_WROOM-32_Module_Top_View.jpg"
+        ]
+    },
+    {
+        n: "Arduino Nano V3",
+        p: "10 KM",
+        imgs: [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Arduino_Nano.jpg/1200px-Arduino_Nano.jpg"
+        ]
+    },
+    {
+        n: "Senzor HC-SR04",
+        p: "5 KM",
+        imgs: [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/HC-SR04_Ultrasonic_Sensor.jpg/1200px-HC-SR04_Ultrasonic_Sensor.jpg"
+        ]
+    },
+    {
+        n: "Senzor DHT11",
+        p: "4 KM",
+        imgs: [
+            "https://upload.wikimedia.org/wikipedia/commons/3/30/DHT11_Sensor.jpg"
+        ]
+    },
+    {
+        n: "Servo Motor SG90",
+        p: "5 KM",
+        imgs: [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/TowerPro_SG90_Servo_front.jpg/1200px-TowerPro_SG90_Servo_front.jpg"
+        ]
+    },
+    {
+        n: "LCD 16x2 I2C",
+        p: "10 KM",
+        imgs: [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Lcd_display_16x2.jpg/1200px-Lcd_display_16x2.jpg"
+        ]
+    },
+    {
+        n: "Breadboard 830",
+        p: "7 KM",
+        imgs: [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Breadboard_schematic.jpg/1200px-Breadboard_schematic.jpg"
+        ]
+    },
+    {
+        n: "Relej Modul 5V",
+        p: "4 KM",
+        imgs: [
+            "https://upload.wikimedia.org/wikipedia/commons/0/07/SRD-05VDC-SL-C_Relay.jpg"
+        ]
+    }
 ];
-
     // UČITAVANJE PROIZVODA (Dodan parametar za jezik)
    function loadProducts(lang='bs'){
     const grid=document.getElementById("product-grid");
@@ -623,6 +682,7 @@ window.onload = function(){
 </script>
 </body>
 </html>
+
 
 
 
