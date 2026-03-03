@@ -1,141 +1,214 @@
+Evo kompletnog, spojenog HTML koda za tvoju njemačku stranicu (/de/). Kod je očišćen, profesionalan i sadrži sve sekcije koje smo dogovorili: O nama, Zašto mi, Usluge i Recenzije.
+HTML
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPS Programmierung & Industrieautomation Deutschland | Automatika EU</title>
 
-<title>PLC Programmierung & Industrieautomation Deutschland | Automatika EU</title>
+    <meta name="description" content="Professionelle SPS/PLC Programmierung, TIA Portal, SCADA Systeme und Industrieautomation in Deutschland. Ihr Partner für effiziente Produktion.">
+    
+    <meta property="og:title" content="Industrieautomation & SPS Programmierung">
+    <meta property="og:description" content="Maßgeschneiderte Automatisierungslösungen für deutsche Industrieunternehmen.">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://www.automatikaeu.store/de/">
 
-<meta name="description" content="Professionelle PLC Programmierung, SCADA Systeme und Industrieautomation für Unternehmen in Deutschland. SPS Service, Inbetriebnahme und technische Unterstützung.">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --dark: #0f172a;
+            --light-bg: #f4f6f9;
+            --white: #ffffff;
+            --text: #334155;
+        }
 
-<meta property="og:title" content="PLC Programmierung & Industrieautomation Deutschland">
-<meta property="og:description" content="Automatisierungslösungen für Produktionsanlagen und industrielle Systeme.">
-<meta property="og:type" content="website">
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--light-bg);
+        }
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Industrieautomation Deutschland">
-<meta name="twitter:description" content="Professionelle SPS Programmierung und Industrieautomation für Unternehmen.">
+        /* Header & Hero */
+        header {
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), 
+                        url('https://images.unsplash.com/photo-1581092121797-57448f359867?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
 
-<link rel="canonical" href="https://automatikaeu.store/de/">
+        header h1 { font-size: 2.5em; margin-bottom: 20px; }
+        header p { font-size: 1.2em; max-width: 800px; margin: 0 auto 30px; }
 
-<style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f4f6f9;
-    color: #222;
-}
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .btn:hover { background: #1d4ed8; transform: translateY(-2px); }
 
-header {
-    background: #0f172a;
-    color: white;
-    padding: 80px 20px;
-    text-align: center;
-}
+        /* Sections */
+        section {
+            padding: 70px 10%;
+            max-width: 1200px;
+            margin: auto;
+        }
 
-header h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
+        h2 {
+            font-size: 2em;
+            color: var(--dark);
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
 
-header p {
-    font-size: 18px;
-    max-width: 800px;
-    margin: auto;
-}
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            margin: 15px auto 0;
+        }
 
-.btn {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 15px 30px;
-    background: #2563eb;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 5px;
-}
+        /* Grid System */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
 
-section {
-    padding: 60px 20px;
-    max-width: 1100px;
-    margin: auto;
-}
+        .card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); }
+        .card h3 { color: var(--dark); margin-top: 0; }
 
-h2 {
-    margin-bottom: 30px;
-    font-size: 28px;
-}
+        /* Why Us Section */
+        .why-us { background: #e2e8f0; }
 
-.services {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-}
+        /* Review Card */
+        .review-card {
+            border-left: 5px solid var(--primary);
+            font-style: italic;
+        }
+        .review-author {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            font-style: normal;
+            color: var(--primary);
+        }
 
-.service-box {
-    background: white;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
 
-footer {
-    background: #0f172a;
-    color: white;
-    text-align: center;
-    padding: 30px;
-}
-</style>
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.8em; }
+            section { padding: 40px 5%; }
+        }
+    </style>
 </head>
-
 <body>
 
 <header>
-    <h1>Industrieautomation & PLC Programmierung in Deutschland</h1>
-    <p>Professionelle Automatisierungslösungen für Produktionsanlagen, Maschinenbau und industrielle Systeme.</p>
+    <h1>Industrieautomation & SPS Programmierung</h1>
+    <p>Wir optimieren Ihre Produktionsprozesse mit modernster Steuerungstechnik und individuellen IoT-Lösungen.</p>
     <a href="#kontakt" class="btn">Kostenlose Beratung anfragen</a>
 </header>
 
-<section>
+<section id="uber-uns">
+    <h2>Über uns</h2>
+    <p style="text-align: center; max-width: 900px; margin: 0 auto;">
+        Automatika EU ist Ihr kompetenter Partner für maßgeschneiderte Lösungen in der Automatisierungstechnik. 
+        Mit tiefgreifendem Know-how in der <strong>SPS-Programmierung (Siemens TIA Portal, Step 7)</strong> 
+        und der Integration von <strong>SCADA-Systemen</strong> unterstützen wir Unternehmen dabei, 
+        ihre Produktionsprozesse effizienter und zukunftssicherer zu gestalten.
+    </p>
+</section>
+
+<section id="leistungen">
     <h2>Unsere Leistungen</h2>
-    <div class="services">
-        <div class="service-box">
-            <h3>PLC / SPS Programmierung</h3>
-            <p>Siemens S7, TIA Portal, Optimierung bestehender Steuerungen und Entwicklung neuer Automatisierungslösungen.</p>
+    <div class="grid">
+        <div class="card">
+            <h3>SPS / PLC Programmierung</h3>
+            <p>Spezialisiert auf Siemens S7-1200/1500, TIA Portal und die Optimierung bestehender Steuerungsarchitekturen.</p>
         </div>
-
-        <div class="service-box">
-            <h3>SCADA & HMI Systeme</h3>
-            <p>Visualisierung, Prozessüberwachung und Integration moderner Bedienoberflächen für industrielle Anlagen.</p>
+        <div class="card">
+            <h3>HMI & SCADA</h3>
+            <p>Intuitive Bedienoberflächen und umfassende Prozessvisualisierung für maximale Kontrolle über Ihre Anlagen.</p>
         </div>
-
-        <div class="service-box">
-            <h3>Inbetriebnahme & Service</h3>
-            <p>Vor-Ort Unterstützung, Schaltschrank Integration, Fehleranalyse und technische Wartung.</p>
+        <div class="card">
+            <h3>Industrielles IoT</h3>
+            <p>Vernetzung von Maschinen mittels Arduino, ESP32 und Raspberry Pi zur Echtzeit-Datenanalyse.</p>
         </div>
     </div>
 </section>
 
-<section>
+<section class="why-us">
     <h2>Warum Automatika EU?</h2>
-    <ul>
-        <li>Technische Expertise in Industrieautomation</li>
-        <li>Schnelle und effiziente Projektumsetzung</li>
-        <li>Flexible Zusammenarbeit mit Unternehmen</li>
-        <li>Erfahrung in Produktions- und Maschinenanlagen</li>
-    </ul>
+    <div class="grid">
+        <div class="card">
+            <h3>Fachkompetenz</h3>
+            <p>Langjährige Erfahrung in der Systemintegration und tiefes Verständnis für komplexe industrielle Abläufe.</p>
+        </div>
+        <div class="card">
+            <h3>Effizienz</h3>
+            <p>Schnelle Fehlersuche und zielgerichtete Projektumsetzung, um Stillstandzeiten auf ein Minimum zu reduzieren.</p>
+        </div>
+        <div class="card">
+            <h3>Zuverlässigkeit</h3>
+            <p>Wir bieten langfristigen Support und Wartung, damit Ihre Systeme dauerhaft stabil laufen.</p>
+        </div>
+    </div>
 </section>
 
-<section id="kontakt">
+<section id="referenzen">
+    <h2>Referenzen</h2>
+    <div class="grid">
+        <div class="card review-card">
+            <p>"Hervorragende Arbeit bei der SPS-Fehlersuche. Unser Problem wurde innerhalb weniger Stunden gelöst. Sehr kompetent!"</p>
+            <span class="review-author">– Industrie-Service GmbH</span>
+        </div>
+        <div class="card review-card">
+            <p>"Die neue SCADA-Visualisierung hat unsere Prozessüberwachung deutlich vereinfacht. Absolute Empfehlung."</p>
+            <span class="review-author">– Technik Nord AG</span>
+        </div>
+    </div>
+</section>
+
+<section id="kontakt" style="text-align: center;">
     <h2>Kontaktieren Sie uns</h2>
-    <p>Email: info@automatikaeu.store</p>
-    <p>Telefon / WhatsApp: +49 XXX XXXXXXX</p>
-    <p>Wir beantworten Ihre Anfrage innerhalb von 24 Stunden.</p>
+    <p>Haben Sie ein technisches Anliegen oder planen Sie ein neues Projekt?</p>
+    <p><strong>Email:</strong> info@automatikaeu.store</p>
+    <p><strong>WhatsApp / Tel:</strong> +387 64 417 9441</p>
+    <br>
+    <a href="mailto:info@automatikaeu.store" class="btn">Nachricht senden</a>
 </section>
 
 <footer>
-    © 2026 Automatika EU – Industrieautomation Deutschland
+    <p>&copy; 2026 Automatika EU – Industrieautomation Deutschland</p>
+    <p style="font-size: 0.8em; opacity: 0.6;">Impressum | Datenschutz</p>
 </footer>
 
 </body>
