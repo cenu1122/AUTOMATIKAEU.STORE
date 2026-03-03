@@ -1,231 +1,259 @@
-Evo kompletnog koda. Sada je stranica podijeljena na dva glavna stuba: Automatika i Reduktori. Dodao sam specifične njemačke termine za reparaciju mašinstva, kao i sekcije "O nama", "Zašto mi" i "Recenzije" koje pokrivaju oba sektora.
-
-Sve je spakovano u jedan fajl, spremno za objavu.
-HTML
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Industrie-Service: Automation & Getriebereparatur | Automatika EU</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --primary-blue: #2563eb; /* Boja za automatiku */
-            --primary-orange: #d35400; /* Boja za reduktore/mehaniku */
-            --dark: #0f172a;
-            --light: #f4f6f9;
+            --blue-clr: #2563eb;
+            --orange-clr: #d35400;
+            --dark-navy: #0f172a;
             --white: #ffffff;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
             line-height: 1.6;
             color: #334155;
-            background: var(--light);
+            background: #f8fafc;
             scroll-behavior: smooth;
         }
 
-        /* NAVIGACIJA */
+        /* --- FIKSNA NAVIGACIJA SA DUGMADI ZA SEKTRE --- */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: var(--dark);
-            color: white;
+            background: var(--dark-navy);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 5%;
+            padding: 10px 5%;
             box-sizing: border-box;
-            z-index: 2000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            z-index: 10000;
+            border-bottom: 3px solid var(--blue-clr);
         }
 
-        .nav-links { display: flex; gap: 20px; align-items: center; }
-        .nav-links a { color: white; text-decoration: none; font-size: 0.85em; text-transform: uppercase; font-weight: bold; transition: 0.3s; }
-        .nav-links a:hover { color: var(--primary-blue); }
-        .btn-nav { background: var(--primary-blue); padding: 8px 15px; border-radius: 4px; }
+        .logo {
+            font-weight: 800;
+            color: white;
+            font-size: 1.2em;
+            letter-spacing: 1px;
+        }
 
-        /* HERO SEKCIJA */
+        /* DUGMAD U VRHU - KLJUČNA IZMJENA */
+        .header-switcher {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 800;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .nav-btn-blue {
+            background: var(--blue-clr);
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+        }
+
+        .nav-btn-orange {
+            background: var(--orange-clr);
+            box-shadow: 0 4px 10px rgba(211, 84, 0, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        /* --- HERO SEKCIJA --- */
         header {
-            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), 
-                        url('https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&w=1920&q=80');
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
+                        url('https://images.unsplash.com/photo-1581092121797-57448f359867?auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
-            color: white;
-            padding: 160px 20px 100px;
+            height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            color: white;
+            padding: 100px 20px 0;
         }
 
-        header h1 { font-size: 3em; margin-bottom: 20px; text-transform: uppercase; }
-        header p { font-size: 1.3em; max-width: 900px; margin: 0 auto 40px; }
+        header h1 { font-size: 3.2em; margin-bottom: 15px; text-transform: uppercase; }
+        header p { font-size: 1.3em; max-width: 800px; margin-bottom: 40px; }
 
-        .btn-group { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-        .btn {
-            padding: 18px 35px;
-            color: white;
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .big-btn {
+            padding: 22px 45px;
+            border-radius: 8px;
             text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
+            color: white;
+            font-weight: 800;
+            font-size: 1.2em;
             transition: 0.3s;
             min-width: 280px;
-            font-size: 1.1em;
             text-align: center;
-            border: none;
-            cursor: pointer;
         }
-        .btn-blue { background: var(--primary-blue); box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4); }
-        .btn-orange { background: var(--primary-orange); box-shadow: 0 4px 15px rgba(211, 84, 0, 0.4); }
-        .btn:hover { transform: translateY(-3px); brightness: 1.1; }
 
-        /* SEKCIJE */
-        section { padding: 80px 10%; max-width: 1200px; margin: auto; }
-        h2 { font-size: 2.2em; color: var(--dark); text-align: center; margin-bottom: 50px; text-transform: uppercase; }
-        h2::after { content: ''; display: block; width: 80px; height: 4px; background: var(--primary-blue); margin: 15px auto; }
-        .orange-line::after { background: var(--primary-orange) !important; }
-
+        /* --- SEKCIJE --- */
+        section { padding: 90px 10%; }
+        .title { text-align: center; margin-bottom: 50px; }
+        .title h2 { font-size: 2.5em; color: var(--dark-navy); margin-bottom: 10px; }
+        
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { background: var(--white); padding: 40px; border-radius: 12px; box-shadow: 0 5px 25px rgba(0,0,0,0.05); transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); }
-        .card h3 { margin-top: 0; color: var(--dark); }
+        .card { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
 
-        /* O NAMA */
-        .about-text { text-align: center; max-width: 850px; margin: 0 auto; font-size: 1.15em; line-height: 1.8; }
+        /* BOJE ZA SEKCIJE */
+        #automation { background: #f1f5f9; }
+        #gearbox { background: #1e293b; color: white; }
+        #gearbox h2 { color: white; }
 
-        /* RECENZIJE */
-        .review { border-left: 5px solid var(--primary-blue); padding-left: 20px; font-style: italic; }
-        .review-orange { border-left-color: var(--primary-orange); }
+        footer { background: #0f172a; color: white; text-align: center; padding: 50px 20px; }
 
-        footer { background: var(--dark); color: white; text-align: center; padding: 60px 20px; }
-
-        /* WHATSAPP */
-        .whatsapp { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; padding: 15px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px; background: #25d366; 
+            color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; 
+            font-weight: bold; z-index: 11000; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
 
         @media (max-width: 768px) {
+            .header-switcher { gap: 5px; }
+            .nav-btn { padding: 8px 10px; font-size: 0.7em; }
             header h1 { font-size: 2em; }
-            section { padding: 50px 5%; }
-            .btn { width: 100%; }
         }
     </style>
 </head>
 <body>
 
 <nav>
-    <div style="font-weight: bold; font-size: 1.5em;">AUTOMATIKA <span style="color: var(--primary-blue);">EU</span></div>
-    <div class="nav-links">
-        <a href="#about">Über uns</a>
-        <a href="#automation">Automation</a>
-        <a href="#getriebe">Getriebe</a>
-        <a href="#contact" class="btn-nav">KONTAKT</a>
+    <div class="logo">AUTOMATIKA <span style="color:var(--blue-clr)">EU</span></div>
+    
+    <div class="header-switcher">
+        <a href="#automation" class="nav-btn nav-btn-blue">
+            <span>💻</span> SPS & AUTOMATION
+        </a>
+        <a href="#gearbox" class="nav-btn nav-btn-orange">
+            <span>⚙️</span> GETRIEBE-SERVICE
+        </a>
     </div>
 </nav>
 
 <header>
-    <h1>Industrieservice & Technik</h1>
-    <p>Ihr zuverlässiger Partner für SPS-Programmierung und professionelle Reparatur von Industriegetrieben aller Art.</p>
-    <div class="btn-group">
-        <a href="#automation" class="btn btn-blue">SPS & AUTOMATISIERUNG</a>
-        <a href="#getriebe" class="btn btn-orange">GETRIEBEREPARATUR</a>
+    <h1>Industrieservice Deutschland</h1>
+    <p>Spezialisierte Lösungen für Steuerungstechnik und mechanische Getriebesanierung.</p>
+    
+    <div class="hero-btns">
+        <a href="#automation" class="big-btn nav-btn-blue">SPS PROGRAMMIERUNG</a>
+        <a href="#gearbox" class="big-btn nav-btn-orange">GETRIEBEREPARATUR</a>
     </div>
 </header>
 
-<section id="about">
-    <h2>Über uns</h2>
-    <div class="about-text">
-        <p>Automatika EU vereint zwei Kernkompetenzen der modernen Industrie: <strong>Präzise Automation</strong> und <strong>robuste Mechanik</strong>. Wir unterstützen Unternehmen in Deutschland bei der Optimierung ihrer Produktionsanlagen – sei es durch die Programmierung hochmoderner Steuerungen oder durch die fachgerechte Sanierung mechanischer Antriebskomponenten.</p>
-        <p>Unser Team garantiert höchste Qualität, schnellen Vor-Ort-Service und technische Exzellenz.</p>
+<section id="about" style="text-align: center;">
+    <div class="title">
+        <h2>Über Uns</h2>
+        <div style="width:80px; height:4px; background:var(--blue-clr); margin:auto;"></div>
     </div>
+    <p style="max-width: 900px; margin: 0 auto; font-size: 1.2em;">
+        Wir bieten Ihnen das Beste aus zwei Welten: Die Präzision der <strong>modernen SPS-Programmierung</strong> und die Zuverlässigkeit <strong>traditioneller Getriebetechnik</strong>. Ein Partner für Ihre gesamte Anlage.
+    </p>
 </section>
 
-<section id="automation" style="background: #fff;">
-    <h2>Industrieautomation</h2>
+<section id="automation">
+    <div class="title">
+        <h2 style="color:var(--blue-clr)">SPS & Automation</h2>
+    </div>
     <div class="grid">
-        <div class="card">
-            <h3>SPS Programmierung</h3>
-            <p>Spezialisierung auf Siemens TIA Portal, S7-1200/1500 und Beckhoff. Wir programmieren Ihre Anlage für maximale Effizienz.</p>
+        <div class="card" style="border-top: 6px solid var(--blue-clr);">
+            <h3>SPS / PLC Service</h3>
+            <p>Siemens S7-1200, 1500, TIA Portal. Wir lösen Softwareprobleme und programmieren neue Abläufe direkt vor Ort.</p>
         </div>
-        <div class="card">
-            <h3>HMI & SCADA</h3>
-            <p>Moderne Visualisierungslösungen für eine intuitive Überwachung und Steuerung Ihrer Fertigungsprozesse.</p>
+        <div class="card" style="border-top: 6px solid var(--blue-clr);">
+            <h3>HMI Visualisierung</h3>
+            <p>Bedienerfreundliche Oberflächen für Maschinen und Anlagen zur optimalen Prozesskontrolle.</p>
         </div>
-        <div class="card">
-            <h3>Retrofitting</h3>
-            <p>Modernisierung alter Steuerungen auf den neuesten Stand der Technik für eine längere Lebensdauer Ihrer Maschinen.</p>
+        <div class="card" style="border-top: 6px solid var(--blue-clr);">
+            <h3>Schaltschrank-Service</h3>
+            <p>Prüfung, Erweiterung und Modernisierung Ihrer elektrischen Steuerungsschränke.</p>
         </div>
     </div>
 </section>
 
-<section id="getriebe">
-    <h2 class="orange-line">Getriebeservice & Sanierung</h2>
+<section id="gearbox">
+    <div class="title">
+        <h2 style="color:var(--orange-clr)">Getriebereparatur</h2>
+    </div>
     <div class="grid">
-        <div class="card" style="border-top: 5px solid var(--primary-orange);">
-            <h3>Instandsetzung</h3>
-            <p>Reparatur und Generalüberholung von Stirnrad-, Schnecken- und Planetengetrieben bekannter Marken (SEW, Flender, etc.).</p>
+        <div class="card" style="background: rgba(255,255,255,0.05); border-top: 6px solid var(--orange-clr);">
+            <h3 style="color:white;">Sanierung</h3>
+            <p>Fachgerechte Reparatur von Stirnrad-, Schnecken- und Planetengetrieben aller Hersteller (SEW, Flender, Nord).</p>
         </div>
-        <div class="card" style="border-top: 5px solid var(--primary-orange);">
-            <h3>Schadensanalyse</h3>
-            <p>Präzise Diagnose von Lagerschäden, Zahnradverschleiß und Dichtungsproblemen zur Vermeidung von Folgeschäden.</p>
+        <div class="card" style="background: rgba(255,255,255,0.05); border-top: 6px solid var(--orange-clr);">
+            <h3 style="color:white;">Ersatzteile</h3>
+            <p>Austausch von Lagern, Wellendichtringen und Zahnrädern für eine maximale Lebensdauer.</p>
         </div>
-        <div class="card" style="border-top: 5px solid var(--primary-orange);">
-            <h3>Ersatzteilservice</h3>
-            <p>Schnelle Beschaffung oder Anfertigung von hochwertigen Komponenten für alle gängigen Getriebetypen.</p>
-        </div>
-    </div>
-</section>
-
-<section style="background: #e2e8f0;">
-    <h2>Warum Automatika EU?</h2>
-    <div class="grid">
-        <div class="card">
-            <h3>Interdisziplinär</h3>
-            <p>Wir verstehen das Zusammenspiel von Steuerung und Mechanik. Das spart Ihnen Zeit bei der Fehlersuche.</p>
-        </div>
-        <div class="card">
-            <h3>Minimale Stillstandzeit</h3>
-            <p>Wir arbeiten schnell und zielorientiert, damit Ihre Produktion so kurz wie möglich unterbrochen wird.</p>
-        </div>
-        <div class="card">
-            <h3>24/7 Support</h3>
-            <p>Für unsere Industriekunden bieten wir schnelle technische Unterstützung bei Notfällen.</p>
+        <div class="card" style="background: rgba(255,255,255,0.05); border-top: 6px solid var(--orange-clr);">
+            <h3 style="color:white;">Notfall-Service</h3>
+            <p>Schnelle Hilfe bei Getriebeschäden, um teure Produktionsausfälle so kurz wie möglich zu halten.</p>
         </div>
     </div>
 </section>
 
-<section id="reviews">
-    <h2>Referenzen</h2>
-    <div class="grid">
-        <div class="card review">
-            <p>"Hervorragende SPS-Anpassung in Rekordzeit. Die Anlage läuft stabiler als je zuvor."</p>
-            <strong>– TechLogistik GmbH</strong>
+<section id="faq">
+    <div class="title"><h2>Häufig gestellte Fragen</h2></div>
+    <div style="max-width: 800px; margin: 0 auto;">
+        <div class="card" style="margin-bottom: 20px;">
+            <strong>Wie schnell sind Sie vor Ort?</strong>
+            <p>In dringenden Fällen sind wir innerhalb von 24 Stunden bei Ihnen im Betrieb.</p>
         </div>
-        <div class="card review review-orange">
-            <p>"Unser Flender-Getriebe wurde innerhalb von 48 Stunden komplett saniert. Top Service!"</p>
-            <strong>– Schwermaschinen Bau AG</strong>
+        <div class="card">
+            <strong>Welche Marken unterstützen Sie?</strong>
+            <p>Wir arbeiten herstellerunabhängig – von Siemens und Beckhoff bis hin zu SEW, Flender und Bonfiglioli.</p>
         </div>
     </div>
 </section>
 
-<section id="contact">
-    <h2>Kontaktieren Sie uns</h2>
-    <div class="card" style="max-width: 700px; margin: 0 auto; text-align: center;">
-        <p>Haben Sie ein technisches Problem oder benötigen Sie ein Angebot?</p>
-        <p style="font-size: 1.3em;"><strong>E-Mail:</strong> info@automatikaeu.store</p>
-        <p style="font-size: 1.3em;"><strong>WhatsApp / Tel:</strong> +387 64 417 9441</p>
-        <br>
-        <a href="mailto:info@automatikaeu.store" class="btn btn-blue" style="min-width: 200px;">ANFRAGE SENDEN</a>
+<section id="contact" style="background: var(--dark-navy); color: white; text-align: center;">
+    <h2>Direkter Kontakt</h2>
+    <p>Schreiben Sie uns oder rufen Sie uns direkt an:</p>
+    <div style="margin-top: 40px; display: flex; flex-direction: column; gap: 15px;">
+        <span style="font-size: 1.8em; font-weight: 800; color: var(--blue-clr);">info@automatikaeu.store</span>
+        <span style="font-size: 1.8em; font-weight: 800; color: var(--orange-clr);">+387 64 417 9441</span>
     </div>
 </section>
 
 <footer>
-    <p>&copy; 2026 Automatika EU – Ihr Partner für Automation & Getriebetechnik</p>
-    <p style="font-size: 0.8em; opacity: 0.5;">Impressum | Datenschutz | Haftungsausschluss</p>
+    <p>&copy; 2026 Automatika EU – Ihr Technik-Partner in Deutschland</p>
+    <p style="opacity: 0.5; font-size: 0.8em;">Impressum | Datenschutz | Service</p>
 </footer>
 
-<a href="https://wa.me/387644179441" class="whatsapp" target="_blank">
-    WhatsApp Support
+<a href="https://wa.me/387644179441" class="whatsapp-float" target="_blank">
+    💬 WhatsApp Kontakt
 </a>
 
 </body>
