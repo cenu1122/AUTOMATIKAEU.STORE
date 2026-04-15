@@ -1,162 +1,148 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Mechanical Calculators - Hydraulic, Power & Torque</title>
+<title>Industrijski Kalkulatori - Hidraulika, Snaga i Moment</title>
 
 <style>
-body {
-    font-family: Arial;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    text-align: center;
-    color: white;
-    transition: 0.3s;
-}
-
-.dark {
-    background: #121212;
-}
-
-.container {
-    background: white;
-    color: black;
-    padding: 20px;
-    margin: 30px auto;
-    width: 90%;
-    max-width: 400px;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
-
-button {
-    background: #667eea;
-    color: white;
-    border: none;
-    padding: 10px;
-    margin: 5px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #5a67d8;
-}
-
-.calc { display: none; }
-.active { display: block; }
-
-input, select {
-    width: 90%;
-    padding: 8px;
-    margin: 5px;
-}
-
-.text {
-    max-width: 700px;
-    margin: 20px auto;
-    text-align: left;
-}
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: linear-gradient(135deg, #2c3e50, #4ca1af);
+        text-align: center;
+        color: white;
+        margin: 0;
+        padding: 20px;
+    }
+    .dark { background: #1a1a1a; }
+    .container {
+        background: white;
+        color: #333;
+        padding: 25px;
+        margin: 20px auto;
+        width: 95%;
+        max-width: 500px;
+        border-radius: 12px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    }
+    .formula-box {
+        background: #f4f7f6;
+        padding: 10px;
+        border-left: 5px solid #667eea;
+        margin: 15px 0;
+        font-style: italic;
+    }
+    button {
+        background: #667eea;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        margin: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    button:hover { background: #5a67d8; }
+    .calc { display: none; }
+    .active { display: block; }
+    input, select {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    .text-section {
+        max-width: 800px;
+        margin: 40px auto;
+        text-align: left;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        border-radius: 15px;
+        line-height: 1.6;
+    }
+    h2, h3 { color: #ffcc00; }
+    .unit-label { font-size: 0.9em; color: #666; }
 </style>
 </head>
-
 <body>
 
-<h1>⚙️ Mechanical Calculators</h1>
+<h1>⚙️ Industrijski Tehnički Kalkulatori</h1>
+<p>Alati za inženjering i održavanje postrojenja</p>
 <button onclick="toggleDark()">🌙 Dark Mode</button>
 
 <div class="container">
+    <div style="margin-bottom: 20px;">
+        <button onclick="showCalc('hydraulic')">Hidraulika</button>
+        <button onclick="showCalc('power')">Snaga</button>
+        <button onclick="showCalc('torque')">Moment</button>
+    </div>
 
-<button onclick="showCalc('hydraulic')">Hidraulika</button>
-<button onclick="showCalc('power')">Snaga</button>
-<button onclick="showCalc('torque')">Moment</button>
+    <div id="hydraulic" class="calc active">
+        <h3>Hidraulična Sila (Cilindar)</h3>
+        <div class="formula-box">Formula: $$F = p \cdot A$$</div>
+        <label class="unit-label">Pritisak (p):</label>
+        <input type="number" id="pressure" placeholder="Unesite pritisak">
+        <select id="unit">
+            <option value="bar">Bar (10^5 Pa)</option>
+            <option value="pa">Pascal (Pa)</option>
+        </select>
+        <label class="unit-label">Površina klipa (A) u m²:</label>
+        <input type="number" id="area" placeholder="Površina (m²)">
+        <button onclick="calcHydraulic()">Izračunaj Silu</button>
+        <h4 id="resultHydraulic" style="color: #2c3e50;"></h4>
+    </div>
 
-<!-- HIDRAULIKA -->
-<div id="hydraulic" class="calc active">
-    <h3>Hydraulic Force Calculator</h3>
-    <p>Formula: F = p × A</p>
+    <div id="power" class="calc">
+        <h3>Mehanička Snaga</h3>
+        <div class="formula-box">Formula: $$P = F \cdot v$$</div>
+        <label class="unit-label">Sila (F) u N:</label>
+        <input type="number" id="force" placeholder="Sila (N)">
+        <label class="unit-label">Brzina (v) u m/s:</label>
+        <input type="number" id="velocity" placeholder="Brzina (m/s)">
+        <button onclick="calcPower()">Izračunaj Snagu</button>
+        <h4 id="resultPower" style="color: #2c3e50;"></h4>
+    </div>
 
-    <input type="number" id="pressure" placeholder="Pressure"><br>
-
-    <select id="unit">
-      <option value="pa">Pascal (Pa)</option>
-      <option value="bar">Bar</option>
-    </select><br>
-
-    <input type="number" id="area" placeholder="Area (m²)"><br>
-    <button onclick="calcHydraulic()">Calculate</button>
-    <p id="resultHydraulic"></p>
+    <div id="torque" class="calc">
+        <h3>Moment Sile</h3>
+        <div class="formula-box">Formula: $$M = F \cdot r$$</div>
+        <label class="unit-label">Sila (F) u N:</label>
+        <input type="number" id="force2" placeholder="Sila (N)">
+        <label class="unit-label">Krak poluge (r) u m:</label>
+        <input type="number" id="radius" placeholder="Radijus/Krak (m)">
+        <button onclick="calcTorque()">Izračunaj Moment</button>
+        <h4 id="resultTorque" style="color: #2c3e50;"></h4>
+    </div>
 </div>
 
-<!-- SNAGA -->
-<div id="power" class="calc">
-    <h3>Power Calculator</h3>
-    <p>Formula: P = F × v</p>
+<div class="text-section">
+    <h2>Tehnička Dokumentacija i Primjena</h2>
+    <p>
+        Ovi kalkulatori su dizajnirani kao pomoćno sredstvo pri projektovanju i održavanju 
+        mehaničkih sistema. Kao inženjer sa dugogodišnjim iskustvom, znam koliko je važna 
+        brza provjera parametara na terenu.
+    </p>
 
-    <input type="number" id="force" placeholder="Force (N)">
-    <input type="number" id="velocity" placeholder="Velocity (m/s)">
-    <button onclick="calcPower()">Calculate</button>
-    <p id="resultPower"></p>
-</div>
+    <h3>1. Hidraulični sistemi</h3>
+    <p>
+        Kod proračuna hidrauličnih presa (poput <strong>apkant presa</strong>), osnovni parametar je sila koju klip 
+        ostvaruje. Formula $$F = p \cdot A$$ pokazuje da sila raste linearno sa pritiskom 
+        ili povećanjem površine poprečnog presjeka klipa. 
+    </p>
 
-<!-- MOMENT -->
-<div id="torque" class="calc">
-    <h3>Torque Calculator</h3>
-    <p>Formula: M = F × r</p>
+    <h3>2. Snaga i Rad</h3>
+    <p>
+        Snaga ($P$) definiše koliko brzo se rad obavlja. U industrijskoj automatici, ovo je ključno 
+        za dimenzionisanje elektromotora i pneumatskih pogona.
+    </p>
 
-    <input type="number" id="force2" placeholder="Force (N)">
-    <input type="number" id="radius" placeholder="Radius (m)">
-    <button onclick="calcTorque()">Calculate</button>
-    <p id="resultTorque"></p>
-</div>
-
-</div>
-
-<!-- SEO TEKST -->
-<div class="text">
-<h2>About Mechanical Calculators</h2>
-<p>
-This website provides simple and effective mechanical engineering calculators
-for students, engineers, and professionals. These tools are designed to help you
-quickly calculate important physical values such as force, power, and torque.
-</p>
-
-<h3>Hydraulic Force Calculator</h3>
-<p>
-The hydraulic force calculator uses the formula F = p × A, where pressure (p)
-multiplied by area (A) gives the resulting force (F). This is widely used in
-hydraulic systems such as presses, cylinders, and heavy machinery.
-</p>
-
-<h3>Power Calculator</h3>
-<p>
-Power is calculated using the formula P = F × v. It represents the rate at which
-work is done. This calculator is useful for determining motor power, mechanical
-output, and efficiency in various systems.
-</p>
-
-<h3>Torque Calculator</h3>
-<p>
-Torque is calculated using M = F × r. It represents rotational force and is used
-in engines, shafts, and mechanical components where rotation is involved.
-</p>
-
-<h3>Why Use These Tools?</h3>
-<p>
-These calculators are simple, fast, and accessible online. Whether you are a
-student learning engineering concepts or a professional working in industry,
-these tools can save time and improve accuracy.
-</p>
-
-<h3>Applications</h3>
-<ul>
-<li>Hydraulic systems</li>
-<li>Mechanical engineering</li>
-<li>Automotive industry</li>
-<li>Industrial machinery</li>
-<li>Engineering education</li>
-</ul>
+    <h3>3. Moment (Torque)</h3>
+    <p>
+        Vrtilni moment je od presudnog značaja kod vijčanih veza i prenosnih mehanizama. 
+        Pravilno pritezanje i proračun krakova poluge sprečava havarije na mašinama.
+    </p>
 </div>
 
 <script>
@@ -173,27 +159,23 @@ function calcHydraulic() {
     let p = document.getElementById('pressure').value;
     let A = document.getElementById('area').value;
     let unit = document.getElementById('unit').value;
-
-    if(unit === "bar"){
-        p = p * 100000;
-    }
-
+    if(unit === "bar"){ p = p * 100000; }
     let F = p * A;
-    document.getElementById('resultHydraulic').innerText = "Force: " + F + " N";
+    document.getElementById('resultHydraulic').innerText = "Rezultat: " + F.toLocaleString() + " N";
 }
 
 function calcPower() {
     let F = document.getElementById('force').value;
     let v = document.getElementById('velocity').value;
     let P = F * v;
-    document.getElementById('resultPower').innerText = "Power: " + P + " W";
+    document.getElementById('resultPower').innerText = "Rezultat: " + P.toLocaleString() + " W (Vata)";
 }
 
 function calcTorque() {
     let F = document.getElementById('force2').value;
     let r = document.getElementById('radius').value;
     let M = F * r;
-    document.getElementById('resultTorque').innerText = "Torque: " + M + " Nm";
+    document.getElementById('resultTorque').innerText = "Rezultat: " + M.toLocaleString() + " Nm";
 }
 </script>
 
