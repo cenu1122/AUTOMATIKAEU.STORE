@@ -1,1 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Mechanical Calculators - Hydraulic, Power & Torque</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    text-align: center;
+    color: white;
+    transition: 0.3s;
+}
+
+.dark {
+    background: #121212;
+}
+
+.container {
+    background: white;
+    color: black;
+    padding: 20px;
+    margin: 30px auto;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+button {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #5a67d8;
+}
+
+.calc { display: none; }
+.active { display: block; }
+
+input, select {
+    width: 90%;
+    padding: 8px;
+    margin: 5px;
+}
+
+.text {
+    max-width: 700px;
+    margin: 20px auto;
+    text-align: left;
+}
+</style>
+</head>
+
+<body>
+
+<h1>⚙️ Mechanical Calculators</h1>
+<button onclick="toggleDark()">🌙 Dark Mode</button>
+
+<div class="container">
+
+<button onclick="showCalc('hydraulic')">Hidraulika</button>
+<button onclick="showCalc('power')">Snaga</button>
+<button onclick="showCalc('torque')">Moment</button>
+
+<!-- HIDRAULIKA -->
+<div id="hydraulic" class="calc active">
+    <h3>Hydraulic Force Calculator</h3>
+    <p>Formula: F = p × A</p>
+
+    <input type="number" id="pressure" placeholder="Pressure"><br>
+
+    <select id="unit">
+      <option value="pa">Pascal (Pa)</option>
+      <option value="bar">Bar</option>
+    </select><br>
+
+    <input type="number" id="area" placeholder="Area (m²)"><br>
+    <button onclick="calcHydraulic()">Calculate</button>
+    <p id="resultHydraulic"></p>
+</div>
+
+<!-- SNAGA -->
+<div id="power" class="calc">
+    <h3>Power Calculator</h3>
+    <p>Formula: P = F × v</p>
+
+    <input type="number" id="force" placeholder="Force (N)">
+    <input type="number" id="velocity" placeholder="Velocity (m/s)">
+    <button onclick="calcPower()">Calculate</button>
+    <p id="resultPower"></p>
+</div>
+
+<!-- MOMENT -->
+<div id="torque" class="calc">
+    <h3>Torque Calculator</h3>
+    <p>Formula: M = F × r</p>
+
+    <input type="number" id="force2" placeholder="Force (N)">
+    <input type="number" id="radius" placeholder="Radius (m)">
+    <button onclick="calcTorque()">Calculate</button>
+    <p id="resultTorque"></p>
+</div>
+
+</div>
+
+<!-- SEO TEKST -->
+<div class="text">
+<h2>About Mechanical Calculators</h2>
+<p>
+This website provides simple and effective mechanical engineering calculators
+for students, engineers, and professionals. These tools are designed to help you
+quickly calculate important physical values such as force, power, and torque.
+</p>
+
+<h3>Hydraulic Force Calculator</h3>
+<p>
+The hydraulic force calculator uses the formula F = p × A, where pressure (p)
+multiplied by area (A) gives the resulting force (F). This is widely used in
+hydraulic systems such as presses, cylinders, and heavy machinery.
+</p>
+
+<h3>Power Calculator</h3>
+<p>
+Power is calculated using the formula P = F × v. It represents the rate at which
+work is done. This calculator is useful for determining motor power, mechanical
+output, and efficiency in various systems.
+</p>
+
+<h3>Torque Calculator</h3>
+<p>
+Torque is calculated using M = F × r. It represents rotational force and is used
+in engines, shafts, and mechanical components where rotation is involved.
+</p>
+
+<h3>Why Use These Tools?</h3>
+<p>
+These calculators are simple, fast, and accessible online. Whether you are a
+student learning engineering concepts or a professional working in industry,
+these tools can save time and improve accuracy.
+</p>
+
+<h3>Applications</h3>
+<ul>
+<li>Hydraulic systems</li>
+<li>Mechanical engineering</li>
+<li>Automotive industry</li>
+<li>Industrial machinery</li>
+<li>Engineering education</li>
+</ul>
+</div>
+
+<script>
+function showCalc(calc) {
+    document.querySelectorAll('.calc').forEach(el => el.classList.remove('active'));
+    document.getElementById(calc).classList.add('active');
+}
+
+function toggleDark() {
+    document.body.classList.toggle("dark");
+}
+
+function calcHydraulic() {
+    let p = document.getElementById('pressure').value;
+    let A = document.getElementById('area').value;
+    let unit = document.getElementById('unit').value;
+
+    if(unit === "bar"){
+        p = p * 100000;
+    }
+
+    let F = p * A;
+    document.getElementById('resultHydraulic').innerText = "Force: " + F + " N";
+}
+
+function calcPower() {
+    let F = document.getElementById('force').value;
+    let v = document.getElementById('velocity').value;
+    let P = F * v;
+    document.getElementById('resultPower').innerText = "Power: " + P + " W";
+}
+
+function calcTorque() {
+    let F = document.getElementById('force2').value;
+    let r = document.getElementById('radius').value;
+    let M = F * r;
+    document.getElementById('resultTorque').innerText = "Torque: " + M + " Nm";
+}
+</script>
+
+</body>
+</html>
